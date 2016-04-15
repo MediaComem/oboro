@@ -9,6 +9,14 @@ window.requestAnimFrame = (function() {
 var canvas = document.getElementById('canvas'),
 	ctx = canvas.getContext('2d');
 
+var container = document.getElementById('container');
+
+// create a simple instance
+// by default, it only adds horizontal recognizers
+var mc = new Hammer(container);
+
+
+
 var width = 422,
 	height = 552;
 
@@ -218,6 +226,21 @@ var spring = function() {
 
 var Spring = new spring();
 
+
+// listen to events...
+mc.on("panleft panright", function(ev) {
+   
+	if(ev.type=="panleft"){
+		dir = "left";
+		player.isMovingLeft = true;
+	}
+	else if(ev.type=="panright"){
+		dir = "right";
+		player.isMovingRight = true;
+	}
+	console.log(dir);
+});
+
 function init() {
 	//Variables for the game
 	var	dir = "left",
@@ -230,6 +253,7 @@ function init() {
 	function paintCanvas() {
 		ctx.clearRect(0, 0, width, height);
 	}
+
 
 	//Player related calculations and functions
 
@@ -265,6 +289,7 @@ function init() {
 		document.onkeyup = function(e) {
 			var key = e.keyCode;
 		
+
 			if (key == 37) {
 				dir = "left";
 				player.isMovingLeft = false;
@@ -277,18 +302,18 @@ function init() {
 		//Accelerations produces when the user hold the keys
 		if (player.isMovingLeft === true) {
 			player.x += player.vx;
-			player.vx -= 0.15;
+			player.vx -= 0.05;
 		} else {
 			player.x += player.vx;
-			if (player.vx < 0) player.vx += 0.1;
+			if (player.vx < 0) player.vx += 0.05;
 		}
 
 		if (player.isMovingRight === true) {
 			player.x += player.vx;
-			player.vx += 0.15;
+			player.vx += 0.05;
 		} else {
 			player.x += player.vx;
-			if (player.vx > 0) player.vx -= 0.1;
+			if (player.vx > 0) player.vx -= 0.05;
 		}
 
 		// Speed limits!
@@ -468,6 +493,10 @@ function init() {
 		base.draw();
 
 		updateScore();
+
+		dir = "";
+		player.isMovingLeft = false;
+		player.isMovingRight = false;
 	}
 
 	menuLoop = function(){return;};

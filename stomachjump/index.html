@@ -9,9 +9,12 @@
   <!--[if IE]>
       <link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <![endif]-->
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+
 </head>
 <body>
-	<div class="container">
+	<div id="container" class="container">
 		<canvas id="canvas">
 			Oooh… votre navigateur ne supporte pas HTML5!
 		</canvas>
@@ -19,9 +22,7 @@
 		<div id="mainMenu">
 			<h1>doodle jump</h1>
 			<h3>en HTML, CSS &amp; JavaScript</h3>
-			<h3>...par <a href="http://twitter.com/julienchauveau" target="_blank">Julien Chauveau</a></h3>
-			<h3>et <a href="http://www.mediabox.fr" target="_blank">mediabox</a></h3>
-
+		
 			<p class="info">
 				utiliser
 				<span class="key left">←</span>
@@ -40,6 +41,7 @@
 			<a id="tweetBtn" target="_blank" class="button tweet" href="#">Tweeter</a>
 			<a class="button" href="javascript:reset()">Redémarrer</a>
 		</div>
+
 		
 		
 		<!-- Preloading image ;) -->
@@ -50,6 +52,13 @@
 		</div>
 
 	</div>
-    <script src="javascript/main.min.js" type="text/javascript" charset="utf-8"></script>
+   	 <script src="../lib/hammerjs/hammer.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="javascript/main.js" type="text/javascript" charset="utf-8"></script>
+   
+    <script type="text/javascript">
+
+    	
+
+    </script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+{
+  "name": "oboro-games",
+  "version": "0.0.0",
+  "homepage": "https://github.com/simkarlier/oboro-games",
+  "authors": [
+    "Simon Carlier <admin@simka.ch>"
+  ],
+  "description": "oboro-games",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "hammerjs": "~2.0.6"
+  }
+}
