@@ -1,0 +1,41 @@
+#01_intro{
+  background-color: #1abc9c;
+  width:200px;
+  height:100px;
+  color:blue;
+}
+#02_video{
+  display:none;
+  background-color: #2ecc71;
+
+}
+#03_game{
+  display:none;
+  background-color: #3498db;
+
+}
+#04_video{
+  display:none;
+  background-color: #9b59b6;
+
+}
+#05_game{
+  display:none;
+  background-color: #34495e;
+
+}
+#06_video{
+  display:none;
+  background-color: #f1c40f;
+
+}
+#07_game{
+  display:none;
+  background-color: #e67e22;
+
+}
+#08_outro{
+  display:none;
+  background-color: #e74c3c;
+
+}
