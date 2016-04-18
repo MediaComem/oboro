@@ -9,19 +9,39 @@ window.requestAnimFrame = (function() {
 var canvas = document.getElementById('canvas'),
 	ctx = canvas.getContext('2d');
 
+var backgroundCanvas = 	document.getElementById('bg-canvas'),
+	ctxBg = backgroundCanvas.getContext('2d');
+
+
 var container = document.getElementById('container');
 
 // create a simple instance
 // by default, it only adds horizontal recognizers
 var mc = new Hammer(container);
 
-
+var img = new Image();
 
 var width = 422,
 	height = 552;
 
 canvas.width = width;
 canvas.height = height;
+
+
+
+
+backgroundCanvas.width = width;
+backgroundCanvas.height = height;
+
+
+img.src = 'https://www.google.nl/images/srpr/logo3w.png';
+
+img.onload = function(){
+    // create pattern
+    var ptrn = ctxBg.createPattern(img, 'repeat'); // Create a pattern with this image, and set it to "repeat".
+    ctxBg.fillStyle = ptrn;
+    ctxBg.fillRect(0, 0, canvas.width, canvas.height); // context.fillRect(x, y, width, height);
+}
 
 //Variables for game
 var platforms = [],

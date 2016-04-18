@@ -7,7 +7,9 @@ body { margin: 0; padding: 0; font-family: 'Gloria Hallelujah', cursive; }
 
 .container { height: 552px; width: 422px; position: relative; margin: 20px auto; overflow: hidden; }
 
-canvas { height: 552px; width: 422px; display: block; background: url(../img/canvas.png) top left; }
+#canvas { height: 552px; width: 422px; display: block; background: url(../img/canvas.png); background-repeat: repeat-x }
+
+#bg-canvas { height: 552px; width: 422px; display: block; }
 
 #scoreBoard { width: 420px; height: 50px; background: rgba(182, 200, 220, 0.7); position: absolute; top: -3px; left: 0; z-index: -1; border-image: url(../img/board.png) 100 5 round; }
 #scoreBoard p { font-size: 20px; padding: 0; line-height: 47px; margin: 0px 0 0 5px; }
