@@ -1,0 +1,27 @@
+{
+  "name": "oboro",
+  "version": "0.0.1",
+  "description": "Oboro games",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.2.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simkarlier/oboro-games.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simkarlier/oboro-games/issues"
+  },
+  "homepage": "https://github.com/simkarlier/oboro-games#readme"
+}
