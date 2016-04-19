@@ -4,6 +4,8 @@
         <script src="leveldata.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/reset.css">
+        <script type="text/javascript" src="../assets/js/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript">
             var Direction = {
                 Up: 0,
@@ -36,7 +38,7 @@
             var playerTiles = new Array();
 
             //selected level
-            var currentLevel = 2;
+            var currentLevel = 0;
             var levelMap;
             var placedCrates;
             var moves = 0;
@@ -524,6 +526,12 @@
                 //alert (helpDiv.style.);
                 helpDiv.style.display = "none";
             }
+
+            // Controls button adds
+
+
+
+
         </script>
         <style type="text/css">
             body{
@@ -631,6 +639,13 @@
             <canvas id="myDrawing">
                 <p>Your browser doesn't support the HTML5 canvas element. Please upgrade to FireFox 4, Google Chrome or IE9</p>
             </canvas>
+
+            <div>
+              <img src="img/arrow-top.png" alt="top" id="arrow-top"/>
+              <img src="img/arrow-bottom.png" alt="bottom" id="arrow-bottom"/>
+              <img src="img/arrow-left.png" alt="left" id="arrow-left"/>
+              <img src="img/arrow-right.png" alt="right" id="arrow-right"/>
+            </div>
 
             <div id="help" onClick="hideHelp();">
                 <p>
