@@ -7,6 +7,7 @@ levelDataLine[2] = "@> o  @     @   @";
 levelDataLine[3] = "@  @     @      @";
 levelDataLine[4] = "@  @  @  @  @   @";
 levelDataLine[5] = "@@@@@@@@@@@@@@@@@";
+
 level[0] = new levelObject(levelDataLine);
 
 levelDataLine = new Array();

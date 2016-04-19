@@ -4,8 +4,7 @@
         <script src="leveldata.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/reset.css">
-        <script type="text/javascript" src="../assets/js/jquery-1.12.3.min.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="../assets/js/jquery-1.12.3.min.js"></script>
         <script type="text/javascript">
             var Direction = {
                 Up: 0,
@@ -84,11 +83,15 @@
                 }
 
                 this.moveUp = function(){
+
                     if(handleMove(Direction.Up)){
+
                             this.y -= 1;
                             moves += 1;
+
                     }
                     this.d = Direction.Up;
+
                     this.animate();
                 }
 
@@ -165,7 +168,7 @@
                     }
                     drawField();
                 } else {
-                    alert("No more moves to undo!");
+                    console.log("No more moves to undo!");
                 }
             }
 
@@ -359,10 +362,13 @@
                 }
                 if(placedCrates === level[currentLevel].cratesToPlace){
                     if((currentLevel + 1) < level.length){
-                        alert("Level " + (currentLevel + 1) + " completed. Well Done. Ready for the next Level?");
                         gotoNextLevel();
                     } else {
-                        alert("YEAH! YOU ARE A CRATE PUSHING MASTER!!");
+
+                        console.log('VIDEO SUIVANTE')
+                        /*
+                        show bpx id suiv.
+                        */
                     }
                 }
             }
@@ -455,6 +461,12 @@
                 }
                 return false;
             }
+            // Controls button adds
+
+
+
+
+
 
             document.onkeydown = function(e){
                 var thisEvent = e;
@@ -527,12 +539,32 @@
                 helpDiv.style.display = "none";
             }
 
-            // Controls button adds
+            $(function() {
+
+              $('#arrow-top').on('click', function(){
+                var e = $.Event("keydown", { keyCode: 38}); //"keydown" if that's what you're doing
+                $("body").trigger(e);
+              })
+              $('#arrow-bottom').on('click', function(){
+                var e = $.Event("keydown", { keyCode: 40}); //"keydown" if that's what you're doing
+                $("body").trigger(e);
+              })
+              $('#arrow-left').on('click', function(){
+                var e = $.Event("keydown", { keyCode: 37}); //"keydown" if that's what you're doing
+                $("body").trigger(e);
+              })
+              $('#arrow-right').on('click', function(){
+                var e = $.Event("keydown", { keyCode: 39}); //"keydown" if that's what you're doing
+                $("body").trigger(e);
+              })
+            });
 
 
 
 
         </script>
+
+        <script type="text/javascript" src="js/main.js"></script>
         <style type="text/css">
             body{
                 background-color: #000000;
