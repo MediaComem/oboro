@@ -1,10 +1,15 @@
 <html>
     <head>
         <title>JavaScript Sokoban</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
         <script src="leveldata.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/reset.css">
-<script type="text/javascript" src="../assets/js/jquery-1.12.3.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../lib/bootstrap/dist/css/bootstrap.css" />
+        <script type="text/javascript" src="../assets/js/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript" src="../lib/bootstrap/dist/js/bootstrap.js"></script>
+
+
         <script type="text/javascript">
             var Direction = {
                 Up: 0,
@@ -653,6 +658,7 @@
         </style>
     </head>
     <body>
+        <div class="col-md-12 col-lg-12 col-sm-12" style="padding:0px;">
         <div id="gameContainer">
             <div id="scoreBoard">
                 <div class="info" id="levelInfo"></div>
@@ -698,5 +704,6 @@
                 </p>
             </div>
         </div>
+      </div>
     </body>
 </html>
