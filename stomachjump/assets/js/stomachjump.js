@@ -1,3 +1,7 @@
+//registering the code for the dom
+//parts["stomachjump"].dom = "hello world";
+
+
 // RequestAnimFrame: a browser API for getting smooth animations
 window.requestAnimFrame = (function() {
 	return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
