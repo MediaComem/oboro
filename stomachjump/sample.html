@@ -4,8 +4,8 @@
   <title>Doodle Jump</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+  <link href="assets/css/stomachjump.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="assets/css/print.css" media="print" rel="stylesheet" type="text/css" />
   <!--[if IE]>
       <link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <![endif]-->
@@ -46,7 +46,10 @@
 		
 		
 		<!-- Preloading image ;) -->
-		<img id="sprite" src="img/sprite.png"/>
+		<img id="base" src="./stomachjump/assets/img/base.png"/>
+
+		<!-- Preloading image ;) -->
+		<img id="sprite" src="./stomachjumpassets/img/sprite.png"/>
 
 		<div id="scoreBoard">
 			<p id="score">0</p>
@@ -57,15 +60,10 @@
 
 	<canvas id="bg-canvas">
 			Oooh… votre navigateur ne supporte pas HTML5!
-		</canvas>
+	</canvas>
 		
    	 <script src="../lib/hammerjs/hammer.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="javascript/main.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/stomachjump.js" type="text/javascript" charset="utf-8"></script>
    
-    <script type="text/javascript">
-
-    	
-
-    </script>
 </body>
 </html>

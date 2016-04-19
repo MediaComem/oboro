@@ -7,7 +7,7 @@ body { margin: 0; padding: 0; font-family: 'Gloria Hallelujah', cursive; }
 
 .container { height: 552px; width: 422px; position: relative; margin: 20px auto; overflow: hidden; }
 
-#canvas { height: 552px; width: 422px; display: block; background: url(../img/canvas.png); background-repeat: repeat-x }
+#canvas { height: 552px; width: 422px; display: block; background: url(../img/pattern.png); background-repeat: repeat-x }
 
 #bg-canvas { height: 552px; width: 422px; display: block; }
 
