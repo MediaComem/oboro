@@ -29,22 +29,17 @@ levelDataLine[9] = "@@@@@@@@@@@@@@@@@@@@";
 level[1] = new levelObject(levelDataLine);
 
 levelDataLine = new Array();
-levelDataLine[0] = "@@@@@@@@@@@@@@@@@@@@";
-levelDataLine[1] = "@@@@@@@@@@@@@@@@@@@@";
-levelDataLine[2] = "@@@@@@@@@@@@@@@@@@@@";
-levelDataLine[3] = "@@@@@@@@@@@@@@@@@@@@";
-levelDataLine[4] = "@@@@@@@@@@     <@@@@";
-levelDataLine[5] = "@@@@@@@@@@ o@o @@@@@";
-levelDataLine[6] = "@@@@@@@@@@ o  o@@@@@";
-levelDataLine[7] = "@@@@@@@@@@@o o @@@@@";
-levelDataLine[8] = "@@@@@@@@@@ o @ @@@@@";
-levelDataLine[9] = "@@xxxx  @@ o  o  @@@";
-levelDataLine[10] = "@@@xxx    o  o   @@@";
-levelDataLine[11] = "@@xxxx  @@@@@@@@@@@@";
-levelDataLine[12] = "@@@@@@@@@@@@@@@@@@@@";
-levelDataLine[13] = "@@@@@@@@@@@@@@@@@@@@";
-levelDataLine[14] = "@@@@@@@@@@@@@@@@@@@@";
-levelDataLine[15] = "@@@@@@@@@@@@@@@@@@@@";
+levelDataLine[0] = "@@@@@@@@@@@@@@@@@@@";
+levelDataLine[1] = "@@@@@@@@@@     <@@@";
+levelDataLine[2] = "@@@@@@@@@@ o@o @@@@";
+levelDataLine[3] = "@@@@@@@@@@ o   @@@@";
+levelDataLine[4] = "@@@@@@@@@@@o o @@@@";
+levelDataLine[5] = "@@@@@@@@@@ o @ @@@@";
+levelDataLine[6] = "@@xxxx  @@ o  o  @@";
+levelDataLine[7] = "@@@xx     o  o   @@";
+levelDataLine[8] = "@@xxxx  @@@@@@@@@@@";
+levelDataLine[9] = "@@@@@@@@@@@@@@@@@@@";
+
 level[2] = new levelObject(levelDataLine);
 
 levelDataLine = new Array();
