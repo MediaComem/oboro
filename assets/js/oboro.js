@@ -80,6 +80,10 @@ $(function() {
 
 	//load the sokoban
 	parts["sokoban"] = new Part("sokoban");
+	parts["stomachjump"] = new Part("stomachjump");
+	
+	
+
 
 	setTimeout(function(){parts["sokoban"].show(); }, 1000);
 
