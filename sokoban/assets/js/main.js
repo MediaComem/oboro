@@ -19,6 +19,49 @@ var Tile = {
 var canvas;
 var context;
 
+
+canvas = document.getElementById("myDrawing");
+context = canvas.getContext("2d");
+
+
+
+
+var ImageLoader = {
+    imgArray: [],
+    toLoad: 0,
+    tileArray: [],
+    callback: 0,
+    init: function(array,callback){
+            this.imgArray = array;
+            this.toLoad = this.imgArray.length;
+            this.callback = callback;
+            for(i in this.imgArray){
+                    this.tileArray[i] = 0;
+            }
+    },
+    startLoading: function(){
+            for(i in this.imgArray){
+                    img = new Image;
+                    img.src = this.imgArray[i];
+                    img.imgIndex = i;
+                    img.onload = function(){
+                            ImageLoader.finishedLoading(this);
+                    }
+            }
+    },
+    finishedLoading: function(img){
+            this.toLoad -= 1;
+            this.tileArray[img.imgIndex] = new tileFromImage(img);
+            if(this.toLoad <= 0){
+                    this.callback(this.tileArray);
+            }
+    }
+}
+
+ImageLoader.init(new Array("./sokoban/assets/img/textures/ground.png","./sokoban/assets/img/textures/wall.png","./sokoban/assets/img/textures/stone.png"),mapTilesLoaded);
+ImageLoader.startLoading();
+
+
 var playerTileSet;
 var floorTile;
 var wallTile;
@@ -181,41 +224,11 @@ function tileFromSubImage(img, srcX, srcY, subW, subH){
     this.ctx.drawImage(img,srcX,srcY,subW,subH,0,0,32,32);
 }
 
-var ImageLoader = {
-    imgArray: [],
-    toLoad: 0,
-    tileArray: [],
-    callback: 0,
-    init: function(array,callback){
-            this.imgArray = array;
-            this.toLoad = this.imgArray.length;
-            this.callback = callback;
-            for(i in this.imgArray){
-                    this.tileArray[i] = 0;
-            }
-    },
-    startLoading: function(){
-            for(i in this.imgArray){
-                    img = new Image;
-                    img.src = this.imgArray[i];
-                    img.imgIndex = i;
-                    img.onload = function(){
-                            ImageLoader.finishedLoading(this);
-                    }
-            }
-    },
-    finishedLoading: function(img){
-            this.toLoad -= 1;
-            this.tileArray[img.imgIndex] = new tileFromImage(img);
-            if(this.toLoad <= 0){
-                    this.callback(this.tileArray);
-            }
-    }
-}
 
 function loadPlayerTiles(){
+
     playerTileSet = new Image();
-    playerTileSet.src = "my_sprites_charset.png";
+    playerTileSet.src = "./sokoban/assets/img/my_sprites_charset.png";
     playerTileSet.onload = function(){
             context.drawImage(playerTileSet,0,0);
             for(i=0;i<4;i++){
@@ -229,17 +242,13 @@ function loadPlayerTiles(){
 }
 
 function mapTilesLoaded(tileArray){
+
     mapTiles = tileArray;
     loadPlayerTiles();
 }
 
-window.onload = function(){
-    canvas = document.getElementById("myDrawing");
-    context = canvas.getContext("2d");
 
-    ImageLoader.init(new Array("../img/textures/ground.png","../img/textures/wall.png","../img/textures/stone.png"),mapTilesLoaded);
-    ImageLoader.startLoading();
-}
+   
 
 function bordersWallsOnly(map,x,y,xMax,yMax){
     //alert(map[0][0])
@@ -535,6 +544,7 @@ function hideHelp(){
 // Controls for mobile devices
 
 $(function() {
+
 
   $('#arrow-top').on('click', function(){
     var e = $.Event("keydown", { keyCode: 38}); //"keydown" if that's what you're doing

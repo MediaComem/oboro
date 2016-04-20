@@ -1,3 +1,0 @@
-var Direction ={Up:0,Left: 1,Right: 2,Down: 3}; var Tile ={None:-1,Empty: 0,Wall: 1,Crate: 2,Slot: 3,Start: 4}var ImageLoader ={imgArray:[],toLoad: 0,tileArray: [],callback: 0,init: function(array,callback) { this.imgArray = array; this.toLoad = this.imgArray.length; this.callback = callback; for(i in this.imgArray) { this.tileArray[i] = 0; } },startLoading: function() { for(i in this.imgArray) { img = new Image; img.src = this.imgArray[i]; img.imgIndex = i; img.onload = function() { ImageLoader.finishedLoading(this); } } },finishedLoading: function(img) { this.toLoad -= 1; this.tileArray[img.imgIndex] = new tileFromImage(img); if(this.toLoad <= 0) { this.callback(this.tileArray); } }});
-
-__ESCAPED_SOURCE_END_CLEAN_CSS__

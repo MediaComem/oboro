@@ -71,10 +71,12 @@ $(function() {
 	}
 
 	//load for example the stomachjump
-	parts["stomachjump"] = new Part("stomachjump");
+	//parts["stomachjump"] = new Part("stomachjump");
 
 	//load the sokoban
 	parts["sokoban"] = new Part("sokoban");
+
+	setTimeout(function(){parts["sokoban"].show(); }, 1000);
 
 
 

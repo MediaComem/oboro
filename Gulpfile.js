@@ -40,7 +40,7 @@ function build(folder,env){
 	var css = gulp.src(['./'+folder+'/**/*.css','!./'+folder+'/**/'+folder+'*.css'])
 				.pipe(gulpif(toMinify,concat(folder+".min.css"),concat(folder+".css")))
 				.pipe(gulpif(toMinify, minify()))
-				.pipe(gulp.dest('./'+folder+'/assets/css'))     
+				.pipe(gulp.dest('./'+folder+'/assets/css'));     
 
 	return merge(js, css);
 
@@ -72,10 +72,10 @@ gulp.task("main",function(){
 		        .pipe(gulpif(toMinify, uglify()))
 		        .pipe(gulp.dest('./assets/js'));
 
-	var css = gulp.src(['./assets/css/*.css','!./assets/js/oboro*.css'])
+	var css = gulp.src(['./assets/css/*.css','!./assets/css/oboro*.css'])
 				.pipe(gulpif(toMinify,concat("oboro.min.css"),concat("oboro.css")))
 				.pipe(gulpif(toMinify, minify()))
-				.pipe(gulp.dest('./assets/css'))   
+				.pipe(gulp.dest('./assets/css'));   
 
 	return merge(js, css);
 
