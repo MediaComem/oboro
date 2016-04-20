@@ -12,8 +12,10 @@ $(function() {
 
 	function Part(part){
 
+		var that = this;	
+
 		this.baseUrl = "./" + part +"/";
-		var that = this;
+		
 
 		this.exec = {};
 
@@ -42,7 +44,7 @@ $(function() {
 
 			//$("#"+this.part).append('<script type="text/javascript" src="'+this.baseUrl+'assets/js/'+this.part+'.js"> </script>')
 			
-			$.getScript(this.baseUrl + "assets/js/"+ part +".js")
+			$.getScript(that.baseUrl + "assets/js/"+ part +".js")
 			 .done(function( script, textStatus ) {
 			  	//executes the code
 			  	that.exec = window.currentPart;
@@ -56,26 +58,35 @@ $(function() {
 		//load the css
 		//e.g /stomachjump/assets/css/stomachjump.css
 		this.getStyle = function(){
-			$('<link class="site-part">')
+			$('<link class="site-part ' + that.part + '">')
 	  		.appendTo('head')
 	  		.attr({type : 'text/css', rel : 'stylesheet'})
 	  		.attr('href', this.baseUrl + "assets/css/" + part + ".css");
 
 		}
 
+		this.applyStyle = function(){
+			$('<style class="site-part ' + that.part + '">'+that.style+'</style>')
+	  		.appendTo('head')
+		}
+
+		this.removeOthers = function(){
+			//remove all the other site parts except the current one
+		 	$(".site-part").not("."+that.part).remove();
+		}
+
 
 		//get the html content and append it to the DOM
-		$.get( this.baseUrl + "/" + this.part + ".html", function( data ) {
-		 	//remove all the other site parts
-		 	$(".site-part").remove();
-
-		 	that.dom = data;
-
-		 	that.getStyle();
+		$.get( this.baseUrl + "/" + this.part + ".html", function( html ) {
 		 	
-
+		 	that.dom = html;
+		 	
+			$.get(that.baseUrl+"/assets/css/"+that.part+".css", function( css ) {
+			  	that.style = css;
+			});
+		 	
 		 	//appends to the body
-			$( "body" ).append( "<div class='site-part' id='"+ that.part+"'>"+"</div>" );
+			$( "body" ).append( "<div class='site-part "+ that.part+"' id='"+ that.part+"'>"+"</div>" );
 			$("#"+that.part).append(that.dom);
 			$("#"+that.part).css("visibility","hidden");
 
@@ -88,28 +99,29 @@ $(function() {
 	//load for example the stomachjump
 	//parts["stomachjump"] = new Part("stomachjump");
 
-	//load the sokoban
+	//load the sokoban (HTML + SCRIPT)
 	var sokoban = new Part("sokoban");
 	
 	
 	//parts["pingouin"] = new Part("pingouin");
 	
-	 setTimeout(function(){ 
+	 setTimeout(function(){
+	 	sokoban.applyStyle(); 
 	 	sokoban.show();
 	 	sokoban.exec();
 
+	 	//loads the other page while the user is playing
+	 	parts["stomachjump"] = new Part("stomachjump");
+	 	
 	 	setTimeout(function(){
-
-		 	parts["stomachjump"] = new Part("stomachjump");
-
-		 	setTimeout(function(){
-		 		parts["stomachjump"].show();
-				parts["stomachjump"].exec();	
-		 	},1000);
+	 	parts["stomachjump"].removeOthers();
+	 	parts["stomachjump"].getStyle();
+ 		parts["stomachjump"].show();
+		parts["stomachjump"].exec();	
 
 	 	},20000)
 	 	
-	 }, 3000);
+	 }, 1000);
 
 
 
