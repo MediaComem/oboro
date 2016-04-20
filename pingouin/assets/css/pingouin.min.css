@@ -1,0 +1,488 @@
+; var SceneGame = Class.create(Scene,{initialize:function() { var game,label,bg,penguin,iceGroup;//Call superclass constructor Scene.apply(this);//Access to the game singleton instance game = Game.instance; label = new Label('SCORE<br>0'); label.x = 9; label.y = 32; label.color = 'white'; label.font = '16px strong'; label.textAlign = 'center'; label._style.textShadow ="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"; this.scoreLabel = label; bg = new Sprite(320,440); bg.image = game.assets['res/BG.png']; penguin = new Penguin(); penguin.x = game.width/2 - penguin.width/2; penguin.y = 280; this.penguin = penguin; iceGroup = new Group(); this.iceGroup = iceGroup; this.addChild(bg); this.addChild(iceGroup); this.addChild(penguin); this.addChild(label); this.addEventListener(Event.TOUCH_START,this.handleTouchControl); this.addEventListener(Event.ENTER_FRAME,this.update);//Instance variables this.generateIceTimer = 0; this.scoreTimer = 0; this.score = 0; this.bgm = game.assets['res/bgm.mp3'];//Add this line//Start BGM this.bgm.play(); },handleTouchControl: function (evt) { var laneWidth,lane; laneWidth = 320/3; lane = Math.floor(evt.x/laneWidth); lane = Math.max(Math.min(2,lane),0); this.penguin.switchToLaneNumber(lane); },update: function(evt) {//Score increase as time pass this.scoreTimer += evt.elapsed * .001; if(this.scoreTimer >= .5) { this.setScore(this.score + 1); this.scoreTimer -= .5; }//Check if it's time to create a new set of obstacles
+        this.generateIceTimer += evt.elapsed * 0.001;
+        if(this.generateIceTimer >= 0.5)
+        {
+            var ice;
+            this.generateIceTimer -= 0.5;
+            ice = new Ice(Math.floor(Math.random()*3));
+            this.iceGroup.addChild(ice);
+        }
+
+        // Check collision
+        for (var i = this.iceGroup.childNodes.length - 1; i >= 0; i--) {
+            var ice;
+            ice = this.iceGroup.childNodes[i];
+            if(ice.intersect(this.penguin)){  
+                var game;
+                game = Game.instance;
+                game.assets['res/Hit.mp3'].play();                    
+                this.iceGroup.removeChild(ice);
+                this.bgm.stop();
+                game.replaceScene(new SceneGameOver(this.score));        
+                break;
+            }
+        }
+
+        // Loop BGM
+        if( this.bgm.currentTime >= this.bgm.duration ){
+            this.bgm.play();
+        }
+    },
+
+    setScore: function (value) {
+        this.score = value;
+        this.scoreLabel.text = 'SCORE<br>' + this.score;
+    }
+});
+
+/**
+ * Penguin
+ */
+ var Penguin = Class.create(Sprite, {
+    /**
+     * The player character.     
+     */
+    initialize: function() {
+        // Call superclass constructor
+        Sprite.apply(this,[30, 43]);
+        this.image = Game.instance.assets['res/penguinSheet.png'];        
+        this.animationDuration = 0;
+        this.addEventListener(Event.ENTER_FRAME, this.updateAnimation);
+    },
+
+    updateAnimation: function (evt) {        
+        this.animationDuration += evt.elapsed * 0.001;       
+        if(this.animationDuration >= 0.25)
+        {
+            this.frame = (this.frame + 1) % 2;
+            this.animationDuration -= 0.25;
+        }
+    },
+
+    switchToLaneNumber: function(lane){     
+        var targetX = 160 - this.width/2 + (lane-1)*90;
+        this.x = targetX;
+    }
+});
+
+ /**
+ * Ice Cube
+ */
+var Ice = Class.create(Sprite, {
+    /**
+     * The obstacle that the penguin must avoid
+     */
+    initialize: function(lane) {
+        // Call superclass constructor
+        Sprite.apply(this,[48, 49]);
+        this.image  = Game.instance.assets['res/Ice.png'];      
+        this.rotationSpeed = 0;
+        this.setLane(lane);
+        this.addEventListener(Event.ENTER_FRAME, this.update);
+    },
+
+    setLane: function(lane) {
+        var game, distance;
+        game = Game.instance;        
+        distance = 90;
+     
+        this.rotationSpeed = Math.random() * 100 - 50;
+     
+        this.x = game.width/2 - this.width/2 + (lane - 1) * distance;
+        this.y = -this.height;    
+        this.rotation = Math.floor( Math.random() * 360 );    
+    },
+
+    update: function(evt) { 
+        var ySpeed, game;
+     
+        game = Game.instance;
+        ySpeed = 300;
+     
+        this.y += ySpeed * evt.elapsed * 0.001;
+        this.rotation += this.rotationSpeed * evt.elapsed * 0.001;           
+        if(this.y > game.height)
+        {
+            this.parentNode.removeChild(this);          
+        }
+    }
+});
+
+/**
+ * SceneGameOver  
+ */
+var SceneGameOver = Class.create(Scene, {
+    initialize: function(score) {
+        var gameOverLabel, scoreLabel;
+        Scene.apply(this);
+        this.backgroundColor = 'black';
+
+        gameOverLabel = new Label("GAME OVER<br>Tap to Restart");
+        gameOverLabel.x = 8;
+        gameOverLabel.y = 128;
+        gameOverLabel.color = 'white';
+        gameOverLabel.font = '32px strong';
+        gameOverLabel.textAlign = 'center';
+
+        scoreLabel = new Label('SCORE<br>' + score);
+        scoreLabel.x = 9;
+        scoreLabel.y = 32;        
+        scoreLabel.color = 'white';
+        scoreLabel.font = '16px strong';
+        scoreLabel.textAlign = 'center';
+
+        this.addChild(gameOverLabel);
+        this.addChild(scoreLabel);
+
+        this.addEventListener(Event.TOUCH_START, this.touchToRestart);
+
+
+    },
+
+    touchToRestart: function(evt) {
+        var game = Game.instance;
+        game.replaceScene(new SceneGame());
+    }
+});
+/**
+ * enchant.js v0.5.1
+ *
+ * Copyright (c) Ubiquitous Entertainment Inc.
+ * Dual licensed under the MIT or GPL Version 3 licenses
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+if (typeof Object.defineProperty !== 'function') {
+    Object.defineProperty = function(obj, prop, desc) {
+        if ('value' in desc) {
+            obj[prop] = desc.value;
+        }
+        if ('get' in desc) {
+            obj.__defineGetter__(prop, desc.get);
+        }
+        if ('set' in desc) {
+            obj.__defineSetter__(prop, desc.set);
+        }
+        return obj;
+    };
+}
+if (typeof Object.defineProperties !== 'function') {
+    Object.defineProperties = function(obj, descs) {
+        for (var prop in descs) {
+            if (descs.hasOwnProperty(prop)) {
+                Object.defineProperty(obj, prop, descs[prop]);
+            }
+        }
+        return obj;
+    };
+}
+if (typeof Object.create !== 'function') {
+    Object.create = function(prototype, descs) {
+        function F() {
+        }
+
+        F.prototype = prototype;
+        var obj = new F();
+        if (descs != null){
+            Object.defineProperties(obj, descs);
+        }
+        return obj;
+    };
+}
+if (typeof Object.getPrototypeOf !== 'function') {
+    Object.getPrototypeOf = function(obj) {
+        return obj.__proto__;
+    };
+}
+
+if (typeof Function.prototype.bind !== 'function') {
+    Function.prototype.bind = function(thisObject) {
+        var func = this;
+        var args = Array.prototype.slice.call(arguments, 1);
+        var Nop = function() {
+        };
+        var bound = function() {
+            var a = args.concat(Array.prototype.slice.call(arguments));
+            return func.apply(
+                this instanceof Nop ? this : thisObject || window, a);
+        };
+        Nop.prototype = func.prototype;
+        bound.prototype = new Nop();
+        return bound;
+    };
+}
+
+/**
+ * Export library classes globally.
+ *
+ * When no arguments are delivered, all classes defined in enchant.js as well as all classes defined in
+ * plugins will be exported. When more than one argument is delivered, by default only classes defined
+ * in enchant.js will be exported. When you wish to export plugin classes you must explicitly deliver  *  * plugin identifiers as arguments.
+ *
+ * @example
+ *   enchant();     // All classes will be exported.
+ *   enchant('');   // Only classes in enchant.js will be exported.
+ *   enchant('ui'); // enchant.js classes and ui.enchant.js classes will be exported.
+ *
+ * @param {...String} [modules] Export module. Multiple designations possible.
+ */
+var enchant = function(modules) {
+    if (modules != null) {
+        if (!(modules instanceof Array)) {
+            modules = Array.prototype.slice.call(arguments);
+        }
+        modules = modules.filter(function(module) {
+            return [module].join();
+        });
+    }
+    (function include(module, prefix) {
+        var submodules = [],
+            i, len;
+        for (var prop in module){
+            if (module.hasOwnProperty(prop)) {
+                if (typeof module[prop] === 'function') {
+                    window[prop] = module[prop];
+                } else if (typeof module[prop] === 'object' && Object.getPrototypeOf(module[prop]) === Object.prototype) {
+                    if (modules == null) {
+                        submodules.push(prop);
+                    } else {
+                        i = modules.indexOf(prefix + prop);
+                        if (i !== -1) {
+                            submodules.push(prop);
+                            modules.splice(i, 1);
+                        }
+                    }
+                }
+            }
+        }
+
+        for (i = 0, len = submodules.length; i < len; i++) {
+            include(module[submodules[i]], prefix + submodules[i] + '.');
+        }
+    }(enchant, ''));
+
+    if (modules != null && modules.length) {
+        throw new Error('Cannot load module: ' + modules.join(','));
+    }
+};
+
+window.addEventListener("message", function(msg, origin) {
+    try {
+        var data = JSON.parse(msg.data);
+        if (data.type === "event") {
+            enchant.Game.instance.dispatchEvent(new enchant.Event(data.value));
+        } else if (data.type === "debug") {
+            switch (data.value) {
+                case "start":
+                    enchant.Game.instance.start();
+                    break;
+                case "pause":
+                    enchant.Game.instance.pause();
+                    break;
+                case "resume":
+                    enchant.Game.instance.resume();
+                    break;
+                case "tick":
+                    enchant.Game.instance._tick();
+                    break;
+                default:
+                    break;
+            }
+        }
+    } catch (e) {
+        // ignore
+    }
+}, false);
+
+/**
+ * Class Classes
+ *
+ * @param {Function} [superclass] Successor class.
+ * @param {*} definition Class definition.
+ * @constructor
+ */
+enchant.Class = function(superclass, definition) {
+    return enchant.Class.create(superclass, definition);
+};
+
+/**
+ * Create class.
+ *
+ * When making classes that succeed other classes, the previous class is used as a base with
+ * constructor as default. In order to override the constructor, it is necessary to explicitly
+ * call up the previous constructor to use it.
+ *
+ * @example
+ *   var Ball = Class.create({ // Creates independent class.
+ *       initialize: function(radius) { ... }, // Method definition.
+ *       fall: function() { ... }
+ *   });
+ *
+ *   var Ball = Class.create(Sprite);  // Creates a class succeeding "Sprite"
+ *   var Ball = Class.create(Sprite, { // Creates a class succeeding "Sprite"
+ *       initialize: function(radius) { // Overwrites constructor
+ *          Sprite.call(this, radius*2, radius*2); // Applies previous constructor.
+ *          this.image = game.assets['ball.gif'];
+ *       }
+ *   });
+ *
+ * @param {Function} [superclass] Preceding class.
+ * @param {*} [definition] Class definition.
+ * @static
+ */
+enchant.Class.create = function(superclass, definition) {
+    if (arguments.length === 0) {
+        return enchant.Class.create(Object, definition);
+    } else if (arguments.length === 1 && typeof arguments[0] !== 'function') {
+        return enchant.Class.create(Object, arguments[0]);
+    }
+
+    for (var prop in definition){
+        if (definition.hasOwnProperty(prop)) {
+            if (typeof definition[prop] === 'object' && Object.getPrototypeOf(definition[prop]) === Object.prototype) {
+                if (!('enumerable' in definition[prop])){
+                    definition[prop].enumerable = true;
+                }
+            } else {
+                definition[prop] = { value: definition[prop], enumerable: true, writable: true };
+            }
+        }
+    }
+    var Constructor = function() {
+        if (this instanceof Constructor) {
+            Constructor.prototype.initialize.apply(this, arguments);
+        } else {
+            return new Constructor();
+        }
+    };
+    Constructor.prototype = Object.create(superclass.prototype, definition);
+    Constructor.prototype.constructor = Constructor;
+    if (Constructor.prototype.initialize == null) {
+        Constructor.prototype.initialize = function() {
+            superclass.apply(this, arguments);
+        };
+    }
+
+    return Constructor;
+};
+/**
+ */
+enchant.ENV = {
+    /**
+     * css vendor prefix in current browser
+     * @type {String}
+     */
+    VENDOR_PREFIX: (function() {
+        var ua = navigator.userAgent;
+        if (ua.indexOf('Opera') !== -1) {
+            return 'O';
+        } else if (ua.indexOf('MSIE') !== -1) {
+            return 'ms';
+        } else if (ua.indexOf('WebKit') !== -1) {
+            return 'webkit';
+        } else if (navigator.product === 'Gecko') {
+            return 'Moz';
+        } else {
+            return '';
+        }
+    }()),
+    /**
+     * CSS vendor prefix in current browser
+     * @type {String}
+     */
+    TOUCH_ENABLED: (function() {
+        var div = document.createElement('div');
+        div.setAttribute('ontouchstart', 'return');
+        return typeof div.ontouchstart === 'function';
+    }()),
+    /**
+     * Is this browser iPhone with Retina display?
+     * @type {String}
+     */
+    RETINA_DISPLAY: (function() {
+        if (navigator.userAgent.indexOf('iPhone') !== -1 && window.devicePixelRatio === 2) {
+            var viewport = document.querySelector('meta[name=viewport]');
+            if (viewport == null) {
+                viewport = document.createElement('meta');
+                document.head.appendChild(viewport);
+            }
+            viewport.setAttribute('content', 'width=640');
+            return true;
+        } else {
+            return false;
+        }
+    }()),
+    /**
+     * Use Flash instead of native Audio class?
+     * @type {String}
+     */
+    USE_FLASH_SOUND: (function() {
+        var ua = navigator.userAgent;
+        var vendor = navigator.vendor || "";
+        return (location.href.indexOf('http') === 0 && ua.indexOf('Mobile') === -1 && vendor.indexOf('Apple') !== -1);
+    }()),
+    /**
+     * On click/touch event in these tags, setPreventDefault() will not be called
+     */
+    USE_DEFAULT_EVENT_TAGS: ['input', 'textarea', 'select', 'area'],
+    CANVAS_DRAWING_METHODS: [
+        'putImageData', 'drawImage', 'drawFocusRing', 'fill', 'stroke',
+        'clearRect', 'fillRect', 'strokeRect', 'fillText', 'strokeText'
+    ]
+};
+/**
+ * @scope enchant.Event.prototype
+ */
+enchant.Event = enchant.Class.create({
+    /**
+     * A class for independent event implementation like DOM Events.
+     * However, does not include phase concept.
+     * @param {String} type Event type.
+     * @constructs
+     */
+    initialize: function(type) {
+        /**
+         * Event type.
+         * @type {String}
+         */
+        this.type = type;
+        /**
+         * Event target.
+         * @type {*}
+         */
+        this.target = null;
+        /**
+         * Event occurrence's x coordinates. * @type {Number} */this.x = 0; this.y = 0; this.localX = 0; this.localY = 0; },_initPosition: function(pageX,pageY) { var game = enchant.Game.instance; this.x = this.localX = (pageX - game._pageX)/game.scale; this.y = this.localY = (pageY - game._pageY)/game.scale; }}); enchant.Event.LOAD = 'load'; enchant.Event.PROGRESS = 'progress'; enchant.Event.ENTER_FRAME = 'enterframe'; enchant.Event.EXIT_FRAME = 'exitframe'; enchant.Event.ENTER = 'enter'; enchant.Event.EXIT = 'exit'; enchant.Event.ADDED = 'added'; enchant.Event.ADDED_TO_SCENE = 'addedtoscene'; enchant.Event.REMOVED = 'removed'; enchant.Event.REMOVED_FROM_SCENE = 'removedfromscene'; enchant.Event.TOUCH_START = 'touchstart'; enchant.Event.TOUCH_MOVE = 'touchmove'; enchant.Event.TOUCH_END = 'touchend'; enchant.Event.RENDER = 'render'; enchant.Event.INPUT_START = 'inputstart'; enchant.Event.INPUT_CHANGE = 'inputchange'; enchant.Event.INPUT_END = 'inputend'; enchant.Event.LEFT_BUTTON_DOWN = 'leftbuttondown'; enchant.Event.LEFT_BUTTON_UP = 'leftbuttonup'; enchant.Event.RIGHT_BUTTON_DOWN = 'rightbuttondown'; enchant.Event.RIGHT_BUTTON_UP = 'rightbuttonup'; enchant.Event.UP_BUTTON_DOWN = 'upbuttondown'; enchant.Event.UP_BUTTON_UP = 'upbuttonup'; enchant.Event.DOWN_BUTTON_DOWN = 'downbuttondown'; enchant.Event.DOWN_BUTTON_UP = 'downbuttonup'; enchant.Event.A_BUTTON_DOWN = 'abuttondown'; enchant.Event.A_BUTTON_UP = 'abuttonup'; enchant.Event.B_BUTTON_DOWN = 'bbuttondown'; enchant.Event.B_BUTTON_UP = 'bbuttonup'; enchant.EventTarget = enchant.Class.create({initialize:function() { this._listeners = {}; },addEventListener: function(type,listener) { var listeners = this._listeners[type]; if (listeners == null) { this._listeners[type] = [listener]; } else if (listeners.indexOf(listener) === -1) { listeners.unshift(listener); } },on: function() { this.addEventListener.apply(this,arguments); },removeEventListener: function(type,listener) { var listeners = this._listeners[type]; if (listeners != null) { var i = listeners.indexOf(listener); if (i !== -1) { listeners.splice(i,1); } } },clearEventListener: function(type) { if (type != null) { delete this._listeners[type]; } else { this._listeners = {}; } },dispatchEvent: function(e) { e.target = this; e.localX = e.x - this._offsetX; e.localY = e.y - this._offsetY; if (this['on' + e.type] != null) { this['on' + e.type](e); } var listeners = this._listeners[e.type]; if (listeners != null) { listeners = listeners.slice(); for (var i = 0,len = listeners.length; i < len; i++) { listeners[i].call(this,e); } } }},()); enchant.Node = enchant.Class.create(enchant.EventTarget{initialize:function() { enchant.EventTarget.call(this); this._x = 0; this._y = 0; this._offsetX = 0; this._offsetY = 0; this.age = 0; this.parentNode = null; this.scene = null; this.addEventListener('touchstart',function(e) { if (this.parentNode && !this.parentNode._element) { this.parentNode.dispatchEvent(e); } }); this.addEventListener('touchmove',function(e) { if (this.parentNode && !this.parentNode._element) { this.parentNode.dispatchEvent(e); } }); this.addEventListener('touchend',function(e) { if (this.parentNode && !this.parentNode._element) { this.parentNode.dispatchEvent(e); } }); },moveTo: function(x,y) { this._x = x; this._y = y; this._updateCoordinate(); },moveBy: function(x,y) { this._x += x; this._y += y; this._updateCoordinate(); },x: { get: function() { return this._x; },set: function(x) { this._x = x; this._updateCoordinate(); } },y: { get: function() { return this._y; },set: function(y) { this._y = y; this._updateCoordinate(); } },_updateCoordinate: function() { if (this.parentNode) { this._offsetX = this.parentNode._offsetX + this._x; this._offsetY = this.parentNode._offsetY + this._y; } else { this._offsetX = this._x; this._offsetY = this._y; } },remove: function() { if (this._listener) { this.clearEventListener(); } if (this.parentNode) { this.parentNode.removeChild(this); } }},); enchant.Entity = enchant.Class.create(enchant.Node{initialize:function() { var game = enchant.Game.instance; enchant.Node.call(this); this._element = document.createElement('div'); this._style = this._element.style; this._style.position = 'absolute'; this._width = 0; this._height = 0; this._backgroundColor = null; this._opacity = 1; this._visible = true; this._buttonMode = null; if (enchant.Game.instance._debug) { this._style.border = "1px solid blue"; this._style.margin = "-1px"; } this.buttonMode = null; this.buttonPressed = false; this.addEventListener('touchstart',function() { if (!this.buttonMode) { return; } this.buttonPressed = true; var e = new enchant.Event(this.buttonMode + 'buttondown'); this.dispatchEvent(e); game.dispatchEvent(e); }); this.addEventListener('touchend',function() { if (!this.buttonMode) { return; } this.buttonPressed = false; var e = new enchant.Event(this.buttonMode + 'buttonup'); this.dispatchEvent(e); game.dispatchEvent(e); }); var that = this; var render = function() { that.dispatchEvent(new enchant.Event('render')); }; this.addEventListener('addedtoscene',function() { render(); game.addEventListener('exitframe',render); }); this.addEventListener('removedfromscene',function() { game.removeEventListener('exitframe',render); }); this.addEventListener('render',function() { if (this._offsetX !== this._previousOffsetX) { this._style.left = this._offsetX + 'px'; } if (this._offsetY !== this._previousOffsetY) { this._style.top = this._offsetY + 'px'; } this._previousOffsetX = this._offsetX; this._previousOffsetY = this._offsetY; }); if (enchant.ENV.TOUCH_ENABLED) { this._element.addEventListener('touchstart',function(e) { var touches = e.touches; for (var i = 0,len = touches.length; i < len; i++) { e = new enchant.Event('touchstart'); e.identifier = touches[i].identifier; e._initPosition(touches[i].pageX,touches[i].pageY); that.dispatchEvent(e); } },false); this._element.addEventListener('touchmove',function(e) { var touches = e.touches; for (var i = 0,len = touches.length; i < len; i++) { e = new enchant.Event('touchmove'); e.identifier = touches[i].identifier; e._initPosition(touches[i].pageX,touches[i].pageY); that.dispatchEvent(e); } },false); this._element.addEventListener('touchend',function(e) { var touches = e.changedTouches; for (var i = 0,len = touches.length; i < len; i++) { e = new enchant.Event('touchend'); e.identifier = touches[i].identifier; e._initPosition(touches[i].pageX,touches[i].pageY); that.dispatchEvent(e); } },false); } else { this._element.addEventListener('mousedown',function(e) { var x = e.pageX; var y = e.pageY; e = new enchant.Event('touchstart'); e.identifier = game._mousedownID; e._initPosition(x,y); that.dispatchEvent(e); that._mousedown = true; },false); game._element.addEventListener('mousemove',function(e) { if (!that._mousedown) { return; } var x = e.pageX; var y = e.pageY; e = new enchant.Event('touchmove'); e.identifier = game._mousedownID; e._initPosition(x,y); that.dispatchEvent(e); },false); game._element.addEventListener('mouseup',function(e) { if (!that._mousedown) { return; } var x = e.pageX; var y = e.pageY; e = new enchant.Event('touchend'); e.identifier = game._mousedownID; e._initPosition(x,y); that.dispatchEvent(e); that._mousedown = false; },false); } },id: { get: function() { return this._element.id; },set: function(id) { this._element.id = id; } },className: { get: function() { return this._element.className; },set: function(className) { this._element.className = className; } },width: { get: function() { return this._width; },set: function(width) { this._style.width = (this._width = width) + 'px'; } },height: { get: function() { return this._height; },set: function(height) { this._style.height = (this._height = height) + 'px'; } },backgroundColor: { get: function() { return this._backgroundColor; },set: function(color) { this._element.style.backgroundColor = this._backgroundColor = color; } },opacity: { get: function() { return this._opacity; },set: function(opacity) { this._style.opacity = this._opacity = opacity; } },visible: { get: function() { return this._visible; },set: function(visible) { if (this._visible = visible) { this._style.display = 'block'; } else { this._style.display = 'none'; } } },touchEnabled: { get: function() { return this._touchEnabled; },set: function(enabled) { if (this._touchEnabled = enabled) { this._style.pointerEvents = 'all'; } else { this._style.pointerEvents = 'none'; } } },intersect: function(other) { return this._offsetX < other._offsetX + other.width && other._offsetX < this._offsetX + this.width && this._offsetY < other._offsetY + other.height && other._offsetY < this._offsetY + this.height; },within: function(other,distance) { if (distance == null) { distance = (this.width + this.height + other.width + other.height)/4; } var _; return (_ = this._offsetX - other._offsetX + (this.width - other.width) / 2) * _ + (_ = this._offsetY - other._offsetY + (this.height - other.height) / 2) * _ < distance * distance; },scale: function(x,y) { if (y == null) { y = x; } this._scaleX *= x; this._scaleY *= y; this._dirty = true; },rotate: function(deg) { this._rotation += deg; this._dirty = true; },scaleX: { get: function() { return this._scaleX; },set: function(scaleX) { this._scaleX = scaleX; this._dirty = true; } },scaleY: { get: function() { return this._scaleY; },set: function(scaleY) { this._scaleY = scaleY; this._dirty = true; } },rotation: { get: function() { return this._rotation; },set: function(rotation) { this._rotation = rotation; this._dirty = true; } }},); enchant.Sprite = enchant.Class.create(enchant.Entity{initialize:function(width,height) { enchant.Entity.call(this); this.width = width; this.height = height; this._scaleX = 1; this._scaleY = 1; this._rotation = 0; this._dirty = false; this._image = null; this._frame = 0; this._frameSequence = []; this._style.overflow = 'hidden'; this.addEventListener('render',function() { if (this._dirty) { var transform = [ 'rotate(',this._rotation,'deg)','scale(',this._scaleX,',',this._scaleY,')' ]; // Issues #80 if (navigator.userAgent.indexOf('iPhone') !== -1) { transform.push('translate3d(0,0,0)'); } this._style[enchant.ENV.VENDOR_PREFIX + 'Transform'] = transform.join(''); this._dirty = false; } }); this.addEventListener('enterframe',function() { if (this._frameSequence.length !== 0) { var nextFrame = this._frameSequence.shift(); if (nextFrame === null) { this._frameSequence = []; } else { this._setFrame(nextFrame); this._frameSequence.push(nextFrame); } } }); if (enchant.Game.instance._debug) { this._style.border = "1px solid red"; this._style.margin = "-1px"; } },image: { get: function() { return this._image; },set: function(image) { if (image === this._image) { return; } if (this._image != null) { if (this._image.css) { this._style.backgroundImage = ''; } else if (this._element.firstChild) { this._element.removeChild(this._element.firstChild); if (this._dirtyListener) { this.removeEventListener('render',this._dirtyListener); this._dirtyListener = null; } else { this._image._parent = null; } } } if (image != null) { if (image._css) { this._style.backgroundImage = image._css; } else if (image._parent) { var canvas = document.createElement('canvas'); var context = canvas.getContext('2d'); canvas.width = image.width; canvas.height = image.height; context.drawImage(image._element,0,0); this._dirtyListener = function() { if (image._dirty) { context.drawImage(image._element); image._dirty = false; } }; this.addEventListener('render',this._dirtyListener); this._element.appendChild(canvas); } else { image._parent = this; this._element.appendChild(image._element); } } this._image = image; this.frame = this.frame; } },frame: { get: function() { return this._frame; },set: function(frame) { if (frame instanceof Array) { var frameSequence = frame; var nextFrame = frameSequence.shift(); this._setFrame(nextFrame); frameSequence.push(nextFrame); this._frameSequence = frameSequence; } else { this._setFrame(frame); this._frameSequence = []; this._frame = frame; } } },_setFrame: function(frame) { if (this._image != null) { this._frame = frame; var row = this._image.width/this._width | 0; if (this._image._css) { this._style.backgroundPosition = [ -(frame % row | 0) * this._width,'px ',-(frame / row | 0) * this._height,'px' ].join(''); } else if (this._element.firstChild) { var style = this._element.firstChild.style; style.left = -(frame % row | 0) * this._width + 'px'; style.top = -(frame / row | 0) * this._height + 'px'; } } }},); enchant.Label = enchant.Class.create(enchant.Entity{initialize:function(text) { enchant.Entity.call(this); this.width = 300; this.text = text; this.textAlign = 'left'; },text: { get: function() { return this._element.innerHTML; },set: function(text) { this._element.innerHTML = text; } },textAlign: { get: function() { return this._style.textAlign; },set: function(textAlign) { this._style.textAlign = textAlign; } },font: { get: function() { return this._style.font; },set: function(font) { this._style.font = font; } },color: { get: function() { return this._style.color; },set: function(color) { this._style.color = color; } }},()); enchant.Group = enchant.Class.create(enchant.Node{initialize:function() { enchant.Node.call(this); this.childNodes = []; this._x = 0; this._y = 0; },addChild: function(node) { this.childNodes.push(node); node.parentNode = this; node.dispatchEvent(new enchant.Event('added')); if (this.scene) { var e = new enchant.Event('addedtoscene'); node.scene = this.scene; node.dispatchEvent(e); node._updateCoordinate(); var fragment = document.createDocumentFragment(); var nodes; var push = Array.prototype.push; if (node._element) { fragment.appendChild(node._element); } else if (node.childNodes) { nodes = node.childNodes.slice() .reverse(); while (nodes.length) { node = nodes.pop(); node.scene = this.scene; node.dispatchEvent(e); if (node._element) { fragment.appendChild(node._element); } else if (node.childNodes) { push.apply(nodes,node.childNodes.reverse()); } } } if (!fragment.childNodes.length) { return; } var nextSibling,thisNode = this; while (thisNode.parentNode) { nodes = thisNode.parentNode.childNodes; nodes = nodes.slice(nodes.indexOf(thisNode) + 1) .reverse(); while (nodes.length) { node = nodes.pop(); if (node._element) { nextSibling = node._element; break; } else if (node.childNodes) { push.apply(nodes,node.childNodes.slice() .reverse()); } } thisNode = thisNode.parentNode; } if (nextSibling) { this.scene._element.insertBefore(fragment,nextSibling); } else { this.scene._element.appendChild(fragment); } } },insertBefore: function(node,reference) { var i = this.childNodes.indexOf(reference); if (i !== -1) { this.childNodes.splice(i,0,node); node.parentNode = this; node.dispatchEvent(new enchant.Event('added')); if (this.scene) { var e = new enchant.Event('addedtoscene'); node.scene = this.scene; node.dispatchEvent(e); node._updateCoordinate(); var fragment = document.createDocumentFragment(); var nodes; var push = Array.prototype.push; if (node._element) { fragment.appendChild(node._element); } else if (node.childNodes) { nodes = node.childNodes.slice() .reverse(); while (nodes.length) { node = nodes.pop(); node.scene = this.scene; node.dispatchEvent(e); if (node._element) { fragment.appendChild(node._element); } else if (node.childNodes) { push.apply(nodes,node.childNodes.reverse()); } } } if (!fragment.childNodes.length) { return; } var nextSibling,thisNode = reference; while (thisNode !== this) { if (i != null) { nodes = this.childNodes.slice(i + 1) .reverse(); i = null; } else { nodes = thisNode.parentNode.childNodes; nodes = nodes.slice(nodes.indexOf(thisNode) + 1) .reverse(); } while (nodes.length) { node = nodes.pop(); if (node._element) { nextSibling = node._element; break; } else if (node.childNodes) { push.apply(nodes,node.childNodes.slice() .reverse()); } } thisNode = thisNode.parentNode; } if (nextSibling) { this.scene._element.insertBefore(fragment,nextSibling); } else { this.scene._element.appendChild(fragment); } } } else { this.addChild(node); } },removeChild: function(node) { var i = this.childNodes.indexOf(node); if (i !== -1) { this.childNodes.splice(i,1); } else { return; } node.parentNode = null; node.dispatchEvent(new enchant.Event('removed')); if (this.scene) { var e = new enchant.Event('removedfromscene'); node.scene = null; node.dispatchEvent(e); if (node._element) { this.scene._element.removeChild(node._element); } else if (node.childNodes) { var nodes = node.childNodes.slice(); var push = Array.prototype.push; while (nodes.length) { node = nodes.pop(); node.scene = null; node.dispatchEvent(e); if (node._element) { this.scene._element.removeChild(node._element); } else if (node.childNodes) { push.apply(nodes,node.childNodes); } } } } },firstChild: { get: function() { return this.childNodes[0]; } },lastChild: { get: function() { return this.childNodes[this.childNodes.length - 1]; } },_updateCoordinate: function() { if (this.parentNode) { this._offsetX = this.parentNode._offsetX + this._x; this._offsetY = this.parentNode._offsetY + this._y; } else { this._offsetX = this._x; this._offsetY = this._y; } for (var i = 0,len = this.childNodes.length; i < len; i++) { this.childNodes[i]._updateCoordinate(); } }},); enchant.RGroup = enchant.Class.create(enchant.Group{initialize:function(width,height) { enchant.Group.call(this); if (arguments.length < 2) { throw("Width and height of RGroup must be specified"); } this.width = width; this.height = height; this.rotationOrigin = { x: width/2,y: height/2 }; this._rotation = 0; },addChild: function(node) { enchant.Group.prototype.addChild.apply(this,arguments); node.transformOrigin = "0 0"; },rotation: { get: function() { return this._rotation; },set: function(rotation) { var diff_rotation = (rotation - this._rotation); if (diff_rotation === 0) { return; } var rad = diff_rotation/180 * Math.PI; var sin = Math.sin(rad); var cos = Math.cos(rad); var origin = { x: this.width/2,y: this.height/2 }; for (var i = 0,len = this.childNodes.length; i < len; i++) { var node = this.childNodes[i]; node.rotation -= diff_rotation; var rx = (node.x - origin.x); var ry = (node.y - origin.y); node.x = +cos * rx + sin * ry + origin.x; node.y = -sin * rx + cos * ry + origin.y; } this._rotation = rotation; } }},); enchant.Scene = enchant.Class.create(enchant.Group{initialize:function() { var game = enchant.Game.instance; enchant.Group.call(this); this._element = document.createElement('div'); this._element.style.position = 'absolute'; this._element.style.overflow = 'hidden'; this._element.style.width = (this.width = game.width) + 'px'; this._element.style.height = (this.height = game.height) + 'px'; this._element.style[enchant.ENV.VENDOR_PREFIX + 'TransformOrigin'] = '0 0'; this._element.style[enchant.ENV.VENDOR_PREFIX + 'Transform'] = 'scale(' + game.scale + ')'; this.scene = this; var that = this; if (enchant.ENV.TOUCH_ENABLED) { this._element.addEventListener('touchstart',function(e) { var touches = e.touches; for (var i = 0,len = touches.length; i < len; i++) { e = new enchant.Event('touchstart'); e.identifier = touches[i].identifier; e._initPosition(touches[i].pageX,touches[i].pageY); that.dispatchEvent(e); } },false); this._element.addEventListener('touchmove',function(e) { var touches = e.touches; for (var i = 0,len = touches.length; i < len; i++) { e = new enchant.Event('touchmove'); e.identifier = touches[i].identifier; e._initPosition(touches[i].pageX,touches[i].pageY); that.dispatchEvent(e); } },false); this._element.addEventListener('touchend',function(e) { var touches = e.changedTouches; for (var i = 0,len = touches.length; i < len; i++) { e = new enchant.Event('touchend'); e.identifier = touches[i].identifier; e._initPosition(touches[i].pageX,touches[i].pageY); that.dispatchEvent(e); } },false); } else { this._element.addEventListener('mousedown',function(e) { var x = e.pageX; var y = e.pageY; e = new enchant.Event('touchstart'); e.identifier = game._mousedownID; e._initPosition(x,y); that.dispatchEvent(e); that._mousedown = true; },false); game._element.addEventListener('mousemove',function(e) { if (!that._mousedown) { return; } var x = e.pageX; var y = e.pageY; e = new enchant.Event('touchmove'); e.identifier = game._mousedownID; e._initPosition(x,y); that.dispatchEvent(e); },false); game._element.addEventListener('mouseup',function(e) { if (!that._mousedown) { return; } var x = e.pageX; var y = e.pageY; e = new enchant.Event('touchend'); e.identifier = game._mousedownID; e._initPosition(x,y); that.dispatchEvent(e); that._mousedown = false; },false); } },backgroundColor: { get: function() { return this._backgroundColor; },set: function(color) { this._element.style.backgroundColor = this._backgroundColor = color; } },_updateCoordinate: function() { this._offsetX = this._x; this._offsetY = this._y; for (var i = 0,len = this.childNodes.length; i < len; i++) { this.childNodes[i]._updateCoordinate(); } }},()); enchant.Scene = enchant.Class.create(enchant.Group{initialize:function() { enchant.Group.call(this); this._element = document.createElement('div'); this._element.style.position = 'absolute'; this._element.style.overflow = 'hidden'; this._element.style.width = (this.width = enchant.Game.instance.width) + 'px'; this._element.style.height = (this.height = enchant.Game.instance.height) + 'px'; this._element.style[enchant.ENV.VENDOR_PREFIX + 'TransformOrigin'] = '0 0'; this._element.style[enchant.ENV.VENDOR_PREFIX + 'Transform'] = 'scale(' + enchant.Game.instance.scale + ')'; this.scene = this; var that = this; if (enchant.ENV.TOUCH_ENABLED) { this._element.addEventListener('touchstart',function(e) { var touches = e.touches; for (var i = 0,len = touches.length; i < len; i++) { e = new enchant.Event('touchstart'); e.identifier = touches[i].identifier; e._initPosition(touches[i].pageX,touches[i].pageY); that.dispatchEvent(e); } },false); this._element.addEventListener('touchmove',function(e) { var touches = e.touches; for (var i = 0,len = touches.length; i < len; i++) { e = new enchant.Event('touchmove'); e.identifier = touches[i].identifier; e._initPosition(touches[i].pageX,touches[i].pageY); that.dispatchEvent(e); } },false); this._element.addEventListener('touchend',function(e) { var touches = e.changedTouches; for (var i = 0,len = touches.length; i < len; i++) { e = new enchant.Event('touchend'); e.identifier = touches[i].identifier; e._initPosition(touches[i].pageX,touches[i].pageY); that.dispatchEvent(e); } },false); } else { this._element.addEventListener('mousedown',function(e) { var x = e.pageX; var y = e.pageY; e = new enchant.Event('touchstart'); e.identifier = enchant.Game.instance._mousedownID; e._initPosition(x,y); that.dispatchEvent(e); that._mousedown = true; },false); enchant.Game.instance._element.addEventListener('mousemove',function(e) { if (!that._mousedown) { return; } var x = e.pageX; var y = e.pageY; e = new enchant.Event('touchmove'); e.identifier = enchant.Game.instance._mousedownID; e._initPosition(x,y); that.dispatchEvent(e); },false); enchant.Game.instance._element.addEventListener('mouseup',function(e) { if (!that._mousedown) { return; } var x = e.pageX; var y = e.pageY; e = new enchant.Event('touchend'); e.identifier = enchant.Game.instance._mousedownID; e._initPosition(x,y); that.dispatchEvent(e); that._mousedown = false; },false); } },backgroundColor: { get: function() { return this._backgroundColor; },set: function(color) { this._element.style.backgroundColor = this._backgroundColor = color; } },_updateCoordinate: function() { this._offsetX = this._x; this._offsetY = this._y; for (var i = 0,len = this.childNodes.length; i < len; i++) { this.childNodes[i]._updateCoordinate(); } }},); enchant.Surface = enchant.Class.create(enchant.EventTarget{initialize:function(width,height) { enchant.EventTarget.call(this); var game = enchant.Game.instance; this.width = width; this.height = height; this.context = null; var id = 'enchant-surface' + game._surfaceID++; if (document.getCSSCanvasContext) { this.context = document.getCSSCanvasContext('2d',id,width,height); this._element = this.context.canvas; this._css = '-webkit-canvas(' + id + ')'; var context = this.context; } else if (document.mozSetImageElement) { this._element = document.createElement('canvas'); this._element.width = width; this._element.height = height; this._css = '-moz-element(#' + id + ')'; this.context = this._element.getContext('2d'); document.mozSetImageElement(id,this._element); } else { this._element = document.createElement('canvas'); this._element.width = width; this._element.height = height; this._element.style.position = 'absolute'; this.context = this._element.getContext('2d'); enchant.ENV.CANVAS_DRAWING_METHODS.forEach(function(name) { var method = this.context[name]; this.context[name] = function() { method.apply(this,arguments); this._dirty = true; }; },this); } },getPixel: function(x,y) { return this.context.getImageData(x,y,1,1) .data; },setPixel: function(x,y,r,g,b,a) { var pixel = this.context.createImageData(1,1); pixel.data[0] = r; pixel.data[1] = g; pixel.data[2] = b; pixel.data[3] = a; this.context.putImageData(pixel,x,y); },clear: function() { this.context.clearRect(0,0,this.width,this.height); },draw: function(image) { image = image._element; if (arguments.length === 1) { this.context.drawImage(image,0,0); } else { var args = arguments; args[0] = image; this.context.drawImage.apply(this.context,args); } },clone: function() { var clone = new enchant.Surface(this.width,this.height); clone.draw(this); return clone; },toDataURL: function() { var src = this._element.src; if (src) { if (src.slice(0,5) === 'data:') { return src; } else { return this.clone() .toDataurl('URL('); } } else { return this._element.toDataurl('URL('); } }}; enchant.Sound = enchant.Class.create(enchant.EventTarget,{initialize:function() { enchant.EventTarget.call(this); this.duration = 0; throw new Error("Illegal Constructor"); },play: function() { if (this._element) { this._element.play(); } },pause: function() { if (this._element) { this._element.pause(); } },stop: function() { this.pause(); this.currentTime = 0; },clone: function() { var clone; if (this._element instanceof Audio) { clone = Object.create(enchant.Sound.prototype,{ _element: { value: this._element.cloneNode(false) },duration: { value: this.duration } }); } else if (enchant.ENV.USE_FLASH_SOUND) { return this; } else { clone = Object.create(enchant.Sound.prototype); } enchant.EventTarget.call(clone); return clone; },currentTime: { get: function() { return this._element ? this._element.currentTime : 0; },set: function(time) { if (this._element) { this._element.currentTime = time; } } },volume: { get: function() { return this._element ? this._element.volume : 1; },set: function(volume) { if (this._element) { this._element.volume = volume; } } }};
+
+enchant.Sound.enabledInMobileSafari = false;
+__ESCAPED_SOURCE_END_CLEAN_CSS__
