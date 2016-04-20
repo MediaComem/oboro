@@ -1,9 +1,21 @@
 <html>
     <head>
         <title>JavaScript Sokoban</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta charset="UTF-8">
         <script src="leveldata.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/reset.css">
+
+<script type="text/javascript" src="../assets/js/jquery-1.12.3.min.js"></script>
+
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="../lib/bootstrap/dist/css/bootstrap.css" />
+        <script type="text/javascript" src="../assets/js/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript" src="../lib/bootstrap/dist/js/bootstrap.js"></script>
+
+
         <script type="text/javascript">
             var Direction = {
                 Up: 0,
@@ -36,7 +48,7 @@
             var playerTiles = new Array();
 
             //selected level
-            var currentLevel = 1;
+            var currentLevel = 0;
             var levelMap;
             var placedCrates;
             var moves = 0;
@@ -82,11 +94,15 @@
                 }
 
                 this.moveUp = function(){
+
                     if(handleMove(Direction.Up)){
+
                             this.y -= 1;
                             moves += 1;
+
                     }
                     this.d = Direction.Up;
+
                     this.animate();
                 }
 
@@ -163,7 +179,7 @@
                     }
                     drawField();
                 } else {
-                    alert("No more moves to undo!");
+                    console.log("No more moves to undo!");
                 }
             }
 
@@ -357,10 +373,13 @@
                 }
                 if(placedCrates === level[currentLevel].cratesToPlace){
                     if((currentLevel + 1) < level.length){
-                        alert("Level " + (currentLevel + 1) + " completed. Well Done. Ready for the next Level?");
                         gotoNextLevel();
                     } else {
-                        alert("YEAH! YOU ARE A CRATE PUSHING MASTER!!");
+
+                        console.log('VIDEO SUIVANTE')
+                        /*
+                        show bpx id suiv.
+                        */
                     }
                 }
             }
@@ -453,6 +472,12 @@
                 }
                 return false;
             }
+            // Controls button adds
+
+
+
+
+
 
             document.onkeydown = function(e){
                 var thisEvent = e;
@@ -524,7 +549,33 @@
                 //alert (helpDiv.style.);
                 helpDiv.style.display = "none";
             }
+
+            $(function() {
+
+              $('#arrow-top').on('click', function(){
+                var e = $.Event("keydown", { keyCode: 38}); //"keydown" if that's what you're doing
+                $("body").trigger(e);
+              })
+              $('#arrow-bottom').on('click', function(){
+                var e = $.Event("keydown", { keyCode: 40}); //"keydown" if that's what you're doing
+                $("body").trigger(e);
+              })
+              $('#arrow-left').on('click', function(){
+                var e = $.Event("keydown", { keyCode: 37}); //"keydown" if that's what you're doing
+                $("body").trigger(e);
+              })
+              $('#arrow-right').on('click', function(){
+                var e = $.Event("keydown", { keyCode: 39}); //"keydown" if that's what you're doing
+                $("body").trigger(e);
+              })
+            });
+
+
+
+
         </script>
+
+        <script type="text/javascript" src="js/main.js"></script>
         <style type="text/css">
             body{
                 background-color: #000000;
@@ -613,15 +664,16 @@
         </style>
     </head>
     <body>
+        <div class="col-md-12 col-lg-12 col-sm-12" style="padding:0px;">
         <div id="gameContainer">
-            <div id="scoreBoard">
+            <div id="scoreBoard"  style="display:none;">
                 <div class="info" id="levelInfo"></div>
                 <div class="info" id="stepsInfo"></div>
                 <div class="info" id="pushesInfo"></div>
                 <div class="info" id="cratesInfo"></div>
             </div>
 
-            <div id="levelControl">
+            <div id="levelControl" style="display:none;">
                 <div class="button" onClick="gotoNextLevel()">Next level</div>
                 <div class="button" onClick="gotoPrevLevel()">Prev level</div>
                 <div class="button" onClick="undoMove()">Undo move</div>
@@ -631,6 +683,28 @@
             <canvas id="myDrawing">
                 <p>Your browser doesn't support the HTML5 canvas element. Please upgrade to FireFox 4, Google Chrome or IE9</p>
             </canvas>
+
+            <div style="width:100px;height:80px;margin:auto;">
+              <div style="width:100px;">
+                <img src="img/arrow-top.png" alt="top" id="arrow-top"/>
+              </div>
+              <div style="width:50px;float:left;">
+                <img src="img/arrow-left.png" alt="left" id="arrow-left"/>
+              </div>
+              <div style="width:50px;float:right;">
+                <img src="img/arrow-right.png" alt="right" id="arrow-right"/>
+              </div>
+              <div style="width:100px;">
+                <img src="img/arrow-bottom.png" alt="bottom" id="arrow-bottom"/>
+              </div>
+              <div style="float:right;">
+                <button type="button" onClick="resetLevel()">Redémarrer le niveau</button>
+                <button type="button" onClick="undoMove()">Annuler déplacement!</button>
+              </div>
+              <div class="button" onClick="gotoNextLevel()">Next level</div>
+              <div class="button" onClick="gotoPrevLevel()">Prev level</div>
+
+            </div>
 
             <div id="help" onClick="hideHelp();">
                 <p>
@@ -651,5 +725,6 @@
                 </p>
             </div>
         </div>
+      </div>
     </body>
 </html>

@@ -1,5 +1,5 @@
 /* Welcome to Compass. In this file you should write your main styles. (or centralize your imports) Import this file using the following HTML or equivalent: <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-@font-face { font-family: 'Gloria Hallelujah'; font-style: normal; font-weight: 400; src: local("Gloria Hallelujah"), local("GloriaHallelujah"), url(../GloriaHallelujah.woff) format("woff"); }
+@font-face { font-family: 'Gloria Hallelujah'; font-style: normal; font-weight: 400; src: local("Gloria Hallelujah"), local("GloriaHallelujah"), url(../fonts/GloriaHallelujah.woff) format("woff"); }
 
 * { box-sizing: border-box; }
 
@@ -7,7 +7,7 @@ body { margin: 0; padding: 0; font-family: 'Gloria Hallelujah', cursive; }
 
 .container { height: 552px; width: 422px; position: relative; margin: 20px auto; overflow: hidden; }
 
-#canvas { height: 552px; width: 422px; display: block; background: url(../img/canvas.png); background-repeat: repeat-x }
+#canvas { height: 552px; width: 422px; display: block; background: url(../img/pattern.png); background-repeat: repeat-x }
 
 #bg-canvas { height: 552px; width: 422px; display: block; }
 

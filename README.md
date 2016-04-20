@@ -1,9 +1,9 @@
-# oboro-games
-Développement des jeux pour oboro, note :  le déploiement sur le site se fera sur un autre repository 
+# oboro
+Projet transmédia
 
 ## Installation
 ```
-git clone git@github.com:simkarlier/oboro-games.git
+git clone git@github.com:simkarlier/oboro.git
 ```
 
 ## Règles

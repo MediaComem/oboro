@@ -1,3 +1,7 @@
+//registering the code for the dom
+//parts["stomachjump"].dom = "hello world";
+
+
 // RequestAnimFrame: a browser API for getting smooth animations
 window.requestAnimFrame = (function() {
 	return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
@@ -9,8 +13,6 @@ window.requestAnimFrame = (function() {
 var canvas = document.getElementById('canvas'),
 	ctx = canvas.getContext('2d');
 
-var backgroundCanvas = 	document.getElementById('bg-canvas'),
-	ctxBg = backgroundCanvas.getContext('2d');
 
 
 var container = document.getElementById('container');
@@ -29,20 +31,6 @@ canvas.height = height;
 
 
 
-
-backgroundCanvas.width = width;
-backgroundCanvas.height = height;
-
-
-img.src = 'https://www.google.nl/images/srpr/logo3w.png';
-
-img.onload = function(){
-    // create pattern
-    var ptrn = ctxBg.createPattern(img, 'repeat'); // Create a pattern with this image, and set it to "repeat".
-    ctxBg.fillStyle = ptrn;
-    ctxBg.fillRect(0, 0, canvas.width, canvas.height); // context.fillRect(x, y, width, height);
-}
-
 //Variables for game
 var platforms = [],
 	image = document.getElementById("sprite"),
@@ -56,14 +44,16 @@ var platforms = [],
 
 //Base object
 var Base = function() {
-	this.height = 5;
+	this.height = 181;
 	this.width = width;
 
-	//Sprite clipping
+	this.base = document.getElementById("base");
+	
+	//Sprite clipping 440 * 181
 	this.cx = 0;
-	this.cy = 614;
-	this.cwidth = 100;
-	this.cheight = 5;
+	this.cy = 0;
+	this.cwidth = 440;
+	this.cheight = 181;
 
 	this.moved = 0;
 
@@ -72,7 +62,7 @@ var Base = function() {
 
 	this.draw = function() {
 		try {
-			ctx.drawImage(image, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height);
+			ctx.drawImage(this.base, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height);
 		} catch (e) {}
 	};
 };
@@ -642,7 +632,7 @@ function playerJump() {
 	//Accelerations produces when the user hold the keys
 	if (player.isMovingLeft === true) {
 		player.x += player.vx;
-		player.vx -= 0.15;
+		player.vx -= 0.1;
 	} else {
 		player.x += player.vx;
 		if (player.vx < 0) player.vx += 0.1;
@@ -650,7 +640,7 @@ function playerJump() {
 
 	if (player.isMovingRight === true) {
 		player.x += player.vx;
-		player.vx += 0.15;
+		player.vx += 0.1;
 	} else {
 		player.x += player.vx;
 		if (player.vx > 0) player.vx -= 0.1;

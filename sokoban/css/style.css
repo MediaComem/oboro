@@ -19,7 +19,7 @@ div#gameContainer{
 div#gameContainer canvas#myDrawing{
 
   background-color: white;
-  width:60%;
+   width:65%;
 }
 
 div#gameContainer div#scoreBoard{
@@ -27,3 +27,34 @@ div#gameContainer div#scoreBoard{
   color:blue;
 
 }
+
+
+
+/*
+@media only screen and (max-width: 479px){
+  div#gameContainer canvas#myDrawing{
+      width:98%;
+  }
+}
+
+
+@media only screen and (min-width: 480px)
+{
+  div#gameContainer canvas#myDrawing{
+    width:98%;
+  }
+
+}
+@media only screen and (min-width: 768px)
+{
+  div#gameContainer canvas#myDrawing{
+    width:90%;
+  }
+}
+@media only screen and (min-width: 992px)
+{
+    div#gameContainer canvas#myDrawing{
+      width:65%;
+    }
+}
+*/
