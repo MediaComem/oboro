@@ -1,6 +1,4 @@
-//registering the code for the dom
-//parts["stomachjump"].dom = "hello world";
-
+window.currentPart = function stomachjump(){
 
 // RequestAnimFrame: a browser API for getting smooth animations
 window.requestAnimFrame = (function() {
@@ -12,7 +10,6 @@ window.requestAnimFrame = (function() {
 
 var canvas = document.getElementById('canvas'),
 	ctx = canvas.getContext('2d');
-
 
 
 var container = document.getElementById('container');
@@ -666,4 +663,11 @@ menuLoop = function() {
 	requestAnimFrame(menuLoop);
 };
 
-menuLoop();
+menuLoop(); 
+   
+
+$( "#stomach-start" ).click(function() {
+  init();
+}); 
+
+}

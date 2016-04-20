@@ -1,3 +1,4 @@
+window.currentPart = function sokoban(){
 
 var Direction = {
     Up: 0,
@@ -22,7 +23,6 @@ var context;
 
 canvas = document.getElementById("myDrawing");
 context = canvas.getContext("2d");
-
 
 
 
@@ -563,3 +563,6 @@ $(function() {
     $("body").trigger(e);
   })
 });
+
+}
+

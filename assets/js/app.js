@@ -1,13 +1,16 @@
+window.currentPart = {};
+	
 $(function() {
 	//the array containing the different parts of the adventure
+	
 	var parts = {};
-
-
 
 	function Part(part){
 
 		this.baseUrl = "./" + part +"/";
 		var that = this;
+
+		this.exec = {};
 
 		this.part = part;
 
@@ -19,12 +22,12 @@ $(function() {
 
 		//show the the div
 		this.show = function(){
-			$("#"+this.part).css("visibility","visible");
+			$("#"+that.part).css("visibility","visible");
 		}
 
 		//hide the div
 		this.hide = function(){
-			$("#"+this.part).css("visibility","hidden");
+			$("#"+that.part).css("visibility","hidden");
 		}
 
 
@@ -32,9 +35,13 @@ $(function() {
 		//e.g /stomachjump/assets/js/stomachjump.js
 		this.getScript = function(){
 
+			//$("#"+this.part).append('<script type="text/javascript" src="'+this.baseUrl+'assets/js/'+this.part+'.js"> </script>')
+			
 			$.getScript(this.baseUrl + "assets/js/"+ part +".js")
 			 .done(function( script, textStatus ) {
-			  	console.log("srpit loaded")
+			  	//executes the code
+			  	that.exec = window.currentPart;
+			  
 			  })
 			  .fail(function( jqxhr, settings, exception ) {
 			    console.log("error : " + exception);
@@ -44,7 +51,7 @@ $(function() {
 		//load the css
 		//e.g /stomachjump/assets/css/stomachjump.css
 		this.getStyle = function(){
-			$('<link>')
+			$('<link class="site-part">')
 	  		.appendTo('head')
 	  		.attr({type : 'text/css', rel : 'stylesheet'})
 	  		.attr('href', this.baseUrl + "assets/css/" + part + ".css");
@@ -54,13 +61,16 @@ $(function() {
 
 		//get the html content and append it to the DOM
 		$.get( this.baseUrl + "/" + this.part + ".html", function( data ) {
+		 	//remove all the other site parts
+		 	$(".site-part").remove();
+
 		 	that.dom = data;
 
 		 	that.getStyle();
-
+		 	
 
 		 	//appends to the body
-			$( "body" ).append( "<div id='"+ that.part+"'>"+"</div>" );
+			$( "body" ).append( "<div class='site-part' id='"+ that.part+"'>"+"</div>" );
 			$("#"+that.part).append(that.dom);
 			$("#"+that.part).css("visibility","hidden");
 
@@ -74,18 +84,31 @@ $(function() {
 	//parts["stomachjump"] = new Part("stomachjump");
 
 	//load the sokoban
-	parts["sokoban"] = new Part("sokoban");
-	parts["stomachjump"] = new Part("stomachjump");
+	var sokoban = new Part("sokoban");
 	
 	
+	//parts["pingouin"] = new Part("pingouin");
+	
+	 setTimeout(function(){ 
+	 	sokoban.show();
+	 	sokoban.exec();
+
+	 	setTimeout(function(){
+
+		 	parts["stomachjump"] = new Part("stomachjump");
+
+		 	setTimeout(function(){
+		 		parts["stomachjump"].show();
+				parts["stomachjump"].exec();	
+		 	},1000);
+
+	 	},20000)
+	 	
+	 }, 1000);
 
 
-	setTimeout(function(){parts["sokoban"].show(); }, 1000);
 
-
-
-
-	// Events
+	// 
 	/*var maVid = document.getElementById("vid");
 
   maVid.ontimeupdate = function() {
