@@ -67,7 +67,7 @@ gulp.task("main",function(){
 	var toMinify = argv.env != "dev";
 
 
-	var js =  gulp.src(['./assets/js/*.js','!./assets/js/oboro*.js'])
+	var js =  gulp.src(['./assets/js/jquery.min.js','./assets/js/*.js','!./assets/js/oboro*.js'])
 		        .pipe(gulpif(toMinify,concat("oboro.min.js"),concat("oboro.js")))
 		        .pipe(gulpif(toMinify, uglify()))
 		        .pipe(gulp.dest('./assets/js'));
