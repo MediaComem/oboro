@@ -2,6 +2,7 @@
     <head>
         <title>JavaScript Sokoban</title>
         <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta charset="UTF-8">
         <script src="leveldata.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/reset.css">
@@ -660,14 +661,14 @@
     <body>
         <div class="col-md-12 col-lg-12 col-sm-12" style="padding:0px;">
         <div id="gameContainer">
-            <div id="scoreBoard">
+            <div id="scoreBoard"  style="display:none;">
                 <div class="info" id="levelInfo"></div>
                 <div class="info" id="stepsInfo"></div>
                 <div class="info" id="pushesInfo"></div>
                 <div class="info" id="cratesInfo"></div>
             </div>
 
-            <div id="levelControl">
+            <div id="levelControl" style="display:none;">
                 <div class="button" onClick="gotoNextLevel()">Next level</div>
                 <div class="button" onClick="gotoPrevLevel()">Prev level</div>
                 <div class="button" onClick="undoMove()">Undo move</div>
@@ -678,11 +679,26 @@
                 <p>Your browser doesn't support the HTML5 canvas element. Please upgrade to FireFox 4, Google Chrome or IE9</p>
             </canvas>
 
-            <div>
-              <img src="img/arrow-top.png" alt="top" id="arrow-top"/>
-              <img src="img/arrow-bottom.png" alt="bottom" id="arrow-bottom"/>
-              <img src="img/arrow-left.png" alt="left" id="arrow-left"/>
-              <img src="img/arrow-right.png" alt="right" id="arrow-right"/>
+            <div style="width:100px;height:80px;margin:auto;">
+              <div style="width:100px;">
+                <img src="img/arrow-top.png" alt="top" id="arrow-top"/>
+              </div>
+              <div style="width:50px;float:left;">
+                <img src="img/arrow-left.png" alt="left" id="arrow-left"/>
+              </div>
+              <div style="width:50px;float:right;">
+                <img src="img/arrow-right.png" alt="right" id="arrow-right"/>
+              </div>
+              <div style="width:100px;">
+                <img src="img/arrow-bottom.png" alt="bottom" id="arrow-bottom"/>
+              </div>
+              <div style="float:right;">
+                <button type="button" onClick="resetLevel()">Redémarrer le niveau</button>
+                <button type="button" onClick="undoMove()">Annuler déplacement!</button>
+              </div>
+              <div class="button" onClick="gotoNextLevel()">Next level</div>
+              <div class="button" onClick="gotoPrevLevel()">Prev level</div>
+
             </div>
 
             <div id="help" onClick="hideHelp();">

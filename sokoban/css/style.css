@@ -19,7 +19,7 @@ div#gameContainer{
 div#gameContainer canvas#myDrawing{
 
   background-color: white;
- width:90%;
+   width:65%;
 }
 
 div#gameContainer div#scoreBoard{
