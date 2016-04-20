@@ -37,7 +37,7 @@ function build(folder,env){
 		        .pipe(gulpif(toMinify, uglify()))
 		        .pipe(gulp.dest('./'+folder+'/assets/js'));
 
-	var css = gulp.src(['./'+folder+'/**/*.js','!./'+folder+'/**/'+folder+'*.css'])
+	var css = gulp.src(['./'+folder+'/**/*.css','!./'+folder+'/**/'+folder+'*.css'])
 				.pipe(gulpif(toMinify,concat(folder+".min.css"),concat(folder+".css")))
 				.pipe(gulpif(toMinify, minify()))
 				.pipe(gulp.dest('./'+folder+'/assets/css'))     
