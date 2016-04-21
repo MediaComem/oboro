@@ -115,7 +115,7 @@ $(function() {
 	 	
 	 	setTimeout(function(){
 	 	parts["stomachjump"].removeOthers();
-	 	parts["stomachjump"].getStyle();
+	 	parts["stomachjump"].applyStyle(); 
  		parts["stomachjump"].show();
 		parts["stomachjump"].exec();	
 
