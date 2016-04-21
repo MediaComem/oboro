@@ -1,4 +1,10 @@
 
+body, html { 
+    overflow-x: hidden; 
+    overflow-y: auto;
+}
+
+
 div.box{
   position: absolute;
   width:100%;
