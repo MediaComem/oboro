@@ -1,9 +1,17 @@
+window.parts = []//the array containing the different parts of the adventure
 window.currentPart = {};
+window.next = function(){
+	//executes the script contained in the last added part
+	var lastPart = parts[parts.length-1];
+	
+	lastPart.removeOthers();
+	lastPart.applyStyle();
+	lastPart.show();
+	lastPart.exec();
+}
 
 $(function() {
-	//the array containing the different parts of the adventure
-
-	var parts = {};
+	
 
 	function Part(part){
 
@@ -91,30 +99,45 @@ $(function() {
 
 	}
 
+	function Video(part){
+		var that = this;
+
+		this.video = $("#" +part  + " video").get(0);
+
+
+		this.video.ontimeupdate = function() {
+		    if(that.video.currentTime >= that.video.duration){
+		      that.video.pause()
+		    }
+		}
+
+		this.video.onpause = function(){
+   			window.next();
+  		}
+
+	}
+
+
+
 	//load for example the stomachjump
 	//parts["stomachjump"] = new Part("stomachjump");
 
-	//load the sokoban (HTML + SCRIPT)
-	var sokoban = new Part("sokoban");
+	
+	parts.push(new Part("intro"));
 
+
+
+
+	// txtArea[0].value
 
 	//parts["pingouin"] = new Part("pingouin");
 
 	 setTimeout(function(){
-	 	sokoban.applyStyle();
-	 	sokoban.show();
-	 	sokoban.exec();
-
+	 	parts[0].video = new Video("intro");
+		parts[0].show();
+ 		
 	 	//loads the other page while the user is playing
-	  parts["stomachjump"] = new Part("stomachjump");
-
-	 	setTimeout(function(){
-	 	parts["stomachjump"].removeOthers();
-	 	parts["stomachjump"].applyStyle();
- 		parts["stomachjump"].show();
-		parts["stomachjump"].exec();
-
-	 	},20000)
+	  	parts.push(new Part("stomachjump"));
 
 	 }, 1000);
 
