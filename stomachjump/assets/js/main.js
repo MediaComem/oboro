@@ -335,7 +335,11 @@ function init() {
 		if ((player.y + player.height) > base.y && base.y < height) player.jump();
 
 		//Gameover if it hits the bottom 
-		if (base.y > height && (player.y + player.height) > height && player.isDead != "lol") player.isDead = true;
+		if (base.y > height && (player.y + player.height) > height && player.isDead != "lol"){
+			player.isDead = true;
+			console.log("player dead");
+			window.next();
+		}
 
 		//Make the player move through walls
 		if (player.x > width) player.x = 0 - player.width;

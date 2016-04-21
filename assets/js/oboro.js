@@ -144,6 +144,11 @@ $(function() {
 	 	//loads the other page while the user is playing
 	  	parts.push(new Part("stomachjump"));
 
+	  	setTimeout(function(){
+	  		parts.push(new Part("sokoban"));
+	  	},30000);
+
+
 	 }, 1000);
 
 
