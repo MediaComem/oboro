@@ -106,7 +106,7 @@ $(function() {
 	 	sokoban.exec();
 
 	 	//loads the other page while the user is playing
-	 //	parts["stomachjump"] = new Part("stomachjump");
+	  parts["stomachjump"] = new Part("stomachjump");
 
 	 	setTimeout(function(){
 	 	parts["stomachjump"].removeOthers();
