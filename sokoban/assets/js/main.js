@@ -248,7 +248,7 @@ function mapTilesLoaded(tileArray){
 }
 
 
-   
+
 
 function bordersWallsOnly(map,x,y,xMax,yMax){
     //alert(map[0][0])
@@ -516,12 +516,14 @@ function updateStats(){
 }
 
 function resizeInterface(){
-    canvas.width = level[currentLevel].levelWidth * tileXSize
-    canvas.height = level[currentLevel].levelHeight * tileYSize
+    canvas.width = level[currentLevel].levelWidth * tileXSize;
+    canvas.height = level[currentLevel].levelHeight * tileYSize;
+    /*
     var scorePanel = document.getElementById("scoreBoard");
     var levelPanel = document.getElementById("levelControl");
     scorePanel.style.width = "" + canvas.width + "px";
     levelPanel.style.width = "" + canvas.width + "px";
+    */
     var helpDiv = document.getElementById("help");
     helpDiv.style.top = (canvas.offsetTop + 10) + "px";
     helpDiv.style.left = (canvas.offsetLeft + 10) + "px";
@@ -565,4 +567,3 @@ $(function() {
 });
 
 }
-
