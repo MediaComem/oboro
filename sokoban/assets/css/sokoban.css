@@ -8,6 +8,7 @@ body{
   border-color: #cccccc;
   border-style: solid;
   border-width: 0px;
+
 }
 
 
@@ -15,8 +16,11 @@ div#gameContainer{
   width:100%;
   height:100%;
   margin:0px;
-  background-color: #00FF00;
+  /*background-color: #00FF00;*/
+  background-image: url('./sokoban/assets/img/fujir.jpg');
+  background-size: cover;
   overflow: auto;
+  position: fixed;
 }
 
  div#gameContainer div#levelControl{
@@ -30,16 +34,17 @@ div#gameContainer{
 }
 div#gameContainer canvas#myDrawing{
 
-  background-color: white;
+  /*background-color: white;*/
    width:65%;
-
+/*
  border-style: solid;
  border-width: 2px;
- border-color: #000000;
+ border-color: #000000;*/
  margin-top: 10px;
  margin-left: auto;
  margin-right: auto;
  display: inline-block;
+
 }
 
 div#gameContainer div#scoreBoard{
@@ -93,32 +98,98 @@ div.button:hover{
     display: none;
 }
 
+div#gameContainer div.box{
 
-/*
-@media only screen and (max-width: 479px){
+     width:15%;
+     margin-top: 10px;
+     margin-left: auto;
+     margin-right: auto;
+
+}
+
+div#gameContainer div.box #sokcontrols{
+  width:180px;
+  height:180px;
+  background-color:#00FF00;
+  border-radius:70px;
+  float:left;
+  display:none;
+}
+
+
+div#bloc{
+  display:block;
+  background-color:#00FF00;
+}
+
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+/* Styles */
   div#gameContainer canvas#myDrawing{
-      width:98%;
-  }
+
+    /*background-color: white;*/
+     width:100%;
+   }
+
+   div#gameContainer div.box #sokcontrols{
+     display: block;
+   }
 }
 
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (min-width : 321px) {
+/* Styles */
+}
 
-@media only screen and (min-width: 480px)
-{
-  div#gameContainer canvas#myDrawing{
-    width:98%;
-  }
+/* Smartphones (portrait) ----------- */
+@media only screen
+and (max-width : 320px) {
+/* Styles */
+}
 
+/* iPads (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+/* Styles */
 }
-@media only screen and (min-width: 768px)
-{
-  div#gameContainer canvas#myDrawing{
-    width:90%;
-  }
+
+/* iPads (landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+/* Styles */
 }
-@media only screen and (min-width: 992px)
-{
-    div#gameContainer canvas#myDrawing{
-      width:65%;
-    }
+
+/* iPads (portrait) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+/* Styles */
 }
-*/
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+/* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen
+and (min-width : 1824px) {
+/* Styles */
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}
