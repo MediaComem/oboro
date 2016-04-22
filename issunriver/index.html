@@ -3,28 +3,26 @@
     <head>    	
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1.0">
-        <title>FUKUSHIBUSHI</title>                
-        <script src="js/lib/enchant.js"></script> 
-        <script src="js/main.js"></script>
-		<script
+        <title>FUKUSHIBUSHI container</title> 
+                    
+        <script
 			  src="https://code.jquery.com/jquery-2.2.3.min.js"
 			  integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="
-			  crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="style.css" />	        
+			  crossorigin="anonymous"></script> 
+    <script src="js/jquery.ripples.js"></script>
     </head>
-    <body style="margin: 0;">
-        
+
+    
+    <iframe onload="this.contentWindow.focus();" src="game.html" class="issunriver-iframe">
+            </iframe>    
+			<script type="text/javascript" language="javascript"> 
+$('.issunriver-iframe').css('height', $(window).height()/2+'px');
+$('.issunriver-iframe').css('width', $(window).width()/2+'px');
+
+</script>
     
         
-        <div id="wave">
-            
-<div class='wave1'></div>
-<div class='wave2'></div>
-<div class='wave3'></div>
-
-
-
-    </div>
+       
 	
 	
 	

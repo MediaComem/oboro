@@ -1,14 +1,14 @@
 // Start enchant.js
 enchant();
 
-//var bodywidth = $(document).width()/2;
+//var bodywidth = $(document).width();
 //--> A adapter à la div jeux
-//var bodywidth = $(document).width()/2;
+//var bodywidth = $(document).width();
 
 window.onload = function() {
     // Starting point
-	var bodywidth = $(document).width()/2;
-	var bodyheight = $(document).height()/2;
+	var bodywidth = $(document).width();
+	var bodyheight = $(document).height();
 	
 	console.log("Document height: "+bodyheight);
 	console.log("Document width: "+bodywidth);
@@ -17,7 +17,12 @@ window.onload = function() {
                  'res/waste.png',
                  'res/Hit.mp3',
                  'res/bgm.mp3',
-				 'res/terre.PNG');
+				 'res/alcool.mp3',
+				 'res/bravo.mp3',
+				 'res/terre.PNG',
+                 'res/water.PNG',
+				 'res/hokusai.gif',
+				 'res/jura.png'  );
     game.fps = 30;
 	
     game.scale = 1;
@@ -40,7 +45,7 @@ var SceneGame = Class.create(Scene, {
      * The main gameplay scene.     
      */
     initialize: function() {
-        var game, label, bg, issun, terre, iceGroup;
+        var game, label, bg, issun, terre, enemyGroup;
  
         // Call superclass constructor
         Scene.apply(this);
@@ -57,10 +62,10 @@ var SceneGame = Class.create(Scene, {
         label._style.textShadow ="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
         this.scoreLabel = label;        
 		
-		var bodywidth = $(document).width()/2;
-		var bodyheight = $(document).height()/2;
+		var bodywidth = $(document).width();
+		var bodyheight = $(document).height();
 		bg = new Sprite(bodywidth,bodyheight);        
-        //bg.image = game.assets['res/hokusai.png'];
+        bg.image = game.assets['res/hokusai.gif'];
        
 
         issun = new Issun();
@@ -70,17 +75,23 @@ var SceneGame = Class.create(Scene, {
         this.issun = issun;
 
 		terre = new Terre();
-		terre.x = game.width/1.1;
+		terre.x = game.width;
+		
+	
 		//terre.y =  game.height/4;
 		terre.y =  0;
 		
 		this.terre = terre;
 				
-        iceGroup = new Group();
-        this.iceGroup = iceGroup;
+        enemyGroup = new Group();
+        this.enemyGroup = enemyGroup;
+		
+		bonusGroup = new Group();
+        this.bonusGroup = bonusGroup;
  
         this.addChild(bg);
-        this.addChild(iceGroup);
+        this.addChild(enemyGroup);
+		this.addChild(bonusGroup);
         this.addChild(issun);
 		this.addChild(terre);
         this.addChild(label);
@@ -94,7 +105,8 @@ var SceneGame = Class.create(Scene, {
         
 
         // Instance variables
-        this.generateIceTimer = 0;
+		this.generateBonusTimer = 0;
+        this.generateEnemyTimer = 0;
         this.scoreTimer = 0;
 		this.terreTimer = 0;
         this.score = 0;
@@ -109,8 +121,8 @@ var SceneGame = Class.create(Scene, {
             console.log("HandleTouchMove: "+evt.localY);
         }, 
     handleTouchControl: function (evt) {
-        var bodywidth = $(document).width()/2;
-		var bodyheight = $(document).height()/2;
+        var bodywidth = $(document).width();
+		var bodyheight = $(document).height();
         var laneHeight, lane, game;
         //laneHeight = 440/3;
         laneHeight = bodyheight/6;
@@ -135,14 +147,14 @@ var SceneGame = Class.create(Scene, {
             this.scoreTimer -= 1;
         }
 		//Quand un score est atteind issun atteind l'ile
-		if(this.score >= 5){
-			this.setScore(5);
+		if(this.score >= 25){
+			this.setScore(25);
 			var game;
                 game = Game.instance;
-                game.assets['res/Hit.mp3'].play();			
+                //game.assets['res/Hit.mp3'].play();			
 
 								
-                this.iceGroup.remove(ice);
+                //this.enemyGroup.remove(enemy);
                 this.bgm.stop();        
                 
 				var xSpeed, game;
@@ -152,9 +164,10 @@ var SceneGame = Class.create(Scene, {
 				
 				//la terre avance, issun aussi 999 à remplacer par le bord de la frame
 				
-				if(this.terre.x >= 999)
+				if(this.terre.x >= game.width-100)
 				{
-				this.terre.x -= xSpeed * 0.03;
+					
+					this.terre.x -= xSpeed * 0.01;
 				}
 				
 				this.issun.x += xSpeed * 0.03;          
@@ -167,42 +180,72 @@ var SceneGame = Class.create(Scene, {
 				}
 			
 			
+			
         // Check if it's time to create a new set of obstacles
-        this.generateIceTimer += evt.elapsed * 0.001;
-        if(this.generateIceTimer >= 1)
+		// En crée jusqu'au score atteind
+		if(this.score < 25){
+        this.generateEnemyTimer += evt.elapsed * 0.001;
+        if(this.generateEnemyTimer >= 1)
         {
-            var ice;
-            this.generateIceTimer -= 1;
-            ice = new Ice(Math.floor(Math.random()*6));
-            this.iceGroup.addChild(ice);
+            var enemy;
+            this.generateEnemyTimer -= 1;
+            enemy = new Enemy(Math.floor(Math.random()*6));
+            this.enemyGroup.addChild(enemy);
         }
-
+		}
+		// Generated bonus
+		if(this.score < 25){
+        this.generateBonusTimer += evt.elapsed * 0.001;
+        if(this.generateBonusTimer >= 1)
+        {
+            var bonus;
+            this.generateBonusTimer -= 1;
+            bonus = new Bonus(Math.floor(Math.random()*15));
+            this.bonusGroup.addChild(bonus);
+        }
+		}
         // Check collision
 		
-		//N'entre pas dans la boucle de collision si le score le score est atteind
-        if(this.score < 5){
-		for (var i = this.iceGroup.childNodes.length - 1; i >= 0; i--) {
-            var ice;
-            ice = this.iceGroup.childNodes[i];
-            if(ice.intersect(this.issun)){  
+		       
+		for (var i = this.enemyGroup.childNodes.length - 1; i >= 0; i--) {
+            var enemy;
+            enemy = this.enemyGroup.childNodes[i];
+            if(enemy.intersect(this.issun)){  
                 var game;
                 game = Game.instance;
                 game.assets['res/Hit.mp3'].play();
-                this.iceGroup.removeChild(ice);
+                this.enemyGroup.removeChild(enemy);
                 this.bgm.stop();
                 game.replaceScene(new SceneGameOver(this.score));        
                 break;
             }
         }
-		}
+		
+		// Check positive
+		
+		       
+		for (var i = this.bonusGroup.childNodes.length - 1; i >= 0; i--) {
+            var bonus;
+            bonus = this.bonusGroup.childNodes[i];
+            if(bonus.intersect(this.issun)){  
+                var game;
+                game = Game.instance;
+                game.assets['res/alcool.mp3'].play();
+				//console.log(this.score);
+				this.score = this.score+5;
+				this.bonusGroup.removeChild(bonus);
+				
+               
+            }
+        }
 		
 		//
 		
             if((this.terre).intersect(this.issun)){  
                 var game;
                 game = Game.instance;
-                game.assets['res/Hit.mp3'].play();
-                //this.iceGroup.removeChild(ice);
+                game.assets['res/bravo.mp3'].play();
+                //this.enemyGroup.removeChild(enemy);
                 //this.bgm.stop();
                 //game.replaceScene(new SceneFinale());
 				console.log("WINDOWS.NEXT");
@@ -231,8 +274,8 @@ var Terre = Class.create(Sprite, {
 	
 initialize: function() {
         // Call superclass constructor
-		var bodywidth = $(document).width()/2;
-		var bodyheight = $(document).height()/2;
+		var bodywidth = $(document).width();
+		var bodyheight = $(document).height();
         //Sprite.apply(this,[103, 347]);
 		Sprite.apply(this,[103, bodyheight]);
 		this.image = Game.instance.assets['res/terre.PNG'];   
@@ -248,8 +291,8 @@ initialize: function() {
      */
     initialize: function() {
         // Call superclass constructor
-		var bodywidth = $(document).width()/2;
-		var bodyheight = $(document).height()/2;
+		var bodywidth = $(document).width();
+		var bodyheight = $(document).height();
         Sprite.apply(this,[30, 43]);
         this.image = Game.instance.assets['res/IssunSheet.png'];        
         this.animationDuration = 0;
@@ -271,8 +314,8 @@ initialize: function() {
 
 	
    switchToLaneNumber: function(lane){ 
-	var bodywidth = $(document).width()/2;
-	var bodyheight = $(document).height()/2;   
+	var bodywidth = $(document).width();
+	var bodyheight = $(document).height();   
         //var targetY = 310 - this.height/2 + (lane-1)*90;
 		var targetY =  50 + (lane)*bodyheight/6;
 		
@@ -284,29 +327,29 @@ initialize: function() {
 });
 
  /**
- * Ice Cube
+ * Enemy Cube
  */
-var Ice = Class.create(Sprite, {
+var Enemy = Class.create(Sprite, {
     /**
      * The obstacle that the issun must avoid
      */
     initialize: function(lane) {
-		var bodywidth = $(document).width()/2;
-		var bodyheight = $(document).height()/2;
+		var bodywidth = $(document).width();
+		var bodyheight = $(document).height();
         // Call superclass constructor
         Sprite.apply(this,[63, 38]);
         this.image  = Game.instance.assets['res/waste.png'];      
         this.rotationSpeed = 0;
         this.setLane(lane);
-		//position des ices en brut
-		var bodywidth = $(document).width()/2;
+		//position des enemys en brut
+		var bodywidth = $(document).width();
 		this.moveBy(bodywidth,100,0);
         this.addEventListener(Event.ENTER_FRAME, this.update);
     },
 
     setLane: function(lane) {
-		var bodywidth = $(document).width()/2;
-	var bodyheight = $(document).height()/2;
+		var bodywidth = $(document).width();
+	var bodyheight = $(document).height();
         var game, distance;
         game = Game.instance;        
         distance = -(bodyheight/6);
@@ -338,7 +381,58 @@ var Ice = Class.create(Sprite, {
     }
 });
 
+ /**
+ * Bonus
+ */
+var Bonus = Class.create(Sprite, {
+    
+    initialize: function(lane) {
+		var bodywidth = $(document).width();
+		var bodyheight = $(document).height();
+        // Call superclass constructor
+        Sprite.apply(this,[64, 81]);
+        this.image  = Game.instance.assets['res/jura.png'];      
+        this.rotationSpeed = 0;
+        this.setLane(lane);
+		//position des enemys en brut
+		var bodywidth = $(document).width();
+		this.moveBy(bodywidth,100,0);
+        this.addEventListener(Event.ENTER_FRAME, this.update);
+    },
 
+    setLane: function(lane) {
+		var bodywidth = $(document).width();
+	var bodyheight = $(document).height();
+        var game, distance;
+        game = Game.instance;        
+        distance = -(bodyheight/6);
+     
+        this.rotationSpeed = 20;
+     
+	 
+		//var targetY =  this.height/2 + (lane)*73;
+        //this.y = game.height/2 - this.height/2 + (lane - 1) * distance;
+		
+		this.y = game.height/2 - this.height/2 + (lane) * distance;
+        this.x = -this.width;    
+        this.rotation = Math.floor( Math.random() * 360 );    
+    },
+
+    update: function(evt) { 
+        var xSpeed, game;
+     
+        game = Game.instance;
+        xSpeed = 300;
+     
+		//- pour droite gauche
+        this.x -= xSpeed * evt.elapsed * 0.001;
+        this.rotation += this.rotationSpeed * evt.elapsed * 0.001;           
+        if(this.x > game.width)
+        {
+            this.parentNode.removeChild(this);          
+        }
+    }
+});
 
 
 
