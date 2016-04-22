@@ -1,5 +1,5 @@
 
-        <div class="col-md-12 col-lg-12 col-sm-12" style="padding:0px;">
+        <div style="padding:0px;">
         <div id="gameContainer">
             <div id="scoreBoard"  style="display:none;">
                 <div class="info" id="levelInfo"></div>
@@ -15,31 +15,38 @@
                 <div class="button" onClick="resetLevel()">Restart level</div>
                 <div class="button" onClick="showHelp()">Help</div>
             </div>
-            <canvas id="myDrawing">
+            <canvas id="myDrawing" style="clear:both;">
                 <p>Your browser doesn't support the HTML5 canvas element. Please upgrade to FireFox 4, Google Chrome or IE9</p>
             </canvas>
+            <div class="box">
 
-            <div style="width:100px;height:80px;margin:auto;">
-              <div style="width:100px;">
-                <img src="sokoban/assets/img/arrow-top.png" alt="top" id="arrow-top"/>
-              </div>
-              <div style="width:50px;float:left;">
-                <img src="sokoban/assets/img/arrow-left.png" alt="left" id="arrow-left"/>
-              </div>
-              <div style="width:50px;float:right;">
-                <img src="sokoban/assets/img/arrow-right.png" alt="right" id="arrow-right"/>
-              </div>
-              <div style="width:100px;">
-                <img src="sokoban/assets/img/arrow-bottom.png" alt="bottom" id="arrow-bottom"/>
-              </div>
-              <div style="float:right;">
-                <button type="button" onClick="resetLevel()">Redémarrer le niveau</button>
-                <button type="button" onClick="undoMove()">Annuler déplacement!</button>
-              </div>
-              <div class="button" onClick="gotoNextLevel()">Next level</div>
-              <div class="button" onClick="gotoPrevLevel()">Prev level</div>
+
+                  <div id="sokcontrols">
+                              <!-- Directional arrows button (only mobile) -->
+                              <div style="width:180px;">
+                                <img src="sokoban/assets/img/arrow-top.png" alt="top" id="arrow-top"/>
+                              </div>
+                              <div style="width:90px;float:left;text-align:left;">
+                                <img src="sokoban/assets/img/arrow-left.png" alt="left" id="arrow-left"/>
+                              </div>
+                              <div style="width:90px;float:right;text-align:right;">
+                                <img src="sokoban/assets/img/arrow-right.png" alt="right" id="arrow-right"/>
+                              </div>
+                              <div style="width:180px;">
+                                <img src="sokoban/assets/img/arrow-bottom.png" alt="bottom" id="arrow-bottom"/>
+                              </div>
+                  </div>
+
+                  <div style="float:left;background-color:#FF0000;display:block;">
+                    <button type="button" onClick="resetLevel()">Redémarrer le niveau</button>
+                    <button type="button" onClick="undoMove()">Annuler déplacement!</button>
+                  </div>
+
+                  <div id="bloc">d</div>
 
             </div>
+
+
 
             <div id="help" onClick="hideHelp();">
                 <p>
@@ -59,6 +66,6 @@
                     Level gehaald!
                 </p>
             </div>
-          
+
         </div>
       </div>

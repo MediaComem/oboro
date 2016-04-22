@@ -410,7 +410,7 @@ function drawPartial(){
 function drawTile(x,y){
     switch(levelMap[y][x]){
         case Tile.None:
-            drawRectangle(x*tileXSize,y*tileYSize,tileXSize,tileYSize,"#00FF00");
+            drawRectangle(x*tileXSize,y*tileYSize,tileXSize,tileYSize, "transparent");
             break;
         case Tile.Wall:
             context.drawImage(mapTiles[Tile.Wall].canvas,x*tileXSize,y*tileYSize);

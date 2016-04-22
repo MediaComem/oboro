@@ -3,7 +3,7 @@ window.currentPart = {};
 window.next = function(){
 	//executes the script contained in the last added part
 	var lastPart = parts[parts.length-1];
-	
+
 	lastPart.removeOthers();
 	lastPart.applyStyle();
 	lastPart.show();
@@ -11,7 +11,7 @@ window.next = function(){
 }
 
 $(function() {
-	
+
 
 	function Part(part){
 
@@ -78,15 +78,16 @@ $(function() {
 		 	$(".site-part").not("."+that.part).remove();
 		}
 
+		$.get(that.baseUrl+"/assets/css/"+that.part+".css", function( css ) {
+				that.style = css;
+		});
 
 		//get the html content and append it to the DOM
 		$.get( this.baseUrl + "/" + this.part + ".html", function( html ) {
 
 		 	that.dom = html;
 
-			$.get(that.baseUrl+"/assets/css/"+that.part+".css", function( css ) {
-			  	that.style = css;
-			});
+
 
 		 	//appends to the body
 			$( "body" ).append( "<div class='site-part "+ that.part+"' id='"+ that.part+"'>"+"</div>" );
@@ -122,8 +123,8 @@ $(function() {
 	//load for example the stomachjump
 	//parts["stomachjump"] = new Part("stomachjump");
 
-	
-	parts.push(new Part("intro"));
+
+	//parts.push(new Part("intro"));
 
 
 
@@ -132,12 +133,36 @@ $(function() {
 
 	//parts["pingouin"] = new Part("pingouin");
 
-	 setTimeout(function(){
+	 /*setTimeout(function(){
 	 	parts[0].video = new Video("intro");
 		parts[0].show();
- 		
+
 	 	//loads the other page while the user is playing
 	  	parts.push(new Part("stomachjump"));
+
+	 }, 1000);*/
+
+
+	 var sokoban = new Part("sokoban");
+
+
+	//parts["pingouin"] = new Part("pingouin");
+
+	 setTimeout(function(){
+	 	sokoban.applyStyle();
+	 	sokoban.show();
+	 	sokoban.exec();
+
+	 	//loads the other page while the user is playing
+	  parts["stomachjump"] = new Part("stomachjump");
+
+	 	/*setTimeout(function(){
+	 	parts["stomachjump"].removeOthers();
+	 	parts["stomachjump"].applyStyle();
+ 		parts["stomachjump"].show();
+		parts["stomachjump"].exec();
+
+	},20000)*/
 
 	 }, 1000);
 
