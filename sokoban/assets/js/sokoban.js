@@ -503,10 +503,11 @@ function drawTile(x,y){
         default:
             context.drawImage(mapTiles[Tile.Empty].canvas,x*tileXSize,y*tileYSize);
             if(level[currentLevel].levelMapOrig[y][x] === Tile.Slot){
-                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 7, "#FF0000");
+                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 7, "#000000");
+                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 3, "#FF0000");
             }
             if(level[currentLevel].levelMapOrig[y][x] === Tile.Start){
-                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 7, "#00FF00");
+                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 7, "transparent");
             }
         break;
     }
@@ -666,18 +667,35 @@ $(function() {
   $('#instructions p.description').text(description);
 
 //  var cmd = $('<span>commandes:</span>');
-  var cmd_img = "<img src=\"./assets/img/arrowkeys.png\"/>";
+  var cmd_img = "<img src=\"./assets/img/arrowkeys.png\" class=\"img-responsive\"/>";
   var cmd_description = "Déplacements";
 
   //$('#instructions p.inst_controls').html(cmd);
   $('#instructions p.inst_controls').append('<br/>'+cmd_img)
   $('#instructions p.inst_controls').append('<br/><br/>'+cmd_description)
 
-
-
+  // prevent double tap
+  $.fn.nodoubletapzoom = function() {
+      $(this).bind('touchstart', function preventZoom(e){
+          var t2 = e.timeStamp;
+          var t1 = $(this).data('lastTouch') || t2;
+          var dt = t2 - t1;
+          var fingers = e.originalEvent.touches.length;
+          $(this).data('lastTouch', t2);
+          if (!dt || dt > 500 || fingers > 1){
+              return; // not double-tap
+          }
+          e.preventDefault(); // double tap - prevent the zoom
+          // also synthesize click events we just swallowed up
+          $(e.target).trigger('click');
+      });
+  };
+  $("body").nodoubletapzoom();
 
 
 });
+
+
 
 
 
