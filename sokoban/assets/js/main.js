@@ -543,10 +543,11 @@ function hideHelp(){
     helpDiv.style.display = "none";
 }
 
-// Controls for mobile devices
+
 
 $(function() {
 
+  // Controls for mobile devices
 
   $('#arrow-top').on('click', function(){
     var e = $.Event("keydown", { keyCode: 38}); //"keydown" if that's what you're doing
@@ -564,6 +565,38 @@ $(function() {
     var e = $.Event("keydown", { keyCode: 39}); //"keydown" if that's what you're doing
     $("body").trigger(e);
   })
+
+  // Control for cancel move and reload level
+
+  $('#btn_game_reload').on('click', function(){
+    resetLevel();
+  })
+
+  $('#btn_game_cancel').on('click', function(){
+    undoMove();
+  })
+
+  // Adding instructions
+  var title = "Aide le panda!";
+  var description = "Pousse les pierres sur leurs emplacements pour libérer ton amis le panda.";
+
+  $('#instructions h3').text(title);
+  $('#instructions p.description').text(description);
+
+//  var cmd = $('<span>commandes:</span>');
+  var cmd_img = "<img src=\"./assets/img/arrowkeys.png\"/>";
+  var cmd_description = "Déplacements";
+
+  //$('#instructions p.inst_controls').html(cmd);
+  $('#instructions p.inst_controls').append('<br/>'+cmd_img)
+  $('#instructions p.inst_controls').append('<br/><br/>'+cmd_description)
+
+
+
+
+
 });
+
+
 
 }
