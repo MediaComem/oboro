@@ -118,6 +118,14 @@ $(function() {
 
 	}
 
+ var sokoban = new Part("sokoban");
+
+ setTimeout(function(){
+
+	 sokoban.applyStyle();
+	 sokoban.show();
+	 sokoban.exec();
+ },1000)
 
 
 	//load for example the stomachjump
@@ -167,7 +175,7 @@ $(function() {
 
 
 
-	
+
 
 
 
