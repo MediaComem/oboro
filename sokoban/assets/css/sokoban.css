@@ -182,6 +182,7 @@ div#buttonBox{
   height: 84px;
   background-image: url('./sokoban/assets/img/btn_game_cancel.png');
   float:left;
+  background-repeat: no-repeat;
 }
 
 #btn_game_reload{
@@ -189,6 +190,8 @@ div#buttonBox{
   height: 84px;
   background-image: url('./sokoban/assets/img/btn_game_reload.png');
   float:right;
+  background-repeat: no-repeat;
+
 }
 
 #btn_game_reload:hover{
@@ -197,6 +200,23 @@ div#buttonBox{
 
 #btn_game_cancel:hover{
   cursor: pointer;
+}
+
+div#gameContainer div.box #sokcontrols div:nth-child(3n+1){
+  width:420px;
+
+}
+div#gameContainer div.box #sokcontrols div:nth-child(2){
+  width:210px;
+  float:left;
+  text-align:left;
+
+}
+div#gameContainer div.box #sokcontrols div:nth-child(3){
+  width:210px;
+  float:right;
+  text-align:right;
+
 }
 /* ///////////////////////// MQ /////////////////////////////////////////////////*/
 /* Smartphones (portrait and landscape) ----------- */
@@ -235,6 +255,73 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px)
 and (orientation : landscape) {
 /* Styles */
+
+  div#gameContainer div.box{
+
+       width:30%;
+       float:right;
+  }
+
+  div#gameContainer canvas#myDrawing{
+
+    /*background-color: white;*/
+     width:60%;
+     float:left;
+     margin-left: 20px;
+   }
+ #instructions{
+
+   /*background-color: white;*/
+    display: none;
+  }
+
+  div#gameContainer div.box #sokcontrols{
+     display: block;
+     margin-right: 50px;
+
+       width:240px;
+       height:240px;
+
+    /* clear: both;*/
+   }
+   div#gameContainer div.box #sokcontrols div:nth-child(3n+1){
+     width:240px;
+     height: 80px;
+
+   }
+   div#gameContainer div.box #sokcontrols div:nth-child(2){
+     width:120px;
+   }
+   div#gameContainer div.box #sokcontrols div:nth-child(3){
+     width:120px;
+   }
+ div#gameContainer div.box #sokcontrols img{
+
+
+   width: 80px;
+   height: auto;
+ }
+    #btn_game_reload{
+      float: none;
+    }
+    #btn_game_cancel{
+      float: none;
+    }
+    div#buttonBox{
+      clear: both;
+      padding-top:20px;
+    }
+
+    div#buttonBox #btn_game_cancel{
+      width: 200px;
+      height: 50px;
+      background-size: 200px auto;
+    }
+    div#buttonBox #btn_game_reload{
+      width: 200px;
+      background-size: 200px auto;
+      height: 50px;
+    }
 }
 
 /* iPads (portrait) ----------- */

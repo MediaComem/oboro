@@ -1,75 +1,37 @@
 
-        <div style="padding-top:50px;">
-          <div id="gameContainer">
-            <div id="scoreBoard"  style="display:none;">
-                <div class="info" id="levelInfo"></div>
-                <div class="info" id="stepsInfo"></div>
-                <div class="info" id="pushesInfo"></div>
-                <div class="info" id="cratesInfo"></div>
-            </div>
+<div style="padding-top:50px;">
 
-            <div id="levelControl" style="display:none;">
-                <div class="button" onClick="gotoNextLevel()">Next level</div>
-                <div class="button" onClick="gotoPrevLevel()">Prev level</div>
-                <div class="button" onClick="undoMove()">Undo move</div>
-                <div class="button" onClick="resetLevel()">Restart level</div>
-                <div class="button" onClick="showHelp()">Help</div>
-            </div>
-            <canvas id="myDrawing" style="clear:both;">
-                <p>Your browser doesn't support the HTML5 canvas element. Please upgrade to FireFox 4, Google Chrome or IE9</p>
-            </canvas>
-            <div class="box">
+  <div id="gameContainer">
 
+    <canvas id="myDrawing" style="clear:both;">
+        <p>Your browser doesn't support the HTML5 canvas element. Please upgrade to FireFox 4, Google Chrome or IE9</p>
+    </canvas>
 
-                  <div id="sokcontrols">
-                              <!-- Directional arrows button (only mobile) -->
-                              <div style="width:420px;">
-                                <img src="sokoban/assets/img/arrow-top.png" alt="top" id="arrow-top"/>
-                              </div>
-                              <div style="width:210px;float:left;text-align:left;">
-                                <img src="sokoban/assets/img/arrow-left.png" alt="left" id="arrow-left"/>
-                              </div>
-                              <div style="width:210px;float:right;text-align:right;">
-                                <img src="sokoban/assets/img/arrow-right.png" alt="right" id="arrow-right"/>
-                              </div>
-                              <div style="width:420px;">
-                                <img src="sokoban/assets/img/arrow-bottom.png" alt="bottom" id="arrow-bottom"/>
-                              </div>
-                  </div>
+    <div class="box">
 
-                  <div id="buttonBox">
-
-                    <div id="btn_game_cancel" ></div>
-                    <div id="btn_game_reload" ></div>
-
-                    <!--<button type="button" onClick="resetLevel()">Redémarrer le niveau</button>
-                    <button type="button" onClick="undoMove()">Annuler déplacement!</button>-->
-                  </div>
-
-
-
-            </div>
-
-
-
-            <div id="help" onClick="hideHelp();">
-                <p>
-                    <center><strong>Sokoban</strong></center>
-                </p>
-                <p>
-                    <strong>Movement : </strong>arrow keys<br/>
-                    <strong>Restart : </strong>r<br/>
-                    <strong>Undo : </strong>
-                </p>
-                <p>
-                    <em>Click to hide this popup</em>
-                </p>
-            </div>
-            <div id="levelcomplete" onClick="">
-                <p>
-                    Level gehaald!
-                </p>
-            </div>
-
+      <div id="sokcontrols">
+        <!-- Directional arrows button (only mobile) -->
+        <div>
+          <img src="sokoban/assets/img/arrow-top.png" alt="top" id="arrow-top"/>
+        </div>
+        <div>
+          <img src="sokoban/assets/img/arrow-left.png" alt="left" id="arrow-left"/>
+        </div>
+        <div>
+          <img src="sokoban/assets/img/arrow-right.png" alt="right" id="arrow-right"/>
+        </div>
+        <div>
+          <img src="sokoban/assets/img/arrow-bottom.png" alt="bottom" id="arrow-bottom"/>
         </div>
       </div>
+
+      <div id="buttonBox">
+        <div id="btn_game_cancel" ></div>
+        <div id="btn_game_reload" ></div>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>

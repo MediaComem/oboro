@@ -402,7 +402,7 @@ function resetLevel(){
     step.length = 0;
 
     //interface changes
-    updateStats();
+    //updateStats();
     resizeInterface();
     removeWalls(levelMap);
     drawField();
@@ -571,7 +571,7 @@ document.onkeydown = function(e){
     }
     drawPartial();
     checkField();
-    updateStats();
+    //updateStats();
 }
 
 function drawCircle(x,y,r,fillCol){
@@ -606,12 +606,12 @@ function resizeInterface(){
     var levelPanel = document.getElementById("levelControl");
     scorePanel.style.width = "" + canvas.width + "px";
     levelPanel.style.width = "" + canvas.width + "px";
-    */
+
     var helpDiv = document.getElementById("help");
     helpDiv.style.top = (canvas.offsetTop + 10) + "px";
     helpDiv.style.left = (canvas.offsetLeft + 10) + "px";
     helpDiv.style.width = (canvas.width - 30) + "px";
-    helpDiv.style.height = (canvas.height - 30) + "px";
+    helpDiv.style.height = (canvas.height - 30) + "px";*/
 }
 
 function showHelp(){
