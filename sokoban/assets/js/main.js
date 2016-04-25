@@ -320,7 +320,7 @@ function resetLevel(){
     step.length = 0;
 
     //interface changes
-    updateStats();
+    //updateStats();
     resizeInterface();
     removeWalls(levelMap);
     drawField();
@@ -410,7 +410,7 @@ function drawPartial(){
 function drawTile(x,y){
     switch(levelMap[y][x]){
         case Tile.None:
-            drawRectangle(x*tileXSize,y*tileYSize,tileXSize,tileYSize,"#00FF00");
+            drawRectangle(x*tileXSize,y*tileYSize,tileXSize,tileYSize, "transparent");
             break;
         case Tile.Wall:
             context.drawImage(mapTiles[Tile.Wall].canvas,x*tileXSize,y*tileYSize);
@@ -421,10 +421,11 @@ function drawTile(x,y){
         default:
             context.drawImage(mapTiles[Tile.Empty].canvas,x*tileXSize,y*tileYSize);
             if(level[currentLevel].levelMapOrig[y][x] === Tile.Slot){
-                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 7, "#FF0000");
+                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 7, "#000000");
+                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 3, "#FF0000");
             }
             if(level[currentLevel].levelMapOrig[y][x] === Tile.Start){
-                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 7, "#00FF00");
+                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 7, "transparent");
             }
         break;
     }
@@ -488,7 +489,7 @@ document.onkeydown = function(e){
     }
     drawPartial();
     checkField();
-    updateStats();
+    //updateStats();
 }
 
 function drawCircle(x,y,r,fillCol){
@@ -523,12 +524,12 @@ function resizeInterface(){
     var levelPanel = document.getElementById("levelControl");
     scorePanel.style.width = "" + canvas.width + "px";
     levelPanel.style.width = "" + canvas.width + "px";
-    */
+
     var helpDiv = document.getElementById("help");
     helpDiv.style.top = (canvas.offsetTop + 10) + "px";
     helpDiv.style.left = (canvas.offsetLeft + 10) + "px";
     helpDiv.style.width = (canvas.width - 30) + "px";
-    helpDiv.style.height = (canvas.height - 30) + "px";
+    helpDiv.style.height = (canvas.height - 30) + "px";*/
 }
 
 function showHelp(){
@@ -543,10 +544,11 @@ function hideHelp(){
     helpDiv.style.display = "none";
 }
 
-// Controls for mobile devices
+
 
 $(function() {
 
+  // Controls for mobile devices
 
   $('#arrow-top').on('click', function(){
     var e = $.Event("keydown", { keyCode: 38}); //"keydown" if that's what you're doing
@@ -564,6 +566,55 @@ $(function() {
     var e = $.Event("keydown", { keyCode: 39}); //"keydown" if that's what you're doing
     $("body").trigger(e);
   })
+
+  // Control for cancel move and reload level
+
+  $('#btn_game_reload').on('click', function(){
+    resetLevel();
+  })
+
+  $('#btn_game_cancel').on('click', function(){
+    undoMove();
+  })
+
+  // Adding instructions
+  var title = "Aide le panda!";
+  var description = "Pousse les pierres sur leurs emplacements pour libérer ton amis le panda.";
+
+  $('#instructions h3').text(title);
+  $('#instructions p.description').text(description);
+
+//  var cmd = $('<span>commandes:</span>');
+  var cmd_img = "<img src=\"./assets/img/arrowkeys.png\" class=\"img-responsive\"/>";
+  var cmd_description = "Déplacements";
+
+  //$('#instructions p.inst_controls').html(cmd);
+  $('#instructions p.inst_controls').append('<br/>'+cmd_img)
+  $('#instructions p.inst_controls').append('<br/><br/>'+cmd_description)
+
+  // prevent double tap
+  $.fn.nodoubletapzoom = function() {
+      $(this).bind('touchstart', function preventZoom(e){
+          var t2 = e.timeStamp;
+          var t1 = $(this).data('lastTouch') || t2;
+          var dt = t2 - t1;
+          var fingers = e.originalEvent.touches.length;
+          $(this).data('lastTouch', t2);
+          if (!dt || dt > 500 || fingers > 1){
+              return; // not double-tap
+          }
+          e.preventDefault(); // double tap - prevent the zoom
+          // also synthesize click events we just swallowed up
+          $(e.target).trigger('click');
+      });
+  };
+  $("body").nodoubletapzoom();
+
+
 });
+
+
+
+
 
 }

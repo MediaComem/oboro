@@ -1,3 +1,6 @@
+
+@font-face { font-family: 'edo'; src: url('./assets/fonts/edosz-webfont.ttf'); }
+
 body{
   width:100%;
   height:100%;
@@ -8,6 +11,7 @@ body{
   border-color: #cccccc;
   border-style: solid;
   border-width: 0px;
+
 }
 
 
@@ -15,8 +19,11 @@ div#gameContainer{
   width:100%;
   height:100%;
   margin:0px;
-  background-color: #00FF00;
+  /*background-color: #00FF00;*/
+  background-image: url('./sokoban/assets/img/fujir.jpg');
+  background-size: cover;
   overflow: auto;
+  position: fixed;
 }
 
  div#gameContainer div#levelControl{
@@ -30,16 +37,17 @@ div#gameContainer{
 }
 div#gameContainer canvas#myDrawing{
 
-  background-color: white;
+  /*background-color: white;*/
    width:65%;
-
+/*
  border-style: solid;
  border-width: 2px;
- border-color: #000000;
+ border-color: #000000;*/
  margin-top: 10px;
  margin-left: auto;
  margin-right: auto;
  display: inline-block;
+
 }
 
 div#gameContainer div#scoreBoard{
@@ -93,32 +101,302 @@ div.button:hover{
     display: none;
 }
 
+div#gameContainer div.box{
+
+     width:65%;
+     margin-top: 15px;
+     margin-left: auto;
+     margin-right: auto;
+
+}
+
+div#gameContainer div.box #sokcontrols{
+  width:420px;
+  height:420px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius:70px;
+  float:right;
+  display:none;
+  margin: 0 auto;
+  margin-top:10px;
+}
 
 /*
-@media only screen and (max-width: 479px){
-  div#gameContainer canvas#myDrawing{
-      width:98%;
-  }
+div#bloc{
+  display:block;
+  background-color:#00FF00;
+  height: 60px;
+}*/
+
+
+
+
+
+
+div#instructions{
+  position: absolute;
+  top:30px;
+  left:30px;
+  width: 12%;
+  height: auto;
+  background-color: #000000;
+  overflow: auto;
+  z-index: 1;
+  /*height: 200px;*/
+  padding: 15px;
+  color:white;
+  text-align: center;
+}
+
+div#instructions h3{
+  color:#FFFFFF;
+  font-size: 1em;
+  font-family: 'edo';
+  text-transform: uppercase;
+
+}
+div#instructions p.description{
+  color:#FFFFFF;
+  font-size: 0.8em;
+}
+
+div#instructions p.inst_controls{
+  color:#FFFFFF;
+  font-size: 0.8em;
+
+}
+
+#instructions p.inst_controls img{
+  margin: 0 auto;
+}
+
+div#buttonBox{
+
+  display:block;
+  width:840px;
+  margin:auto;
+}
+
+#btn_game_cancel{
+  width: 420px;
+  height: 84px;
+  background-image: url('./sokoban/assets/img/btn_game_cancel.png');
+  float:left;
+  background-repeat: no-repeat;
+}
+
+#btn_game_reload{
+  width: 420px;
+  height: 84px;
+  background-image: url('./sokoban/assets/img/btn_game_reload.png');
+  float:right;
+  background-repeat: no-repeat;
+
+}
+
+#btn_game_reload:hover{
+  cursor: pointer;
+}
+
+#btn_game_cancel:hover{
+  cursor: pointer;
+}
+
+div#gameContainer div.box #sokcontrols div:nth-child(3n+1){
+  width:420px;
+
+}
+div#gameContainer div.box #sokcontrols div:nth-child(2){
+  width:210px;
+  float:left;
+  text-align:left;
+
+}
+div#gameContainer div.box #sokcontrols div:nth-child(3){
+  width:210px;
+  float:right;
+  text-align:right;
+
+}
+/* ///////////////////////// MQ /////////////////////////////////////////////////*/
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-width : 320px)
+and (max-width : 480px) {
+/* Styles */
+
 }
 
 
-@media only screen and (min-width: 480px)
-{
-  div#gameContainer canvas#myDrawing{
-    width:98%;
-  }
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen
+and (max-width : 320px) {
+/* Styles */
+
 
 }
-@media only screen and (min-width: 768px)
-{
-  div#gameContainer canvas#myDrawing{
-    width:90%;
-  }
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+/* Styles */
 }
-@media only screen and (min-width: 992px)
-{
-    div#gameContainer canvas#myDrawing{
-      width:65%;
+
+/* iPads (landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+/* Styles */
+
+  div#gameContainer div.box{
+
+       width:30%;
+       float:right;
+  }
+
+  div#gameContainer canvas#myDrawing{
+
+    /*background-color: white;*/
+     width:60%;
+     float:left;
+     margin-left: 20px;
+   }
+ #instructions{
+
+   /*background-color: white;*/
+    display: none;
+  }
+
+  div#gameContainer div.box #sokcontrols{
+     display: block;
+     margin-right: 50px;
+
+       width:240px;
+       height:240px;
+
+    /* clear: both;*/
+   }
+   div#gameContainer div.box #sokcontrols div:nth-child(3n+1){
+     width:240px;
+     height: 80px;
+
+   }
+   div#gameContainer div.box #sokcontrols div:nth-child(2){
+     width:120px;
+   }
+   div#gameContainer div.box #sokcontrols div:nth-child(3){
+     width:120px;
+   }
+ div#gameContainer div.box #sokcontrols img{
+
+
+   width: 80px;
+   height: auto;
+ }
+    #btn_game_reload{
+      float: none;
+    }
+    #btn_game_cancel{
+      float: none;
+    }
+    div#buttonBox{
+      clear: both;
+      padding-top:20px;
+    }
+
+    div#buttonBox #btn_game_cancel{
+      width: 200px;
+      height: 50px;
+      background-size: 200px auto;
+    }
+    div#buttonBox #btn_game_reload{
+      width: 200px;
+      background-size: 200px auto;
+      height: 50px;
     }
 }
-*/
+
+/* iPads (portrait) ----------- */
+@media only screen
+and (min-width : 768px)
+and (max-width : 1024px)
+and (orientation : portrait) {
+/* Styles */
+div#gameContainer div.box{
+
+     width:98%;
+}
+
+div#gameContainer canvas#myDrawing{
+
+  /*background-color: white;*/
+   width:100%;
+ }
+ #instructions{
+
+   /*background-color: white;*/
+    display: none;
+  }
+ div#gameContainer div.box #sokcontrols{
+   display: block;
+   margin-right: 50px;
+
+  /* clear: both;*/
+ }
+
+  #btn_game_reload{
+    float: none;
+  }
+  #btn_game_cancel{
+    float: none;
+  }
+
+ /*
+ div#buttonBox{
+   width: 300px;
+ }
+ div#buttonBox #btn_game_cancel{
+   width: 150px;
+   background-size: 150px 30px;
+   background-repeat: no-repeat;
+   float: none;
+   clear: both;
+
+ }
+ div#buttonBox #btn_game_reload{
+   width: 150px;
+   background-size: 150px 30px;
+   background-repeat: no-repeat;
+   float: none;
+   clear: both;
+ }*/
+
+}
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+/* Styles */
+
+}
+
+/* Large screens ----------- */
+@media only screen
+and (min-width : 1824px) {
+/* Styles */
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}
