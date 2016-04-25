@@ -550,19 +550,19 @@ $(function() {
 
   // Controls for mobile devices
 
-  $('#arrow-top').on('click', function(){
+  $('#arrow_top').on('click', function(){
     var e = $.Event("keydown", { keyCode: 38}); //"keydown" if that's what you're doing
     $("body").trigger(e);
   })
-  $('#arrow-bottom').on('click', function(){
+  $('#arrow_bottom').on('click', function(){
     var e = $.Event("keydown", { keyCode: 40}); //"keydown" if that's what you're doing
     $("body").trigger(e);
   })
-  $('#arrow-left').on('click', function(){
+  $('#arrow_left').on('click', function(){
     var e = $.Event("keydown", { keyCode: 37}); //"keydown" if that's what you're doing
     $("body").trigger(e);
   })
-  $('#arrow-right').on('click', function(){
+  $('#arrow_right').on('click', function(){
     var e = $.Event("keydown", { keyCode: 39}); //"keydown" if that's what you're doing
     $("body").trigger(e);
   })
@@ -576,7 +576,7 @@ $(function() {
   $('#btn_game_cancel').on('click', function(){
     undoMove();
   })
-
+/*
   // Adding instructions
   var title = "Aide le panda!";
   var description = "Pousse les pierres sur leurs emplacements pour libérer ton amis le panda.";
@@ -591,7 +591,7 @@ $(function() {
   //$('#instructions p.inst_controls').html(cmd);
   $('#instructions p.inst_controls').append('<br/>'+cmd_img)
   $('#instructions p.inst_controls').append('<br/><br/>'+cmd_description)
-
+*/
   // prevent double tap
   $.fn.nodoubletapzoom = function() {
       $(this).bind('touchstart', function preventZoom(e){
@@ -609,6 +609,30 @@ $(function() {
       });
   };
   $("body").nodoubletapzoom();
+
+  /*function isTouchDevice() {
+      return 'ontouchstart' in document.documentElement;
+  }
+  if (isTouchDevice()) {
+    // on Mobile
+    console.log('mobile')
+}
+else {
+    // on Desktop
+    console.log('desktop')
+}*/
+
+
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+ // some code..
+ alert('mobile')
+ $('head').append('<link rel=\"stylesheet\" href=\"./sokoban/mqmobile.css\" />')
+ $('head').append('<script type=\"text/javascript\" src=\"./sokoban/hide-address-bar.js\" ></script>')
+
+ //document.body.requestFullscreen();
+
+}
+
 
 
 });
