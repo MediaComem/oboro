@@ -1,0 +1,44 @@
+#gameContainer>img{
+  display: block;
+  width: 50px;
+}
+#gameContainer div#clearfix>img{
+  display: block;
+  width: 50px;
+}
+div#clearfix{
+  width: 90vw;
+  margin: auto;
+}
+#gameContainer img#arrow_top{
+  display: block;
+  clear: both;
+  margin: 0 auto;
+}
+#gameContainer img#arrow_left{
+  display: block;
+  float:left;
+  margin-top:15%;
+
+}
+#gameContainer img#arrow_right{
+  display: block;
+  float:right;
+  margin-top:15%;
+}
+#gameContainer img#arrow_bottom{
+  display: block;
+  clear: both;
+  margin: 0 auto;
+}
+div#gameContainer canvas#myDrawing{
+  width: 45vw;
+}
+div#buttonBox{
+
+  position: absolute;
+  top:10px;
+  left:10px;
+  width: 50%;
+
+}
