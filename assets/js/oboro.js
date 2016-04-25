@@ -145,7 +145,6 @@ $(function() {
 	 	//loads the other page while the user is playing
 	  	parts.push(new Part("stomachjump"));
 
-	 }, 1000);*/
 
 
 	 var sokoban = new Part("sokoban");
@@ -169,27 +168,11 @@ $(function() {
 
 	},20000)*/
 
-	 }, 1000);
 
 
 
-	//
-	/*var maVid = document.getElementById("vid");
 
-  maVid.ontimeupdate = function() {
-
-    console.log(maVid.currentTime)
-    if(maVid.currentTime >= 25){
-      maVid.pause()
-
-
-    }
-  };
-
-  maVid.onpause = function(){
-    $('div#animatedDenis').append('<div class="denis wow slideInLeft data-wow-duration=" 0.1s""><img src="image/ptits_denis/content.png" class="img-responsive spych" alt="" width="80px" ></div><span class="glyphicon glyphicon-menu-down wow slideInRight data-wow-duration=" 0.1s"" ></span>');
-
-  }*/
+	
 
 
 
