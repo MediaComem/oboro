@@ -1,3 +1,10 @@
+
+var options = {hashTracking: false, closeOnOutsideClick: false};
+
+var inst = $('[data-remodal-id=modal]').remodal(options);
+inst.open();
+
+
 window.currentPart = function stomachjump(){
 
 // RequestAnimFrame: a browser API for getting smooth animations

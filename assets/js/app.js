@@ -118,7 +118,24 @@ $(function() {
 
 	}
 
+	parts.push(new Part("stomachjump"));
 
+	setTimeout(function(){
+
+		parts[0].removeOthers();
+		parts[0].applyStyle();
+		parts[0].show();
+		parts[0].exec();
+
+	},1000);
+
+
+
+	 	/*setTimeout(function(){
+	 	parts["stomachjump"].removeOthers();
+	 	parts["stomachjump"].applyStyle();
+ 		parts["stomachjump"].show();
+		parts["stomachjump"].exec();
 
 	//load for example the stomachjump
 	//parts["stomachjump"] = new Part("stomachjump");
