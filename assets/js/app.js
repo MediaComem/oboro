@@ -13,7 +13,7 @@ window.next = function(){
 $(function() {
 
 
-	function Part(part){
+	window.Part = function Part(part){
 
 		var that = this;
 
@@ -118,6 +118,7 @@ $(function() {
 
 	}
 
+
  //var issunriver = new Part("issunriver");
 	parts.push(new Part("issunriver"));
 	
@@ -136,6 +137,22 @@ $(function() {
 	 
 	 
  },1000)
+
+
+	parts.push(new Part("intro"));
+
+
+	setTimeout(function(){
+
+ 	 parts[0].applyStyle();
+ 	 parts[0].show();
+ 	 parts[0].exec();
+	 parts.push(new Part('sokoban'));
+
+  },1000)
+
+
+
 
 
 	//load for example the stomachjump

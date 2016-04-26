@@ -83,7 +83,12 @@ function levelObject(datalineArray){
 	}
 }
 
+
 /***/
+
+parts.push(new Part('stomachjump'));
+
+
 var Direction = {
     Up: 0,
     Left: 1,
@@ -452,6 +457,8 @@ function checkField(){
         } else {
 
             console.log('VIDEO SUIVANTE')
+
+            window.next();
             /*
             show bpx id suiv.
             */
@@ -714,6 +721,7 @@ else {
      $('head').append('<link rel=\"stylesheet\" href=\"./sokoban/mqmobile.css\" />')
 
 
+    //
      /*function toggleFullScreen() {
         if (!document.fullscreenElement &&    // alternative standard method
             !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods

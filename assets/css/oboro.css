@@ -6814,5 +6814,7 @@ button.close {
 body, html {
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: #000000;
+
 
 }

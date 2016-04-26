@@ -18,7 +18,7 @@ body{
 div#gameContainer{
   width:100vw;
   height:100vh;
-  background-image: url('./sokoban/assets/img/fujir.jpg');
+  background-image: url('./sokoban/assets/img/textures/back.png');
   background-size: cover;
   overflow: auto;
   position: fixed;
