@@ -82,7 +82,6 @@ function levelObject(datalineArray){
 window.currentPart = function sokoban(){
 	
 
-
 	/***/
 var level = new Array();
 
@@ -164,6 +163,7 @@ function levelObject(datalineArray){
 		}
 	}
 }
+
 
 /***/
 
