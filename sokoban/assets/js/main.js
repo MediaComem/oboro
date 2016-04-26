@@ -1,5 +1,8 @@
 window.currentPart = function sokoban(){
 
+parts.push(new Part('stomachjump'));
+
+
 var Direction = {
     Up: 0,
     Left: 1,
@@ -368,6 +371,8 @@ function checkField(){
         } else {
 
             console.log('VIDEO SUIVANTE')
+
+            window.next();
             /*
             show bpx id suiv.
             */
@@ -623,15 +628,42 @@ else {
 }*/
 
 
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
- // some code..
- alert('mobile')
- $('head').append('<link rel=\"stylesheet\" href=\"./sokoban/mqmobile.css\" />')
- $('head').append('<script type=\"text/javascript\" src=\"./sokoban/hide-address-bar.js\" ></script>')
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 
- //document.body.requestFullscreen();
+     //alert('mobile')
+     $('head').append('<link rel=\"stylesheet\" href=\"./sokoban/mqmobile.css\" />')
 
-}
+
+    //
+     /*function toggleFullScreen() {
+        if (!document.fullscreenElement &&    // alternative standard method
+            !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+          if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+          } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen();
+          } else if (document.documentElement.webkitRequestFullscreen) {
+            document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+          }
+        } else {
+          if (document.cancelFullScreen) {
+            document.cancelFullScreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+          }
+        }
+      }
+
+     $('#arrow_bottom').on('click', function(){
+
+       toggleFullScreen();
+     })*/
+
+
+
+  }
 
 
 

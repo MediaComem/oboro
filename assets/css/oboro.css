@@ -6808,6 +6808,7 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 
+<<<<<<< HEAD
 /*
  *  Remodal - v1.0.7
  *  Responsive, lightweight, fast, synchronized with CSS animations, fully customizable modal window plugin with declarative configuration and hash tracking.
@@ -7215,9 +7216,14 @@ html.remodal-is-locked {
   /* Disable Anti-FOUC */
   display: inline-block;
 }
+=======
+@font-face { font-family: 'edo'; src: url('./assets/fonts/edosz-webfont.ttf'); }
+>>>>>>> f24ec3ff967d047bbd18bc9766c29ad032ec2c30
 
 
 body, html {
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: #000000;
+
 }

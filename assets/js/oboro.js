@@ -18,7 +18,7 @@ window.next = function(){
 $(function() {
 
 
-	function Part(part){
+	window.Part = function Part(part){
 
 		var that = this;
 
@@ -129,6 +129,7 @@ $(function() {
 
 	parts.push(new Part("stomachjump"));
 
+<<<<<<< HEAD
 	setTimeout(function(){
 
 		parts[0].removeOthers();
@@ -145,6 +146,22 @@ $(function() {
 	 	parts["stomachjump"].applyStyle();
  		parts["stomachjump"].show();
 		parts["stomachjump"].exec();
+=======
+	parts.push(new Part("intro"));
+
+
+	setTimeout(function(){
+
+ 	 parts[0].applyStyle();
+ 	 parts[0].show();
+ 	 parts[0].exec();
+	 parts.push(new Part('sokoban'));
+
+  },1000)
+
+
+
+>>>>>>> f24ec3ff967d047bbd18bc9766c29ad032ec2c30
 
 	//load for example the stomachjump
 	//parts["stomachjump"] = new Part("stomachjump");
@@ -193,7 +210,7 @@ $(function() {
 
 
 
-	
+
 
 
 

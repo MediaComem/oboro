@@ -1,5 +1,9 @@
+@font-face { font-family: 'edo'; src: url('./assets/fonts/edosz-webfont.ttf'); }
+
 
 body, html {
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: #000000;
+
 }
