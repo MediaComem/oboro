@@ -83,7 +83,7 @@ $(function() {
 		this.removeOthers = function(){
 			//remove all the other site parts except the current one
 		 	$(".site-part").not("."+that.part).fadeOut( "fast", function() {
-			  	$(".site-part").not("."+that.part).remove();	  
+			  	$(".site-part").not("."+that.part).remove();
 			  });
 		}
 
@@ -126,7 +126,7 @@ $(function() {
   		}
 
 	}
-
+/*
 	parts.push(new Part("issunriver"));
 
 
@@ -141,7 +141,7 @@ $(function() {
 
 	},1000);
 
-
+*/
 
 	 	/*setTimeout(function(){
 	 	parts["stomachjump"].removeOthers();

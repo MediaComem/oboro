@@ -80,7 +80,7 @@ function levelObject(datalineArray){
 }
 
 window.currentPart = function sokoban(){
-	
+
 
 	/***/
 var level = new Array();
@@ -643,7 +643,7 @@ function handleMove(moveDir){
 
 
 
-document.addEventListener("keydown", function(e){
+document.onkeydown = function(e){
     var thisEvent = e;
     // add support for webkit key events
     switch(thisEvent.keyCode){
@@ -662,7 +662,7 @@ document.addEventListener("keydown", function(e){
     drawPartial();
     checkField();
     //updateStats();
-});
+};
 
 function drawCircle(x,y,r,fillCol){
     context.fillStyle=fillCol;
@@ -723,8 +723,11 @@ $(function() {
   // Controls for mobile devices
 
   $('#arrow_top').on('click', function(){
+
     var e = $.Event("keydown", { keyCode: 38}); //"keydown" if that's what you're doing
-    $("body").trigger(e);
+
+    $('body').trigger(e);
+    console.log('fdfddfdkg')
   })
   $('#arrow_bottom').on('click', function(){
     var e = $.Event("keydown", { keyCode: 40}); //"keydown" if that's what you're doing
