@@ -1,18 +1,22 @@
-<div class="remodal-bg">
 
-	<div data-remodal-id="modal">
+	<div id="modal">
+		<h2>Stomachjump</h2>
 
-	  <button data-remodal-action="close" class="remodal-close"></button>
-	  <h2>Remodal</h2>
-	  <p>
-	    Responsive, lightweight, fast, synchronized with CSS animations, fully customizable modal window plugin with declarative configuration and hash tracking.
-	  </p>
-	  <br>
-	  <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
-	  <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+		<p>
+			Utilise les flêches ou glisse tes doigts pour sortir du méchant ogre !
+		</p>
+		
+		<div class="instruction-images">
+			<img src="./stomachjump/assets/img/left-right.png" alt="left-right"/>
+			<img src="./stomachjump/assets/img/swipe.png" alt="left-right"/>
+		</div>
+		
+
+		<button id="stomach-start" data-remodal-action="confirm" class="remodal-confirm">OK</button>
+
+
 	</div>	
 
-</div>
 	<div id="container" class="container">
 		<canvas id="canvas">
 			Oooh… votre navigateur ne supporte pas HTML5!
@@ -31,7 +35,6 @@
 				pour vous déplacer <br/>
 				et ESPACE pour (re)démarrer...
 			</p>
-			<a id="stomach-start" class="button">Allons-y&nbsp;!</a>
 		</div>
 		
 		<div id="gameOverMenu">
@@ -44,10 +47,10 @@
 		
 		
 		<!-- Preloading image ;) -->
-		<img id="base" src="./stomachjump/assets/img/base.png"/>
+		<img class="loaded-img" id="base" src="./stomachjump/assets/img/base.png"/>
 
 		<!-- Preloading image ;) -->
-		<img id="sprite" src="./stomachjump/assets/img/sprite.png"/>
+		<img class="loaded-img" id="sprite" src="./stomachjump/assets/img/sprite.png"/>
 
 		<div id="scoreBoard">
 			<p id="score">0</p>
