@@ -118,13 +118,23 @@ $(function() {
 
 	}
 
- var sokoban = new Part("sokoban");
+ //var issunriver = new Part("issunriver");
+	parts.push(new Part("issunriver"));
+	
+	setTimeout(function(){
+			
 
- setTimeout(function(){
-
-	 sokoban.applyStyle();
-	 sokoban.show();
-	 sokoban.exec();
+	 parts[0].applyStyle();
+	 parts[0].show();
+	 parts[0].exec();
+	 parts.push(new Part("intro"));
+	 parts[1].video = new Video("intro");
+	 
+	 setTimeout(function(){
+			parts.push(new Part("sokoban"));
+	 },1000)
+	 
+	 
  },1000)
 
 

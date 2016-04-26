@@ -1,11 +1,12 @@
+window.currentPart = function issunriver(){
 // Start enchant.js
 enchant();
 
-window.onload = function() {
+
     // Starting point
 	var bodywidth = $(document).width();
 	var bodyheight = $(document).height();
-	
+	var islandSwitch = false;
 	console.log("Document height: "+bodyheight);
 	console.log("Document width: "+bodywidth);
     var game = new Game(bodywidth, bodyheight);
@@ -32,10 +33,12 @@ window.onload = function() {
         var scene = new SceneGame();
         game.pushScene(scene);
     }
-    toggleFullScreen();
+    var gameTest = game;
+	
     game.start(); 
+	
      
-};
+
 
 /**
  * SceneGame  
@@ -138,8 +141,8 @@ var SceneGame = Class.create(Scene, {
             this.scoreTimer -= 1;
         }
 		//Quand un score est atteind issun va vers l'ile
-		if(this.score >= 25){
-			this.setScore(25);
+		if(this.score >= 9){
+			this.setScore(9);
 			var game;
                 game = Game.instance;
 
@@ -166,7 +169,7 @@ var SceneGame = Class.create(Scene, {
 			
         // Check Création d'enemi
 		// En crée jusqu'au score atteind
-		if(this.score < 25){
+		if(this.score < 9){
         this.generateEnemyTimer += evt.elapsed * 0.001;
         if(this.generateEnemyTimer >= 1)
         {
@@ -177,7 +180,7 @@ var SceneGame = Class.create(Scene, {
         }
 		}
 		// Generated bonus
-		if(this.score < 25){
+		if(this.score < 9){
         this.generateBonusTimer += evt.elapsed * 0.001;
         if(this.generateBonusTimer >= 1)
         {
@@ -227,7 +230,13 @@ var SceneGame = Class.create(Scene, {
                 var game;
                 game = Game.instance;
                 game.assets['./issunriver/assets/res/bravo.mp3'].play();
-				console.log("WINDOWS.NEXT");
+								
+				 if(!islandSwitch){
+					gameTest.stop();
+					window.next();
+					console.log("windows.next");	
+				}
+				islandSwitch = true;
 				
                 
 			}
@@ -460,3 +469,7 @@ var SceneGameOver = Class.create(Scene, {
 
 
 });
+
+ 	
+
+}
