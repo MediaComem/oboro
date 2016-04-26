@@ -1,33 +1,26 @@
 
-<div style="padding-top:50px;">
-
+<div style="padding-top:10px;">
+  <div id="warning-message">
+  Tourne ton écran horizontalement pour continuer l'aventure !<br/><br/>
+  <img src="./sokoban/assets/img/rotate.png"/>
+  </div>
   <div id="gameContainer">
 
-    <canvas id="myDrawing" style="clear:both;">
-        <p>Your browser doesn't support the HTML5 canvas element. Please upgrade to FireFox 4, Google Chrome or IE9</p>
-    </canvas>
+    <img id="arrow_top" src="./sokoban/assets/img/arrow_top.png"/>
+    <div id="clearfix">
+      <img id="arrow_left"  src="./sokoban/assets/img/arrow_left.png"/>
+      <canvas id="myDrawing" style="clear:both;">
+          <p>Your browser doesn't support the HTML5 canvas element. Please upgrade to FireFox 4, Google Chrome or IE9</p>
+      </canvas>
+      <img id="arrow_right"  src="./sokoban/assets/img/arrow_right.png"/>
+    </div>
+    <img id="arrow_bottom"  src="./sokoban/assets/img/arrow_bottom.png"/>
 
     <div class="box">
 
-      <div id="sokcontrols">
-        <!-- Directional arrows button (only mobile) -->
-        <div>
-          <img src="sokoban/assets/img/arrow-top.png" alt="top" id="arrow-top"/>
-        </div>
-        <div>
-          <img src="sokoban/assets/img/arrow-left.png" alt="left" id="arrow-left"/>
-        </div>
-        <div>
-          <img src="sokoban/assets/img/arrow-right.png" alt="right" id="arrow-right"/>
-        </div>
-        <div>
-          <img src="sokoban/assets/img/arrow-bottom.png" alt="bottom" id="arrow-bottom"/>
-        </div>
-      </div>
-
       <div id="buttonBox">
-        <div id="btn_game_cancel" ></div>
-        <div id="btn_game_reload" ></div>
+        <img src="./sokoban/assets/img/btn_game_cancel.png" id="btn_game_cancel"/>
+        <img src="./sokoban/assets/img/btn_game_reload.png" id="btn_game_reload"/>
       </div>
 
     </div>

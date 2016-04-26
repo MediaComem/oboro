@@ -19,10 +19,10 @@ gulp.task('sokoban-min', function () {
 	var css = gulp.src('./sokoban/**/*.css')
 				.pipe(concat("sokoban.min.css"))
 				.pipe(minify())
-				.pipe(gulp.dest('./sokoban/assets/css'))     
+				.pipe(gulp.dest('./sokoban/assets/css'))
 
 	return merge(js, css);
-    
+
 });
 
 
@@ -32,15 +32,15 @@ function build(folder,env){
 	var toMinify = env != "dev";
 
 
-	var js =  gulp.src(['./'+ folder + '/**/*.js','!./' + folder + '/**/' +folder + '*.js'])
+	var js =  gulp.src(['./'+ folder + '/assets/js/*.js','!./' + folder + '/**/' +folder + '*.js'])
 		        .pipe(gulpif(toMinify,concat(folder+".min.js"),concat(folder+".js")))
 		        .pipe(gulpif(toMinify, uglify()))
 		        .pipe(gulp.dest('./'+folder+'/assets/js'));
 
-	var css = gulp.src(['./'+folder+'/**/*.css','!./'+folder+'/**/'+folder+'*.css'])
+	var css = gulp.src(['./'+folder+'/assets/css/*.css','!./'+folder+'/**/'+folder+'*.css'])
 				.pipe(gulpif(toMinify,concat(folder+".min.css"),concat(folder+".css")))
 				.pipe(gulpif(toMinify, minify()))
-				.pipe(gulp.dest('./'+folder+'/assets/css')) ;    
+				.pipe(gulp.dest('./'+folder+'/assets/css')) ;
 
 	return merge(js, css);
 
@@ -75,7 +75,7 @@ gulp.task("main",function(){
 	var css = gulp.src(['./assets/css/reset.css','./assets/css/*.css','!./assets/css/oboro*.css'])
 				.pipe(gulpif(toMinify,concat("oboro.min.css"),concat("oboro.css")))
 				.pipe(gulpif(toMinify, minify()))
-				.pipe(gulp.dest('./assets/css'));   
+				.pipe(gulp.dest('./assets/css'));
 
 	return merge(js, css);
 
@@ -86,6 +86,3 @@ gulp.task('build', function() {
   	console.log("build finished");
   });
 });
-
-
-

@@ -15,12 +15,11 @@ levelDataLine[0] = "@@@@@@@@@@@@@@@@@";
 levelDataLine[1] = "@@@@@@@@@     <@@";
 levelDataLine[2] = "@@@@@@@@@ o@  @@@";
 levelDataLine[3] = "@@@@@@@@@     @@@";
-levelDataLine[4] = "@@@@@@@@@@    @@@";
-levelDataLine[5] = "@@@@@@@@@   @ @@@";
-levelDataLine[6] = "@x     @@   o   @";
-levelDataLine[7] = "@@              @";
-levelDataLine[8] = "@x     @@@@@@@@@@";
-levelDataLine[9] = "@@@@@@@@@@@@@@@@@";
+levelDataLine[4] = "@@@@@@@@@   @ @@@";
+levelDataLine[5] = "@x     @@   o   @";
+levelDataLine[6] = "@@              @";
+levelDataLine[7] = "@x     @@@@@@@@@@";
+levelDataLine[8] = "@@@@@@@@@@@@@@@@@";
 
 level[1] = new levelObject(levelDataLine);
 
