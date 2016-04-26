@@ -123,21 +123,21 @@ $(function() {
 
 	}
 
- var sokoban = new Part("sokoban");
+/* var sokoban = new Part("sokoban");
 
  setTimeout(function(){
 
 	 sokoban.applyStyle();
 	 sokoban.show();
 	 sokoban.exec();
- },1000)
+ },1000)*/
 
 
 	//load for example the stomachjump
 	//parts["stomachjump"] = new Part("stomachjump");
 
 
-	//parts.push(new Part("intro"));
+	parts.push(new Part("intro"));
 
 
 
@@ -146,27 +146,30 @@ $(function() {
 
 	//parts["pingouin"] = new Part("pingouin");
 
-	 /*setTimeout(function(){
-	 	parts[0].video = new Video("intro");
+	 setTimeout(function(){
+	 	
+		parts[0].applyStyle();
 		parts[0].show();
 
+		parts.push(new Part("sokoban"));
+	}, 1000)
 	 	//loads the other page while the user is playing
-	  	parts.push(new Part("stomachjump"));
+	  	//parts.push(new Part("stomachjump"));
 
 
 
-	 var sokoban = new Part("sokoban");
+	 //var sokoban = new Part("sokoban");
 
 
 	//parts["pingouin"] = new Part("pingouin");
 
-	 setTimeout(function(){
+	 /*setTimeout(function(){
 	 	sokoban.applyStyle();
 	 	sokoban.show();
 	 	sokoban.exec();
 
 	 	//loads the other page while the user is playing
-	  parts["stomachjump"] = new Part("stomachjump");
+	  parts["stomachjump"] = new Part("stomachjump");*/
 
 	 	/*setTimeout(function(){
 	 	parts["stomachjump"].removeOthers();
