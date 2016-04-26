@@ -122,7 +122,7 @@ $(function() {
 
 	}
 
-	parts.push(new Part("stomachjump"));
+	parts.push(new Part("issunriver"));
 
 
 	setTimeout(function(){
@@ -131,6 +131,8 @@ $(function() {
 		parts[0].applyStyle();
 		parts[0].show();
 		parts[0].exec();
+
+		parts.push(new Part("sokoban"));
 
 	},1000);
 
@@ -141,6 +143,26 @@ $(function() {
 	 	parts["stomachjump"].applyStyle();
  		parts["stomachjump"].show();
 		parts["stomachjump"].exec();
+
+ //var issunriver = new Part("issunriver");
+	parts.push(new Part("issunriver"));
+	
+	setTimeout(function(){
+			
+
+	 parts[0].applyStyle();
+	 parts[0].show();
+	 parts[0].exec();
+	 parts.push(new Part("intro"));
+	 parts[1].video = new Video("intro");
+	 
+	 setTimeout(function(){
+			parts.push(new Part("sokoban"));
+	 },1000)
+	 
+	 
+ },1000)
+
 
 	parts.push(new Part("intro"));
 
@@ -153,6 +175,7 @@ $(function() {
 	 parts.push(new Part('sokoban'));
 
   },1000)
+
 
 
 

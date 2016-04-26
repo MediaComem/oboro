@@ -886,7 +886,10 @@ enchant.EventTarget = enchant.Class.create({
             if (initial) {
                 stage = enchant.Game.instance._element;
                 var evt;
+
+
                 document.addEventListener('keydown', function(e) {
+                    
                     game.dispatchEvent(new enchant.Event('keydown'));
                     if ((37 <= e.keyCode && e.keyCode <= 40) || e.keyCode === 32) {
                         e.preventDefault();
@@ -901,7 +904,7 @@ enchant.EventTarget = enchant.Class.create({
                         evt = new enchant.Event(button + 'buttondown');
                         game.dispatchEvent(evt);
                     }
-                }, true);
+                }, false);
                 document.addEventListener('keyup', function(e) {
                     if (!game.running) {
                         return;
@@ -911,7 +914,7 @@ enchant.EventTarget = enchant.Class.create({
                         evt = new enchant.Event(button + 'buttonup');
                         game.dispatchEvent(evt);
                     }
-                }, true);
+                }, false);
 
                 if (enchant.ENV.TOUCH_ENABLED) {
                     stage.addEventListener('touchstart', function(e) {
@@ -922,7 +925,7 @@ enchant.EventTarget = enchant.Class.create({
                                 e.stopPropagation();
                             }
                         }
-                    }, true);
+                    }, false);
                     stage.addEventListener('touchmove', function(e) {
                         var tagName = (e.target.tagName).toLowerCase();
                         if (enchant.ENV.USE_DEFAULT_EVENT_TAGS.indexOf(tagName) === -1) {
@@ -931,7 +934,7 @@ enchant.EventTarget = enchant.Class.create({
                                 e.stopPropagation();
                             }
                         }
-                    }, true);
+                    }, false);
                     stage.addEventListener('touchend', function(e) {
                         var tagName = (e.target.tagName).toLowerCase();
                         if (enchant.ENV.USE_DEFAULT_EVENT_TAGS.indexOf(tagName) === -1) {
@@ -940,7 +943,7 @@ enchant.EventTarget = enchant.Class.create({
                                 e.stopPropagation();
                             }
                         }
-                    }, true);
+                    }, false);
                 } else {
                     stage.addEventListener('mousedown', function(e) {
                         var tagName = (e.target.tagName).toLowerCase();
@@ -951,7 +954,7 @@ enchant.EventTarget = enchant.Class.create({
                                 e.stopPropagation();
                             }
                         }
-                    }, true);
+                    }, false);
                     stage.addEventListener('mousemove', function(e) {
                         var tagName = (e.target.tagName).toLowerCase();
                         if (enchant.ENV.USE_DEFAULT_EVENT_TAGS.indexOf(tagName) === -1) {
@@ -960,7 +963,7 @@ enchant.EventTarget = enchant.Class.create({
                                 e.stopPropagation();
                             }
                         }
-                    }, true);
+                    }, false);
                     stage.addEventListener('mouseup', function(e) {
                         var tagName = (e.target.tagName).toLowerCase();
                         if (enchant.ENV.USE_DEFAULT_EVENT_TAGS.indexOf(tagName) === -1) {
@@ -970,7 +973,7 @@ enchant.EventTarget = enchant.Class.create({
                                 e.stopPropagation();
                             }
                         }
-                    }, true);
+                    }, false);
                 }
             }
         },
