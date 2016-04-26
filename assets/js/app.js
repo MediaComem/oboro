@@ -122,7 +122,7 @@ $(function() {
 
 	}
 
-	parts.push(new Part("issunriver"));
+	parts.push(new Part("stomachjump"));
 
 
 	setTimeout(function(){
