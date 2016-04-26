@@ -52,8 +52,8 @@ gulp.task('sokoban', function () {
 });
 
 
-gulp.task('pingouin', function () {
-	return build("pingouin",argv.env);
+gulp.task('issunriver', function () {
+	return build("issunriver",argv.env);
 });
 
 gulp.task('stomachjump', function () {
@@ -82,7 +82,7 @@ gulp.task("main",function(){
 });
 
 gulp.task('build', function() {
-  runSequence('sokoban','pingouin','stomachjump','main',function(){
+  runSequence('sokoban','issunriver','stomachjump','main',function(){
   	console.log("build finished");
   });
 });
