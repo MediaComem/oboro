@@ -562,7 +562,7 @@ function handleMove(moveDir){
 
 
 
-document.onkeydown = function(e){
+document.addEventListener("keydown", function(e){
     var thisEvent = e;
     // add support for webkit key events
     switch(thisEvent.keyCode){
@@ -581,7 +581,7 @@ document.onkeydown = function(e){
     drawPartial();
     checkField();
     //updateStats();
-}
+});
 
 function drawCircle(x,y,r,fillCol){
     context.fillStyle=fillCol;

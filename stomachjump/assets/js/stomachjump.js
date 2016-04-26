@@ -1,3 +1,12 @@
+
+var options = {hashTracking: false, closeOnOutsideClick: false};
+
+
+var inst = $('#modal').remodal(options);
+inst.open();
+
+
+
 window.currentPart = function stomachjump(){
 
 // RequestAnimFrame: a browser API for getting smooth animations
@@ -477,16 +486,8 @@ function init() {
 		} 
 		else if(player.y < height / 2) flag = 1;
 		else if(player.y + player.height > height) {
-			showGoMenu();
-			hideScore();
 			player.isDead = "lol";
-
-			var tweet = document.getElementById("tweetBtn");
-			tweet.href='http://twitter.com/share?url=http://is.gd/2LVtL1&text=Je viens de faire ' +score+ ' points sur le jeu Doodle Jump en HTML5!&via=Forums_Mediabox&related=julienchauveau';
-		
-			var facebook = document.getElementById("fbBtn");
-			facebook.href='http://facebook.com/sharer.php?s=100&p[url]=http://julienchauveau.com/labs/doodlejump/&p[title]=Je viens de faire ' +score+ ' points sur le jeu Doodle Jump !&p[summary]=Pouvez-vous me battre dans cette version incroyable de Doodle Jump créé en HTML5 ?';
-
+			reset();
 		}
 	}
 

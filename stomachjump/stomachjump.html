@@ -1,3 +1,22 @@
+
+	<div id="modal">
+		<h2>Stomachjump</h2>
+
+		<p>
+			Utilise les flêches ou glisse tes doigts pour sortir du méchant ogre !
+		</p>
+		
+		<div class="instruction-images">
+			<img src="./stomachjump/assets/img/left-right.png" alt="left-right"/>
+			<img src="./stomachjump/assets/img/swipe.png" alt="left-right"/>
+		</div>
+		
+
+		<button id="stomach-start" data-remodal-action="confirm" class="remodal-confirm">OK</button>
+
+
+	</div>	
+
 	<div id="container" class="container">
 		<canvas id="canvas">
 			Oooh… votre navigateur ne supporte pas HTML5!
@@ -16,7 +35,6 @@
 				pour vous déplacer <br/>
 				et ESPACE pour (re)démarrer...
 			</p>
-			<a id="stomach-start" class="button">Allons-y&nbsp;!</a>
 		</div>
 		
 		<div id="gameOverMenu">
@@ -29,10 +47,10 @@
 		
 		
 		<!-- Preloading image ;) -->
-		<img id="base" src="./stomachjump/assets/img/base.png"/>
+		<img class="loaded-img" id="base" src="./stomachjump/assets/img/base.png"/>
 
 		<!-- Preloading image ;) -->
-		<img id="sprite" src="./stomachjump/assets/img/sprite.png"/>
+		<img class="loaded-img" id="sprite" src="./stomachjump/assets/img/sprite.png"/>
 
 		<div id="scoreBoard">
 			<p id="score">0</p>
