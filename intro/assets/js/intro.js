@@ -1,4 +1,6 @@
-$(function() {
+window.currentPart = function intro(){
+
+  $(function() {
 
       function toggleFullScreen() {
        if (!document.fullscreenElement &&    // alternative standard method
@@ -33,3 +35,4 @@ $(function() {
 
 
 });
+}

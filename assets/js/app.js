@@ -13,7 +13,7 @@ window.next = function(){
 $(function() {
 
 
-	function Part(part){
+	window.Part = function Part(part){
 
 		var that = this;
 
@@ -118,14 +118,20 @@ $(function() {
 
 	}
 
- var sokoban = new Part("sokoban");
 
- setTimeout(function(){
+	parts.push(new Part("intro"));
 
-	 sokoban.applyStyle();
-	 sokoban.show();
-	 sokoban.exec();
- },1000)
+
+	setTimeout(function(){
+
+ 	 parts[0].applyStyle();
+ 	 parts[0].show();
+ 	 parts[0].exec();
+	 parts.push(new Part('sokoban'));
+
+  },1000)
+
+
 
 
 	//load for example the stomachjump
