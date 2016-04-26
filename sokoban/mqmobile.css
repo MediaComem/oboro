@@ -40,12 +40,14 @@ div#buttonBox{
   position: absolute;
   top:10px;
   left:10px;
-  width: 50%;
+  width: 30%;
+  /*border:1px solid red;*/
+
 
 }
 div#buttonBox img{
   float: none;
-  width: 40%;
+  width: 80%;
   display: block;
   clear: both;
 }

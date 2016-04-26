@@ -508,7 +508,7 @@ function drawTile(x,y){
             context.drawImage(mapTiles[Tile.Empty].canvas,x*tileXSize,y*tileYSize);
             if(level[currentLevel].levelMapOrig[y][x] === Tile.Slot){
                 drawCircle(x*tileXSize + 16, y*tileYSize + 16, 7, "#000000");
-                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 3, "#FF0000");
+                drawCircle(x*tileXSize + 16, y*tileYSize + 16, 3, "#d2047b");
             }
             if(level[currentLevel].levelMapOrig[y][x] === Tile.Start){
                 drawCircle(x*tileXSize + 16, y*tileYSize + 16, 7, "transparent");
