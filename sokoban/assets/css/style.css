@@ -109,7 +109,7 @@ div#buttonBox{
 
 div#buttonBox img{
 
-  width: 30%;
+  width: 25%;
 }
 #gameContainer>img{
   display: none;
@@ -137,31 +137,7 @@ div#buttonBox img{
 
 }
 
-#btn_game_reload:hover{
-  cursor: pointer;
-}
-
-#btn_game_cancel:hover{
-  cursor: pointer;
-}
 */
-div#gameContainer div.box #sokcontrols div:nth-child(3n+1){
-  width:420px;
-
-}
-div#gameContainer div.box #sokcontrols div:nth-child(2){
-  width:210px;
-  float:left;
-  text-align:left;
-
-}
-div#gameContainer div.box #sokcontrols div:nth-child(3){
-  width:210px;
-  float:right;
-  text-align:right;
-
-}
-
 #warning-message { display: none; color:white;}
    @media only screen and (orientation:portrait){
        #gameContainer { display:none; }

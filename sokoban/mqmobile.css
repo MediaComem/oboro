@@ -1,10 +1,11 @@
 #gameContainer>img{
   display: block;
-  width: 50px;
+  width: 10vw;
+
 }
 #gameContainer div#clearfix>img{
   display: block;
-  width: 50px;
+  width: 10vw;
 }
 div#clearfix{
   width: 90vw;
@@ -18,13 +19,13 @@ div#clearfix{
 #gameContainer img#arrow_left{
   display: block;
   float:left;
-  margin-top:15%;
+  margin-top:10vh;
 
 }
 #gameContainer img#arrow_right{
   display: block;
   float:right;
-  margin-top:15%;
+  margin-top:10vh;
 }
 #gameContainer img#arrow_bottom{
   display: block;
@@ -41,4 +42,10 @@ div#buttonBox{
   left:10px;
   width: 50%;
 
+}
+div#buttonBox img{
+  float: none;
+  width: 40%;
+  display: block;
+  clear: both;
 }
