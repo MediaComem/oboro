@@ -32,7 +32,9 @@ $(function() {
 
 		//show the the div
 		this.show = function(){
-			$("#"+that.part).css("display","block");
+			$("#"+that.part).fadeIn( "fast", function() {
+			    // Animation complete
+			  });;
 		}
 
 		//hide the div
@@ -75,7 +77,9 @@ $(function() {
 
 		this.removeOthers = function(){
 			//remove all the other site parts except the current one
-		 	$(".site-part").not("."+that.part).remove();
+		 	$(".site-part").not("."+that.part).fadeOut( "fast", function() {
+			  	$(".site-part").not("."+that.part).remove();	  
+			  });
 		}
 
 		$.get(that.baseUrl+"/assets/css/"+that.part+".css", function( css ) {
