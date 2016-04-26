@@ -1,0 +1,9 @@
+#enchant-stage{
+color: #fff;
+	background-image: url(./issunriver/assets/res/bg2.jpg);
+	background-size: cover;
+	background-position: 50% 0;
+	height: 100%;
+	display:block;
+	margin:auto;
+}
