@@ -494,7 +494,7 @@ function init() {
 		else if(player.y + player.height > height) {
 			player.isDead = "lol";
 			reset();
-			window.next();
+			//window.next();
 		}
 	}
 

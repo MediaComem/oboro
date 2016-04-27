@@ -147,7 +147,7 @@ var ImageLoader = {
     }
 }
 
-ImageLoader.init(new Array("./sokoban/assets/img/textures/ground.png","./sokoban/assets/img/textures/wall.png","./sokoban/assets/img/textures/stone.png"),mapTilesLoaded);
+ImageLoader.init(new Array("./sokoban/assets/img/textures/ground.png","./sokoban/assets/img/textures/wall.png","./sokoban/assets/img/textures/stone2.png"),mapTilesLoaded);
 ImageLoader.startLoading();
 
 
