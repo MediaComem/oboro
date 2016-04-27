@@ -102,7 +102,7 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 
 
 		this.video.ontimeupdate = function() {
-			
+
 			console.log(that.video.currentTime );
 		    if(that.video.currentTime >= that.video.duration){
 		      that.video.pause();
@@ -111,7 +111,7 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 
 		this.video.onpause = function(){
    			window.next();
-  		}
+  	}
 
 	}
 
@@ -124,7 +124,7 @@ window.next = function(){
 
 	lastPart.removeOthers();
 	lastPart.appendToBody();
-	
+
 	if(lastPart.video){
 		//creates the object if the part is a video
 		lastPart.video = new Video(lastPart.part);
@@ -139,54 +139,6 @@ window.next = function(){
 }
 
 $(function() {
-
-
-	//parts.push(new Part("stomachjump"));
-
-/*
-	parts.push(new Part("issunriver"));
-
-
-
-	setTimeout(function(){
-
-		parts[0].removeOthers();
-		parts[0].applyStyle();
-		parts[0].show();
-		parts[0].exec();
-
-		parts.push(new Part("sokoban"));
-
-	},1000);
-
-*/
-
-	 	/*setTimeout(function(){
-	 	parts["stomachjump"].removeOthers();
-	 	parts["stomachjump"].applyStyle();
- 		parts["stomachjump"].show();
-		parts["stomachjump"].exec();
-
- //var issunriver = new Part("issunriver");
-	/*parts.push(new Part("issunriver"));
-
-	setTimeout(function(){
-
-
-	 parts[0].applyStyle();
-	 parts[0].show();
-	 parts[0].exec();
-	 parts.push(new Part("intro"));
-	 parts[1].video = new Video("intro");
-
-	 setTimeout(function(){
-			parts.push(new Part("sokoban"));
-	 },1000)
-
-
- },1000)*/
-
-
 	parts.push(new Part("intro"));
 
 
@@ -195,58 +147,10 @@ $(function() {
  	 parts[0].applyStyle();
  	 parts[0].show();
  	 parts[0].exec();
-	 
 	 parts.push(new Part('sokoban'));
-
 
   },1000)
 
-
-
-
-
-	//load for example the stomachjump
-	//parts["stomachjump"] = new Part("stomachjump");
-
-
-	//parts.push(new Part("intro"));
-
-
-
-
-	// txtArea[0].value
-
-	//parts["pingouin"] = new Part("pingouin");
-
-	 /*setTimeout(function(){
-	 	parts[0].video = new Video("intro");
-		parts[0].show();
-
-	 	//loads the other page while the user is playing
-	  	parts.push(new Part("stomachjump"));
-
-
-
-	 var sokoban = new Part("sokoban");
-
-
-	//parts["pingouin"] = new Part("pingouin");
-
-	 setTimeout(function(){
-	 	sokoban.applyStyle();
-	 	sokoban.show();
-	 	sokoban.exec();
-
-	 	//loads the other page while the user is playing
-	  parts["stomachjump"] = new Part("stomachjump");
-
-	 	/*setTimeout(function(){
-	 	parts["stomachjump"].removeOthers();
-	 	parts["stomachjump"].applyStyle();
- 		parts["stomachjump"].show();
-		parts["stomachjump"].exec();
-
-	},20000)*/
 
 
 
