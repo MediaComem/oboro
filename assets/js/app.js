@@ -1,17 +1,3 @@
-window.parts = []//the array containing the different parts of the adventure
-window.currentPart = {};
-window.next = function(){
-	//executes the script contained in the last added part
-	var lastPart = parts[parts.length-1];
-
-	lastPart.removeOthers();
-	lastPart.applyStyle();
-	lastPart.show();
-	lastPart.exec();
-}
-
-$(function() {
-
 
 	window.Part = function Part(part){
 
@@ -75,10 +61,17 @@ $(function() {
 	  		.appendTo('head')
 		}
 
+		this.appendToBody = function(){
+			//appends to the body
+			$( "body" ).append( "<div class='site-part "+ that.part+"' id='"+ that.part+"'>"+"</div>" );
+			$("#"+that.part).append(that.dom);
+			$("#"+that.part).css("display","none");
+		}
+
 		this.removeOthers = function(){
 			//remove all the other site parts except the current one
 		 	$(".site-part").not("."+that.part).fadeOut( "fast", function() {
-			  	$(".site-part").not("."+that.part).remove();	  
+			  	$(".site-part").not("."+that.part).remove();
 			  });
 		}
 
@@ -90,13 +83,6 @@ $(function() {
 		$.get( this.baseUrl + "/" + this.part + ".html", function( html ) {
 
 		 	that.dom = html;
-
-
-
-		 	//appends to the body
-			$( "body" ).append( "<div class='site-part "+ that.part+"' id='"+ that.part+"'>"+"</div>" );
-			$("#"+that.part).append(that.dom);
-			$("#"+that.part).css("display","none");
 
 			that.getScript();
 
@@ -111,8 +97,10 @@ $(function() {
 
 
 		this.video.ontimeupdate = function() {
+			
+			console.log(that.video.currentTime );
 		    if(that.video.currentTime >= that.video.duration){
-		      that.video.pause()
+		      that.video.pause();
 		    }
 		}
 
@@ -122,7 +110,37 @@ $(function() {
 
 	}
 
-	parts.push(new Part("stomachjump"));
+
+window.parts = []//the array containing the different parts of the adventure
+window.currentPart = {};
+window.next = function(){
+	//executes the script contained in the last added part
+	var lastPart = parts[parts.length-1];
+
+	lastPart.removeOthers();
+	lastPart.appendToBody();
+	
+	if(lastPart.video){
+		//creates the object if the part is a video
+		lastPart.video = new Video(lastPart.part);
+	}
+
+	lastPart.applyStyle();
+	lastPart.show();
+
+	if(typeof(lastPart.exec) === 'function' ){
+		lastPart.exec();
+	}
+}
+
+$(function() {
+
+
+	//parts.push(new Part("stomachjump"));
+
+/*
+	parts.push(new Part("issunriver"));
+
 
 
 	setTimeout(function(){
@@ -136,7 +154,7 @@ $(function() {
 
 	},1000);
 
-
+*/
 
 	 	/*setTimeout(function(){
 	 	parts["stomachjump"].removeOthers();
@@ -145,34 +163,36 @@ $(function() {
 		parts["stomachjump"].exec();
 
  //var issunriver = new Part("issunriver");
-	parts.push(new Part("issunriver"));
-	
+	/*parts.push(new Part("issunriver"));
+
 	setTimeout(function(){
-			
+
 
 	 parts[0].applyStyle();
 	 parts[0].show();
 	 parts[0].exec();
 	 parts.push(new Part("intro"));
 	 parts[1].video = new Video("intro");
-	 
+
 	 setTimeout(function(){
 			parts.push(new Part("sokoban"));
 	 },1000)
-	 
-	 
- },1000)
+
+
+ },1000)*/
 
 
 	parts.push(new Part("intro"));
 
 
 	setTimeout(function(){
-
+	 parts[0].appendToBody();	
  	 parts[0].applyStyle();
  	 parts[0].show();
  	 parts[0].exec();
+	 
 	 parts.push(new Part('sokoban'));
+
 
   },1000)
 

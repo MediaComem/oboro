@@ -15,6 +15,7 @@ div#clearfix{
   display: block;
   clear: both;
   margin: 0 auto;
+  margin-top:10px;
 }
 #gameContainer img#arrow_left{
   display: block;
