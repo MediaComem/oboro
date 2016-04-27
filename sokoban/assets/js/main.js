@@ -1,6 +1,15 @@
 window.currentPart = function sokoban(){
 
 
+var options = {hashTracking: false, closeOnOutsideClick: false};
+
+$('#sokoban').append("<div data-remodal-id=\"modal\" ><h2>Sokoban</h2><p>Utilise les flêches ou appuie sur les boutons pour faire bouger les pierres !</p><div class=\"instruction-images\"><img src=\"./sokoban/assets/img/left-right-up-down.png\" alt=\"left-right-up-down\"/></div><button data-remodal-action=\"confirm\" class=\"remodal-confirm\">OK</button></div>   ");
+
+
+var inst = $('[data-remodal-id=modal]').remodal();
+inst.open();
+
+
 	/***/
 var level = new Array();
 
@@ -459,6 +468,7 @@ function checkField(){
             console.log('VIDEO SUIVANTE')
 
             window.next();
+            inst.destroy();
             /*
             show bpx id suiv.
             */
