@@ -1,5 +1,9 @@
 window.currentPart = function issunriver(){
 
+parts.push(new Part("arrivee"));
+  
+parts[parts.length-1].video = true;
+    
 
 var options = {hashTracking: false, closeOnOutsideClick: false};
 

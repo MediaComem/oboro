@@ -99,7 +99,9 @@
 		this.video.ontimeupdate = function() {
 
 			console.log(that.video.currentTime );
-		    if(that.video.currentTime >= that.video.duration){
+			console.log(that.video.duration);
+
+		    if(that.video.currentTime >= that.video.duration-1){
 		      that.video.pause();
 		    }
 		}
