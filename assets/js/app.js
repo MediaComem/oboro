@@ -101,7 +101,7 @@
 
 
 		this.video.ontimeupdate = function() {
-			
+
 			console.log(that.video.currentTime );
 		    if(that.video.currentTime >= that.video.duration){
 		      that.video.pause();
@@ -110,7 +110,7 @@
 
 		this.video.onpause = function(){
    			window.next();
-  		}
+  	}
 
 	}
 
@@ -123,7 +123,7 @@ window.next = function(){
 
 	lastPart.removeOthers();
 	lastPart.appendToBody();
-	
+
 	if(lastPart.video){
 		//creates the object if the part is a video
 		lastPart.video = new Video(lastPart.part);
@@ -138,6 +138,7 @@ window.next = function(){
 }
 
 $(function() {
+<<<<<<< HEAD
 
 
 	//parts.push(new Part("stomachjump"));
@@ -205,57 +206,6 @@ $(function() {
   	},1000);	
 
 	
-
-
-
-
-
-	//load for example the stomachjump
-	//parts["stomachjump"] = new Part("stomachjump");
-
-
-	//parts.push(new Part("intro"));
-
-
-
-
-	// txtArea[0].value
-
-	//parts["pingouin"] = new Part("pingouin");
-
-	 /*setTimeout(function(){
-	 	parts[0].video = new Video("intro");
-		parts[0].show();
-
-	 	//loads the other page while the user is playing
-	  	parts.push(new Part("stomachjump"));
-
-
-
-	 var sokoban = new Part("sokoban");
-
-
-	//parts["pingouin"] = new Part("pingouin");
-
-	 setTimeout(function(){
-	 	sokoban.applyStyle();
-	 	sokoban.show();
-	 	sokoban.exec();
-
-	 	//loads the other page while the user is playing
-	  parts["stomachjump"] = new Part("stomachjump");
-
-	 	/*setTimeout(function(){
-	 	parts["stomachjump"].removeOthers();
-	 	parts["stomachjump"].applyStyle();
- 		parts["stomachjump"].show();
-		parts["stomachjump"].exec();
-
-	},20000)*/
-
-
-
-
 
 
 
