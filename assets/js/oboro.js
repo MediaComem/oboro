@@ -45,6 +45,10 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 			  	//executes the code
 			  	that.exec = window.currentPart;
 
+			  	// store the last part's name in the loacal storage
+				localStorage.setItem("lastPartPlayed", window.currentPart.name);
+
+
 			  })
 			  .fail(function( jqxhr, settings, exception ) {
 			    console.log("error : " + exception);
@@ -139,6 +143,7 @@ window.next = function(){
 }
 
 $(function() {
+<<<<<<< HEAD
 	parts.push(new Part("intro"));
 
 
@@ -150,6 +155,75 @@ $(function() {
 	 parts.push(new Part('sokoban'));
 
   },1000)
+=======
+
+
+	//parts.push(new Part("stomachjump"));
+
+/*
+	parts.push(new Part("issunriver"));
+
+
+
+	setTimeout(function(){
+
+		parts[0].removeOthers();
+		parts[0].applyStyle();
+		parts[0].show();
+		parts[0].exec();
+
+		parts.push(new Part("sokoban"));
+
+	},1000);
+
+*/
+
+	 	/*setTimeout(function(){
+	 	parts["stomachjump"].removeOthers();
+	 	parts["stomachjump"].applyStyle();
+ 		parts["stomachjump"].show();
+		parts["stomachjump"].exec();
+
+ //var issunriver = new Part("issunriver");
+	/*parts.push(new Part("issunriver"));
+
+	setTimeout(function(){
+
+
+	 parts[0].applyStyle();
+	 parts[0].show();
+	 parts[0].exec();
+	 parts.push(new Part("intro"));
+	 parts[1].video = new Video("intro");
+
+	 setTimeout(function(){
+			parts.push(new Part("sokoban"));
+	 },1000)
+
+
+ },1000)*/
+
+
+	var lastPartPlayed = localStorage.getItem("lastPartPlayed");
+	if(lastPartPlayed != undefined){
+		parts.push(new Part(lastPartPlayed));
+	}
+	else{
+		parts.push(new Part("intro"));
+	}
+
+
+	setTimeout(function(){
+			 parts[0].appendToBody();	
+		 	 parts[0].applyStyle();
+		 	 parts[0].show();
+		 	 parts[0].exec();
+
+
+  	},1000);	
+
+	
+>>>>>>> d5c71ded429f335edfb444fa93afa2b6928b7132
 
 
 
