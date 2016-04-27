@@ -143,7 +143,7 @@ window.next = function(){
 }
 
 $(function() {
-<<<<<<< HEAD
+
 	parts.push(new Part("intro"));
 
 
@@ -155,7 +155,7 @@ $(function() {
 	 parts.push(new Part('sokoban'));
 
   },1000)
-=======
+
 
 
 	//parts.push(new Part("stomachjump"));

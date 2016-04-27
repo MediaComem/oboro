@@ -138,7 +138,7 @@ window.next = function(){
 }
 
 $(function() {
-<<<<<<< HEAD
+
 
 
 	//parts.push(new Part("stomachjump"));
@@ -171,7 +171,7 @@ $(function() {
 	/*parts.push(new Part("issunriver"));
 
 	setTimeout(function(){
-<<<<<<< HEAD
+
 	 parts[0].appendToBody();	
  	 parts[0].applyStyle();
  	 parts[0].show();
