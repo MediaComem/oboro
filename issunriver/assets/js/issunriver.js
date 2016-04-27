@@ -1,4 +1,14 @@
 window.currentPart = function issunriver(){
+
+
+var options = {hashTracking: false, closeOnOutsideClick: false};
+
+$('#issunriver').append("<div data-remodal-id=\"modal\" ><h2>Issun-River</h2><p>Bouge la souris ou glisse ta main sur l'écran pour aider Issun à rejoindre le rivage!</p><div class=\"instruction-images\"><img src=\"./issunriver/assets/res/swipe-up.png\" alt=\"swipe up\"/></div><button data-remodal-action=\"confirm\" class=\"issunriver-start remodal-confirm\">OK</button></div>   ");
+
+
+var inst = $('[data-remodal-id=modal]').remodal();
+inst.open();
+
 // Start enchant.js
 enchant();
 
@@ -35,8 +45,10 @@ enchant();
     }
     var gameTest = game;
     
-    game.start(); 
-    
+   
+$(".issunriver-start").on("click",function(){
+     game.start();  
+});    
      
 
 
@@ -235,6 +247,7 @@ var SceneGame = Class.create(Scene, {
                    //document.removeEventListener("keydown", keyupShit);
                    //document.removeEventListener("keyup", keydownShit);
                     window.next();
+                    inst.destroy();
                     console.log("windows.next");    
                 }
                 islandSwitch = true;

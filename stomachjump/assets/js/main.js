@@ -7,7 +7,7 @@ parts.push(new Part("issunriver"));
 
 var options = {hashTracking: false, closeOnOutsideClick: false};
 
-$('body').append("<div data-remodal-id=\"modal\" ><h2>Stomachjump</h2><p>Utilise les flêches ou glisse tes doigts pour sortir du méchant ogre !</p><div class=\"instruction-images\"><img src=\"./stomachjump/assets/img/left-right.png\" alt=\"left-right\"/><img src=\"./stomachjump/assets/img/swipe.png\" alt=\"left-right\"/></div><button data-remodal-action=\"confirm\" class=\"stomach-start remodal-confirm\">OK</button></div>	");
+$('#stomachjump').append("<div data-remodal-id=\"modal\" ><h2>Stomachjump</h2><p>Utilise les flêches ou glisse tes doigts pour sortir du méchant ogre !</p><div class=\"instruction-images\"><img src=\"./stomachjump/assets/img/left-right.png\" alt=\"left-right\"/><img src=\"./stomachjump/assets/img/swipe.png\" alt=\"left-right\"/></div><button data-remodal-action=\"confirm\" class=\"stomach-start remodal-confirm\">OK</button></div>	");
 
 
 var inst = $('[data-remodal-id=modal]').remodal();
