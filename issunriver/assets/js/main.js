@@ -113,7 +113,7 @@ var SceneGame = Class.create(Scene, {
         
         //backgroundmusic
         this.bgm = game.assets['./issunriver/assets/res/bgm.mp3'];       
-        //this.bgm.play();
+        this.bgm.play();
     },
     handleTouchMove: function(evt){
             this.issun.y = evt.localY
@@ -141,12 +141,12 @@ var SceneGame = Class.create(Scene, {
             this.scoreTimer -= 1;
         }
         //Quand un score est atteind issun va vers l'ile
-        if(this.score >= 9){
-            this.setScore(9);
+        if(this.score >= 25){
+            this.setScore(25);
             var game;
                 game = Game.instance;
 
-                this.bgm.stop();        
+                       
                 
                 var xSpeed, game;
      
@@ -169,7 +169,7 @@ var SceneGame = Class.create(Scene, {
             
         // Check Création d'enemi
         // En crée jusqu'au score atteind
-        if(this.score < 9){
+        if(this.score < 25){
         this.generateEnemyTimer += evt.elapsed * 0.001;
         if(this.generateEnemyTimer >= 1)
         {
@@ -180,7 +180,7 @@ var SceneGame = Class.create(Scene, {
         }
         }
         // Generated bonus
-        if(this.score < 9){
+        if(this.score < 25){
         this.generateBonusTimer += evt.elapsed * 0.001;
         if(this.generateBonusTimer >= 1)
         {
@@ -229,6 +229,7 @@ var SceneGame = Class.create(Scene, {
             if((this.terre).intersect(this.issun)){  
                 var game;
                 game = Game.instance;
+				this.bgm.stop(); 
                 game.assets['./issunriver/assets/res/bravo.mp3'].play();
                                 
                  if(!islandSwitch){
