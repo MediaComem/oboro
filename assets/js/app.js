@@ -118,7 +118,7 @@ $(function() {
 
 		this.video.onpause = function(){
    			window.next();
-  		}
+  	}
 
 	}
 /*
@@ -164,7 +164,7 @@ $(function() {
  },1000)*/
 
 
-	parts.push(new Part("intro"));
+/*	parts.push(new Part("intro"));
 
 
 	setTimeout(function(){
@@ -174,7 +174,7 @@ $(function() {
  	 parts[0].exec();
 	 parts.push(new Part('sokoban'));
 
-  },1000)
+ },1000)*/
 
 
 
