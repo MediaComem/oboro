@@ -34,12 +34,14 @@ var mc = new Hammer(container);
 
 var img = new Image();
 
-var width = 422,
-	height = 552;
-
+/*var width = 422,
+	height = 552;*/
+var width = 440;//$(document).width();
+var height = $(document).height();
 canvas.width = width;
+console.log(canvas.width)
 canvas.height = height;
-
+console.log(canvas.height)
 
 
 //Variables for game
@@ -509,7 +511,7 @@ function init() {
 
 		base.draw();
 
-		updateScore();
+		//updateScore();
 
 		dir = "";
 		player.isMovingLeft = false;
@@ -524,13 +526,13 @@ function init() {
 
 	animloop();
 
-	hideMenu();
-	showScore();
+	//hideMenu();
+	//showScore();
 }
 
 function reset() {
-	hideGoMenu();
-	showScore();
+	//hideGoMenu();
+	//showScore();
 	player.isDead = false;
 
 	flag = 0;

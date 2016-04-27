@@ -3,9 +3,15 @@
 
 body { margin: 0; padding: 0;}
 
-.container { height: 552px; width: 422px; position: relative; margin: 20px auto; overflow: hidden; }
+.container { height: 100vh; width: 100vw; position: relative; margin: 20px auto; overflow: hidden; }
 
-#canvas { height: 552px; width: 422px; display: block; background: url(./stomachjump/assets/img/pattern.png); background-repeat: repeat-x }
+#canvas { /*height: 100%;
+  width: 40%;*/
+  display: block;
+  background: url(./stomachjump/assets/img/pattern.png);
+  background-repeat: repeat-y;
+  margin: auto;
+ }
 
 #bg-canvas { height: 552px; width: 422px; display: block; }
 
@@ -69,4 +75,3 @@ h3 a { color: #5a5816; }
     font-size: 25px;
     height : 80px;
 }
-
