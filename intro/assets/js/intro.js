@@ -1,5 +1,7 @@
 window.currentPart = function intro(){
 
+  parts.push(new Part("sokoban"));
+    
   $(function() {
     
 
