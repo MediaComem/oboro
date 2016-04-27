@@ -12,11 +12,11 @@ enchant();
     var game = new Game(bodywidth, bodyheight);
     game.preload('./issunriver/assets/res/Hit.mp3',
                  './issunriver/assets/res/bgm.mp3',
-                 './issunriver/assets/res/alcool.mp3',
                  './issunriver/assets/res/bravo.mp3',
                  './issunriver/assets/res/terre.PNG',
                  './issunriver/assets/res/wave2.gif',
                  './issunriver/assets/res/cherry.png',
+				 './issunriver/assets/res/bonus.mp3',
                  './issunriver/assets/res/issun_small.png',
                  './issunriver/assets/res/issun_medium.png',
                  './issunriver/assets/res/issun_big.png',
@@ -216,7 +216,7 @@ var SceneGame = Class.create(Scene, {
             if(bonus.intersect(this.issun)){  
                 var game;
                 game = Game.instance;
-                game.assets['./issunriver/assets/res/alcool.mp3'].play();
+                game.assets['./issunriver/assets/res/bonus.mp3'].play();
                 this.score = this.score+5;
                 this.bonusGroup.removeChild(bonus);
                 
@@ -283,13 +283,13 @@ initialize: function() {
             
     //3 taille de sprite selon la taille du screen      
 if (window.matchMedia("(min-width: 900px)").matches) {
-  Sprite.apply(this,[90, 124]);
+  Sprite.apply(this,[90, 109]);
         this.image = Game.instance.assets['./issunriver/assets/res/issun_big.png'];    
 } else if (window.matchMedia("(min-width: 500px)").matches) {
-  Sprite.apply(this,[50, 69]);
+  Sprite.apply(this,[50, 59]);
         this.image = Game.instance.assets['./issunriver/assets/res/issun_medium.png'];    
 } else {
-    Sprite.apply(this,[32, 44]);
+    Sprite.apply(this,[32, 38]);
         this.image = Game.instance.assets['./issunriver/assets/res/issun_small.png'];    
     
 }
@@ -304,10 +304,10 @@ if (window.matchMedia("(min-width: 900px)").matches) {
         
                 
         this.animationDuration += evt.elapsed * 0.001;       
-        if(this.animationDuration >= 0.25)
+        if(this.animationDuration >= 0.45)
         {
             this.frame = (this.frame + 1) % 2;
-            this.animationDuration -= 0.25;
+            this.animationDuration -= 0.45;
         }
     },
 
@@ -334,13 +334,13 @@ var Enemy = Class.create(Sprite, {
 
 
         if (window.matchMedia("(min-width: 900px)").matches) {
-  Sprite.apply(this,[150, 95]);
+  Sprite.apply(this,[220, 126]);
         this.image = Game.instance.assets['./issunriver/assets/res/tronc_big.png'];    
 } else if (window.matchMedia("(min-width: 500px)").matches) {
-  Sprite.apply(this,[100, 63]);
+  Sprite.apply(this,[130, 74]);
         this.image = Game.instance.assets['./issunriver/assets/res/tronc_medium.png'];    
 } else {
-    Sprite.apply(this,[65, 41]);
+    Sprite.apply(this,[95, 54]);
         this.image = Game.instance.assets['./issunriver/assets/res/tronc_small.png'];
         
     

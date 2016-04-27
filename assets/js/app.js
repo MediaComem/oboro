@@ -131,28 +131,34 @@ window.next = function(){
 	if(typeof(lastPart.exec) === 'function' ){
 		lastPart.exec();
 	}
+
+
+  	// store the last part's name in the loacal storage
+	localStorage.setItem("lastPartPlayed", lastPart.part);
 }
 
 $(function() {
-	parts.push(new Part("intro"));
+
+
+
+	var lastPartPlayed = localStorage.getItem("lastPartPlayed");
+	if(lastPartPlayed != undefined){
+		parts.push(new Part(lastPartPlayed));
+	}
+	else{
+		parts.push(new Part("intro"));
+	}
 
 
 	setTimeout(function(){
-
- 	 parts[0].applyStyle();
- 	 parts[0].show();
- 	 parts[0].exec();
-	 parts.push(new Part('sokoban'));
-
-  },1000)
+			 parts[0].appendToBody();	
+		 	 parts[0].applyStyle();
+		 	 parts[0].show();
+		 	 parts[0].exec();
 
 
+  	},1000);	
 
-
-
-
-
-
-
+	
 
 });
