@@ -1,13 +1,17 @@
 
-var options = {hashTracking: false, closeOnOutsideClick: false};
-
-
-var inst = $('#modal').remodal(options);
-inst.open();
-
 
 
 window.currentPart = function stomachjump(){
+
+
+	var options = {hashTracking: false, closeOnOutsideClick: false};
+
+	$('body').html("<div id=\"modal\"><h2>Stomachjump</h2><p>Utilise les flêches ou glisse tes doigts pour sortir du méchant ogre !</p><div class=\"instruction-images\"><img src=\"./stomachjump/assets/img/left-right.png\" alt=\"left-right\"/><img src=\"./stomachjump/assets/img/swipe.png\" alt=\"left-right\"/></div><button id=\"stomach-start\" data-remodal-action=\"confirm\" class=\"remodal-confirm\">OK</button></div>	");
+
+
+	var inst = $('#modal').remodal(options);
+	inst.open();
+
 
 // RequestAnimFrame: a browser API for getting smooth animations
 window.requestAnimFrame = (function() {
@@ -54,7 +58,7 @@ var Base = function() {
 	this.width = width;
 
 	this.base = document.getElementById("base");
-	
+
 	//Sprite clipping 440 * 181
 	this.cx = 0;
 	this.cy = 0;
@@ -161,7 +165,7 @@ function Platform() {
 	//1: Normal
 	//2: Moving
 	//3: Breakable (Go through)
-	//4: Vanishable 
+	//4: Vanishable
 	//Setting the probability of which type of platforms should be shown at what score
 	if (score >= 5000) this.types = [2, 3, 3, 3, 4, 4, 4, 4];
 	else if (score >= 2000 && score < 5000) this.types = [2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4];
@@ -245,7 +249,7 @@ var Spring = new spring();
 
 // listen to events...
 mc.on("panleft panright", function(ev) {
-   
+
 	if(ev.type=="panleft"){
 		dir = "left";
 		player.isMovingLeft = true;
@@ -261,7 +265,7 @@ function init() {
 	//Variables for the game
 	var	dir = "left",
 		jumpCount = 0;
-	
+
 	firstRun = false;
 
 	//Function for clearing canvas in each consecutive frame
@@ -285,7 +289,7 @@ function init() {
 		//Adding keyboard controls
 		document.onkeydown = function(e) {
 			var key = e.keyCode;
-			
+
 			if (key == 37) {
 				dir = "left";
 				player.isMovingLeft = true;
@@ -293,18 +297,18 @@ function init() {
 				dir = "right";
 				player.isMovingRight = true;
 			}
-			
+
 			if(key == 32) {
 				if(firstRun === true)
 					init();
-				else 
+				else
 					reset();
 			}
 		};
 
 		document.onkeyup = function(e) {
 			var key = e.keyCode;
-		
+
 
 			if (key == 37) {
 				dir = "left";
@@ -339,11 +343,11 @@ function init() {
 			player.vx = -8;
 
 		//console.log(player.vx);
-		
+
 		//Jump the player when it hits the base
 		if ((player.y + player.height) > base.y && base.y < height) player.jump();
 
-		//Gameover if it hits the bottom 
+		//Gameover if it hits the bottom
 		if (base.y > height && (player.y + player.height) > height && player.isDead != "lol"){
 			player.isDead = true;
 			console.log("player dead");
@@ -483,7 +487,7 @@ function init() {
 		if(player.y > height/2 && flag === 0) {
 			player.y -= 8;
 			player.vy = 0;
-		} 
+		}
 		else if(player.y < height / 2) flag = 1;
 		else if(player.y + player.height > height) {
 			player.isDead = "lol";
@@ -527,7 +531,7 @@ function reset() {
 	hideGoMenu();
 	showScore();
 	player.isDead = false;
-	
+
 	flag = 0;
 	position = 0;
 	score = 0;
@@ -582,10 +586,10 @@ function playerJump() {
 	player.y += player.vy;
 	player.vy += gravity;
 
-	if (player.vy > 0 && 
-		(player.x + 15 < 260) && 
-		(player.x + player.width - 15 > 155) && 
-		(player.y + player.height > 475) && 
+	if (player.vy > 0 &&
+		(player.x + 15 < 260) &&
+		(player.x + player.width - 15 > 155) &&
+		(player.y + player.height > 475) &&
 		(player.y + player.height < 500))
 		player.jump();
 
@@ -608,13 +612,13 @@ function playerJump() {
 			dir = "right";
 			player.isMovingRight = true;
 		}
-	
+
 		if(key == 32) {
 			if(firstRun === true) {
 				init();
 				firstRun = false;
 			}
-			else 
+			else
 				reset();
 		}
 	};
@@ -661,18 +665,18 @@ function playerJump() {
 function update() {
 	ctx.clearRect(0, 0, width, height);
 	playerJump();
-}		
+}
 
 menuLoop = function() {
 	update();
 	requestAnimFrame(menuLoop);
 };
 
-menuLoop(); 
-   
+menuLoop();
+
 
 $( "#stomach-start" ).click(function() {
   init();
-}); 
+});
 
 }

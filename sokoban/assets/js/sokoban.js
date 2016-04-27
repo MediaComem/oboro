@@ -651,6 +651,7 @@ document.onkeydown = function(e){
         case 37: player.moveLeft(); break;
         case 39: player.moveRight(); break;
         case 40: player.moveDown(); break;
+				case 78: gotoNextLevel(); break;
         case 0:
             if(thisEvent.charCode === 114){
                 resetLevel();
