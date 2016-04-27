@@ -106,7 +106,7 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 
 
 		this.video.ontimeupdate = function() {
-			
+
 			console.log(that.video.currentTime );
 		    if(that.video.currentTime >= that.video.duration){
 		      that.video.pause();
@@ -115,7 +115,7 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 
 		this.video.onpause = function(){
    			window.next();
-  		}
+  	}
 
 	}
 
@@ -128,7 +128,7 @@ window.next = function(){
 
 	lastPart.removeOthers();
 	lastPart.appendToBody();
-	
+
 	if(lastPart.video){
 		//creates the object if the part is a video
 		lastPart.video = new Video(lastPart.part);
@@ -143,6 +143,23 @@ window.next = function(){
 }
 
 $(function() {
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+>>>>>>> dd1b5cbfe000f520b66d57cad6acee2e936c92eb
+	parts.push(new Part("intro"));
+
+
+	setTimeout(function(){
+	 parts[0].appendToBody();	
+ 	 parts[0].applyStyle();
+ 	 parts[0].show();
+ 	 parts[0].exec();
+	 parts.push(new Part('sokoban'));
+
+  },1000)
+=======
 
 
 	//parts.push(new Part("stomachjump"));
@@ -210,45 +227,29 @@ $(function() {
   	},1000);	
 
 	
+>>>>>>> d5c71ded429f335edfb444fa93afa2b6928b7132
 
 
 
+	//parts.push(new Part("stomachjump"));
 
-
-	//load for example the stomachjump
-	//parts["stomachjump"] = new Part("stomachjump");
-
-
-	//parts.push(new Part("intro"));
+/*
+	parts.push(new Part("issunriver"));
 
 
 
+	setTimeout(function(){
 
-	// txtArea[0].value
-
-	//parts["pingouin"] = new Part("pingouin");
-
-	 /*setTimeout(function(){
-	 	parts[0].video = new Video("intro");
+		parts[0].removeOthers();
+		parts[0].applyStyle();
 		parts[0].show();
+		parts[0].exec();
 
-	 	//loads the other page while the user is playing
-	  	parts.push(new Part("stomachjump"));
+		parts.push(new Part("sokoban"));
 
+	},1000);
 
-
-	 var sokoban = new Part("sokoban");
-
-
-	//parts["pingouin"] = new Part("pingouin");
-
-	 setTimeout(function(){
-	 	sokoban.applyStyle();
-	 	sokoban.show();
-	 	sokoban.exec();
-
-	 	//loads the other page while the user is playing
-	  parts["stomachjump"] = new Part("stomachjump");
+*/
 
 	 	/*setTimeout(function(){
 	 	parts["stomachjump"].removeOthers();
@@ -256,7 +257,47 @@ $(function() {
  		parts["stomachjump"].show();
 		parts["stomachjump"].exec();
 
-	},20000)*/
+ //var issunriver = new Part("issunriver");
+	/*parts.push(new Part("issunriver"));
+
+	setTimeout(function(){
+
+
+	 parts[0].applyStyle();
+	 parts[0].show();
+	 parts[0].exec();
+	 parts.push(new Part("intro"));
+	 parts[1].video = new Video("intro");
+
+	 setTimeout(function(){
+			parts.push(new Part("sokoban"));
+	 },1000)
+
+
+ },1000)*/
+
+
+	var lastPartPlayed = localStorage.getItem("lastPartPlayed");
+	if(lastPartPlayed != undefined){
+		parts.push(new Part(lastPartPlayed));
+	}
+	else{
+		parts.push(new Part("intro"));
+	}
+
+
+	setTimeout(function(){
+			 parts[0].appendToBody();	
+		 	 parts[0].applyStyle();
+		 	 parts[0].show();
+		 	 parts[0].exec();
+
+
+  	},1000);	
+
+	
+>>>>>>> d5c71ded429f335edfb444fa93afa2b6928b7132
+
 
 
 
