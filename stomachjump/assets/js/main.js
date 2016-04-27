@@ -3,14 +3,15 @@
 
 window.currentPart = function stomachjump(){
 
+parts.push(new Part("issunriver"));
 
-	var options = {hashTracking: false, closeOnOutsideClick: false};
+var options = {hashTracking: false, closeOnOutsideClick: false};
 
-	$('body').html("<div id=\"modal\"><h2>Stomachjump</h2><p>Utilise les flêches ou glisse tes doigts pour sortir du méchant ogre !</p><div class=\"instruction-images\"><img src=\"./stomachjump/assets/img/left-right.png\" alt=\"left-right\"/><img src=\"./stomachjump/assets/img/swipe.png\" alt=\"left-right\"/></div><button id=\"stomach-start\" data-remodal-action=\"confirm\" class=\"remodal-confirm\">OK</button></div>	");
+$('body').append("<div data-remodal-id=\"modal\" ><h2>Stomachjump</h2><p>Utilise les flêches ou glisse tes doigts pour sortir du méchant ogre !</p><div class=\"instruction-images\"><img src=\"./stomachjump/assets/img/left-right.png\" alt=\"left-right\"/><img src=\"./stomachjump/assets/img/swipe.png\" alt=\"left-right\"/></div><button data-remodal-action=\"confirm\" class=\"stomach-start remodal-confirm\">OK</button></div>	");
 
 
-	var inst = $('#modal').remodal(options);
-	inst.open();
+var inst = $('[data-remodal-id=modal]').remodal();
+inst.open();
 
 
 // RequestAnimFrame: a browser API for getting smooth animations
@@ -351,7 +352,6 @@ function init() {
 		if (base.y > height && (player.y + player.height) > height && player.isDead != "lol"){
 			player.isDead = true;
 			console.log("player dead");
-			window.next();
 		}
 
 		//Make the player move through walls
@@ -492,6 +492,7 @@ function init() {
 		else if(player.y + player.height > height) {
 			player.isDead = "lol";
 			reset();
+			window.next();
 		}
 	}
 
@@ -675,7 +676,9 @@ menuLoop = function() {
 menuLoop();
 
 
-$( "#stomach-start" ).click(function() {
+$( ".stomach-start" ).on("click",function() {
+  inst.destroy();
+
   init();
 });
 
