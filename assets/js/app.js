@@ -40,10 +40,6 @@
 			  	//executes the code
 			  	that.exec = window.currentPart;
 
-			  	// store the last part's name in the loacal storage
-				localStorage.setItem("lastPartPlayed", window.currentPart.name);
-
-
 			  })
 			  .fail(function( jqxhr, settings, exception ) {
 			    console.log("error : " + exception);
@@ -135,10 +131,14 @@ window.next = function(){
 	if(typeof(lastPart.exec) === 'function' ){
 		lastPart.exec();
 	}
+
+
+  	// store the last part's name in the loacal storage
+	localStorage.setItem("lastPartPlayed", lastPart.part);
 }
 
 $(function() {
-<<<<<<< HEAD
+
 
 
 	//parts.push(new Part("stomachjump"));
