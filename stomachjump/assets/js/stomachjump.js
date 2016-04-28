@@ -689,7 +689,6 @@ $( ".stomach-start" ).on("click",function() {
 });
 
 }
-<<<<<<< HEAD
 
 
 
@@ -1214,7 +1213,7 @@ function init() {
 		base.draw();
 
 		//updateScore();
-
+		
 	}
 
 	menuLoop = function(){return;};
@@ -1384,5 +1383,3 @@ $( ".stomach-start" ).on("click",function() {
 });
 
 }
-=======
->>>>>>> 06646934a06fbcbb2fbd1fe24c1872b1e61cc81f
