@@ -101,6 +101,11 @@
 
 		this.video = $("#" +part  + " video").get(0);
 
+		//if the video is mobile we need to change the tag
+		if(ifMobile){
+			$("#" +part  + " video").parent().append("<div class='video-play'></div>");
+		} 
+
 
 		this.video.ontimeupdate = function() {
 

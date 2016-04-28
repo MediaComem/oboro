@@ -106,6 +106,11 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 
 		this.video = $("#" +part  + " video").get(0);
 
+		//if the video is mobile we need to change the tag
+		if(ifMobile){
+			$("#" +part  + " video").parent().append("<div class='video-play'></div>");
+		} 
+
 
 		this.video.ontimeupdate = function() {
 
