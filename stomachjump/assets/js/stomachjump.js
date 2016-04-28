@@ -689,6 +689,7 @@ $( ".stomach-start" ).on("click",function() {
 });
 
 }
+<<<<<<< HEAD
 
 
 
@@ -1383,3 +1384,5 @@ $( ".stomach-start" ).on("click",function() {
 });
 
 }
+=======
+>>>>>>> 06646934a06fbcbb2fbd1fe24c1872b1e61cc81f
