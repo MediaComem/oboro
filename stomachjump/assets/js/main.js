@@ -56,16 +56,16 @@ var platforms = [],
 
 //Base object
 var Base = function() {
-	this.height = 5;
+	this.height = 181;
 	this.width = width;
 
 	this.base = document.getElementById("base");
 
 	//Sprite clipping 440 * 181
 	this.cx = 0;
-	this.cy = 614;
-	this.cwidth = 100;
-	this.cheight = 5;
+	this.cy = 0;
+	this.cwidth = 440;
+	this.cheight = 181;
 
 	this.moved = 0;
 
@@ -253,7 +253,8 @@ var spring = function() {
 var Spring = new spring();
 
 
-// listen to events...
+if (ifMobile() == true){
+	
 mc.on("panleft panright", function(ev) {
 
 	if(ev.type=="panleft"){
@@ -268,7 +269,8 @@ mc.on("panleft panright", function(ev) {
 	}
 	
 });
-
+	
+}
 function init() {
 	//Variables for the game
 	var	dir = "left",
@@ -313,7 +315,13 @@ function init() {
 					reset();
 			}
 		};
+		// listen to events...
+		
 
+
+
+		
+		
 		document.onkeyup = function(e) {
 			var key = e.keyCode;
 
@@ -331,21 +339,21 @@ function init() {
 		if (player.isMovingLeft === true) {
 			player.x += player.vx;
 			player.vx -= 0.15;
-			console.log("if "+player.vx);
+
 		} else {
 			player.x += player.vx;
 			if (player.vx < 0) player.vx += 0.1;
-			console.log("ELSE: "+player.vx);
+
 		}
 
 		if (player.isMovingRight === true) {
 			player.x += player.vx;
 			player.vx += 0.15;
-			//console.log(player.vx);
+
 		} else {
 			player.x += player.vx;
 			if (player.vx > 0) player.vx -= 0.1;
-			//console.log(player.vx);
+
 		}
 
 		// Speed limits!
@@ -519,9 +527,17 @@ function init() {
 		player.draw();
 
 		base.draw();
+		
 
+
+		
 		//updateScore();
 		
+	if (ifMobile() == true){
+			dir = "";
+		player.isMovingLeft = false;
+		player.isMovingRight = false;	
+	}
 	}
 
 	menuLoop = function(){return;};
