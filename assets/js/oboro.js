@@ -162,6 +162,7 @@ $(function() {
 		parts.push(new Part("intro"));
 	}
 
+	//parts.push(new Part("stomachjump"))
 
 	setTimeout(function(){
 			console.log(ifMobile());
