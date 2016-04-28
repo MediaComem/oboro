@@ -35,3 +35,9 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# Compiled games
+issunriver/assets/issunriver.js
+stomachjump/assets/stomachjump.js
+sokoban/assets/sokoban.js
+assets/oboro.js
