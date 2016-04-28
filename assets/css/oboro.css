@@ -7233,21 +7233,6 @@ body, html {
 }
 
 
-.video-play {
-    background-image:url(../img/play-button.png);
-    background-repeat:no-repeat;
-    width:50%;
-    height:50%;
-    position:absolute;
-    left:0%;
-    right:0%;
-    top:0%;
-    bottom:0%;
-    margin:auto;
-    background-size:contain;
-    background-position: center;
-}
-
 .instruction-images{
      margin: auto;
      margin-bottom: 30px;
@@ -7270,4 +7255,9 @@ body, html {
     width :100px;
     font-size: 25px;
     height : 80px;
+}
+
+
+::-webkit-media-controls-enclosure {
+	display:none !important;
 }
