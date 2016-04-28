@@ -101,7 +101,20 @@
 
 		this.video = $("#" +part  + " video").get(0);
 
+		//if the video is mobile we need to change the tag
+		if(ifMobile){
+			
+			
 
+			/*
+			$("#" +part  + " video").parent().on("click",function () {
+        		that.video.play();
+        		$(".playpause").fadeOut();
+    		});*/
+		} 
+
+
+   
 		this.video.ontimeupdate = function() {
 
 			console.log(that.video.currentTime );

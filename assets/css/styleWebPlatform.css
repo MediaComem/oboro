@@ -51,3 +51,8 @@ body, html {
   background-color: #0d265d;
   cursor: pointer;
 }
+
+
+::-webkit-media-controls-enclosure {
+	display:none !important;
+}
