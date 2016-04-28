@@ -56,16 +56,16 @@ var platforms = [],
 
 //Base object
 var Base = function() {
-	this.height = 5;
+	this.height = 181;
 	this.width = width;
 
 	this.base = document.getElementById("base");
 
 	//Sprite clipping 440 * 181
 	this.cx = 0;
-	this.cy = 614;
-	this.cwidth = 100;
-	this.cheight = 5;
+	this.cy = 0;
+	this.cwidth = 440;
+	this.cheight = 181;
 
 	this.moved = 0;
 
