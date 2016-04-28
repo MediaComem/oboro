@@ -39,9 +39,8 @@ var img = new Image();
 var width = 440;//$(document).width();
 var height = $(document).height();
 canvas.width = width;
-console.log(canvas.width)
 canvas.height = height;
-console.log(canvas.height)
+
 
 
 //Variables for game
@@ -49,7 +48,7 @@ var platforms = [],
 	image = document.getElementById("sprite"),
 	player, platformCount = 10,
 	position = 0,
-	gravity = 0.2,
+	gravity = 0.15,
 	animloop,
 	flag = 0,
 	menuloop, broken = 0,
@@ -109,6 +108,7 @@ var Player = function() {
 	this.draw = function() {
 		try {
 			if (this.dir == "right") this.cy = 121;
+
 			else if (this.dir == "left") this.cy = 201;
 			else if (this.dir == "right_land") this.cy = 289;
 			else if (this.dir == "left_land") this.cy = 371;
@@ -172,8 +172,8 @@ function Platform() {
 	//Setting the probability of which type of platforms should be shown at what score
 	if (score >= 5000) this.types = [2, 3, 3, 3, 4, 4, 4, 4];
 	else if (score >= 2000 && score < 5000) this.types = [2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4];
-	else if (score >= 1000 && score < 2000) this.types = [2, 2, 2, 3, 3, 3, 3, 3];
-	else if (score >= 500 && score < 1000) this.types = [1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3];
+	else if (score >= 1000 && score < 2000) this.types = [2, 2, 2, 3, 3, 3, 3, 3, 4];
+	else if (score >= 500 && score < 1000) this.types = [1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4];
 	else if (score >= 100 && score < 500) this.types = [1, 1, 1, 1, 2, 2];
 	else this.types = [1];
 
@@ -255,13 +255,15 @@ mc.on("panleft panright", function(ev) {
 
 	if(ev.type=="panleft"){
 		dir = "left";
+		player.dir = "left";
 		player.isMovingLeft = true;
 	}
 	else if(ev.type=="panright"){
 		dir = "right";
+		player.dir = "right";
 		player.isMovingRight = true;
 	}
-	console.log(dir);
+	
 });
 
 function init() {
@@ -325,18 +327,20 @@ function init() {
 		//Accelerations produces when the user hold the keys
 		if (player.isMovingLeft === true) {
 			player.x += player.vx;
-			player.vx -= 0.07;
+			player.vx = -1;
+			player.vx -= 0.4;
 		} else {
 			player.x += player.vx;
-			if (player.vx < 0) player.vx += 0.07;
+			if (player.vx < 0) player.vx += 0.4;
 		}
 
 		if (player.isMovingRight === true) {
 			player.x += player.vx;
-			player.vx += 0.07;
+			player.vx = 1;
+			player.vx += 0.4;
 		} else {
 			player.x += player.vx;
-			if (player.vx > 0) player.vx -= 0.07;
+			if (player.vx > 0) player.vx -= 0.4;
 		}
 
 		// Speed limits!
@@ -353,7 +357,7 @@ function init() {
 		//Gameover if it hits the bottom
 		if (base.y > height && (player.y + player.height) > height && player.isDead != "lol"){
 			player.isDead = true;
-			console.log("player dead");
+			//console.log("player dead");
 		}
 
 		//Make the player move through walls
@@ -641,18 +645,18 @@ function playerJump() {
 	//Accelerations produces when the user hold the keys
 	if (player.isMovingLeft === true) {
 		player.x += player.vx;
-		player.vx -= 0.1;
+		player.vx -= 0.2;
 	} else {
 		player.x += player.vx;
-		if (player.vx < 0) player.vx += 0.1;
+		if (player.vx < 0) player.vx += 0.2;
 	}
 
 	if (player.isMovingRight === true) {
 		player.x += player.vx;
-		player.vx += 0.1;
+		player.vx += 0.2;
 	} else {
 		player.x += player.vx;
-		if (player.vx > 0) player.vx -= 0.1;
+		if (player.vx > 0) player.vx -= 0.2;
 	}
 
 	//Jump the player when it hits the base
