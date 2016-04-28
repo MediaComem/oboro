@@ -90,6 +90,12 @@
 
 	}
 
+	function ifMobile(){
+
+		return( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+
+	}
+
 	function Video(part){
 		var that = this;
 
@@ -99,7 +105,9 @@
 		this.video.ontimeupdate = function() {
 
 			console.log(that.video.currentTime );
-		    if(that.video.currentTime >= that.video.duration){
+			console.log(that.video.duration);
+
+		    if(that.video.currentTime >= that.video.duration-1){
 		      that.video.pause();
 		    }
 		}
@@ -151,14 +159,15 @@ $(function() {
 
 
 	setTimeout(function(){
-			 parts[0].appendToBody();	
+			console.log(ifMobile());
+			 parts[0].appendToBody();
 		 	 parts[0].applyStyle();
 		 	 parts[0].show();
 		 	 parts[0].exec();
 
 
-  	},1000);	
+  	},1000);
 
-	
+
 
 });

@@ -176,7 +176,9 @@ function levelObject(datalineArray){
 
 /***/
 
-parts.push(new Part('stomachjump'));
+parts.push(new Part("ogre"));
+  
+parts[parts.length-1].video = true;
 
 
 var Direction = {
