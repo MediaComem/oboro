@@ -56,16 +56,16 @@ var platforms = [],
 
 //Base object
 var Base = function() {
-	this.height = 5;
+	this.height = 181;
 	this.width = width;
 
 	this.base = document.getElementById("base");
 
 	//Sprite clipping 440 * 181
 	this.cx = 0;
-	this.cy = 614;
-	this.cwidth = 100;
-	this.cheight = 5;
+	this.cy = 0;
+	this.cwidth = 440;
+	this.cheight = 181;
 
 	this.moved = 0;
 
@@ -206,9 +206,6 @@ var Platform_broken_substitute = function() {
 	//Sprite clipping
 	this.cx = 0;
 	this.cy = 554;
-	//this.cy = $(document).height();
-
-	
 	this.cwidth = 105;
 	this.cheight = 60;
 
@@ -330,22 +327,20 @@ function init() {
 		//Accelerations produces when the user hold the keys
 		if (player.isMovingLeft === true) {
 			player.x += player.vx;
-			player.vx -= 0.15;
-			console.log("if "+player.vx);
+			player.vx = -1;
+			player.vx -= 0.4;
 		} else {
 			player.x += player.vx;
-			if (player.vx < 0) player.vx += 0.1;
-			console.log("ELSE: "+player.vx);
+			if (player.vx < 0) player.vx += 0.4;
 		}
 
 		if (player.isMovingRight === true) {
 			player.x += player.vx;
-			player.vx += 0.15;
-			//console.log(player.vx);
+			player.vx = 1;
+			player.vx += 0.4;
 		} else {
 			player.x += player.vx;
-			if (player.vx > 0) player.vx -= 0.1;
-			//console.log(player.vx);
+			if (player.vx > 0) player.vx -= 0.4;
 		}
 
 		// Speed limits!
@@ -521,7 +516,10 @@ function init() {
 		base.draw();
 
 		//updateScore();
-		
+
+		dir = "";
+		player.isMovingLeft = false;
+		player.isMovingRight = false;
 	}
 
 	menuLoop = function(){return;};
@@ -609,7 +607,7 @@ function playerJump() {
 		player.dir = "right";
 		if (player.vy < -7 && player.vy > -15) player.dir = "right_land";
 	}
-	
+
 	//Adding keyboard controls
 	document.onkeydown = function(e) {
 		var key = e.keyCode;
@@ -621,13 +619,13 @@ function playerJump() {
 			dir = "right";
 			player.isMovingRight = true;
 		}
-	
+
 		if(key == 32) {
 			if(firstRun === true) {
 				init();
 				firstRun = false;
 			}
-			else 
+			else
 				reset();
 		}
 	};
@@ -647,18 +645,18 @@ function playerJump() {
 	//Accelerations produces when the user hold the keys
 	if (player.isMovingLeft === true) {
 		player.x += player.vx;
-		player.vx -= 0.15;
+		player.vx -= 0.2;
 	} else {
 		player.x += player.vx;
-		if (player.vx < 0) player.vx += 0.1;
+		if (player.vx < 0) player.vx += 0.2;
 	}
 
 	if (player.isMovingRight === true) {
 		player.x += player.vx;
-		player.vx += 0.15;
+		player.vx += 0.2;
 	} else {
 		player.x += player.vx;
-		if (player.vx > 0) player.vx -= 0.1;
+		if (player.vx > 0) player.vx -= 0.2;
 	}
 
 	//Jump the player when it hits the base
