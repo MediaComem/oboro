@@ -21,8 +21,8 @@ enchant();
     var bodywidth = $(document).width();
     var bodyheight = $(document).height();
     var islandSwitch = false;
-    console.log("Document height: "+bodyheight);
-    console.log("Document width: "+bodywidth);
+    //console.log("Document height: "+bodyheight);
+    //console.log("Document width: "+bodywidth);
     var game = new Game(bodywidth, bodyheight);
     game.preload('./issunriver/assets/res/Hit.mp3',
                  './issunriver/assets/res/bgm.mp3',
@@ -71,12 +71,14 @@ var SceneGame = Class.create(Scene, {
  
         // Access to the game singleton instance
         game = Game.instance;
- 
-        label = new Label('SCORE<br>0');
-        label.x = 9;
-        label.y = 32;        
+		var bodywidth = $(document).width();
+		var bodyheight = $(document).height();
+		
+        label = new Label('Distance <br>0 M');
+        label.x = $(document).width()/10;
+        label.y = $(document).height()/10;        
         label.color = 'white';
-        label.font = '16px strong';
+        label.font = '16px edoregular';
         label.textAlign = 'center';
         label._style.textShadow ="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
         this.scoreLabel = label;        
@@ -133,18 +135,14 @@ var SceneGame = Class.create(Scene, {
     },
     handleTouchMove: function(evt){
             this.issun.y = evt.localY
-            //console.log("HandleTouchMove: "+evt.localY);
+
         }, 
     handleTouchControl: function (evt) {
         var bodywidth = $(document).width();
         var bodyheight = $(document).height();
         var laneHeight, lane, game;
-        laneHeight = bodyheight/6;      
-        //console.log("Y Click position: "+evt.localY);
-        
+        laneHeight = bodyheight/6;
         lane = Math.floor(evt.localY/laneHeight);
-        //console.log("Correspond à la ligne: "+lane);
-                        
         this.issun.switchToLaneNumber(lane);
     },
   
@@ -157,8 +155,8 @@ var SceneGame = Class.create(Scene, {
             this.scoreTimer -= 1;
         }
         //Quand un score est atteind issun va vers l'ile
-        if(this.score >= 25){
-            this.setScore(25);
+        if(this.score >= 33){
+            this.setScore(33);
             var game;
                 game = Game.instance;
 
@@ -185,7 +183,7 @@ var SceneGame = Class.create(Scene, {
             
         // Check Création d'enemi
         // En crée jusqu'au score atteind
-        if(this.score < 25){
+        if(this.score < 33){
         this.generateEnemyTimer += evt.elapsed * 0.001;
         if(this.generateEnemyTimer >= 1)
         {
@@ -196,7 +194,7 @@ var SceneGame = Class.create(Scene, {
         }
         }
         // Generated bonus
-        if(this.score < 25){
+        if(this.score < 33){
         this.generateBonusTimer += evt.elapsed * 0.001;
         if(this.generateBonusTimer >= 1)
         {
@@ -249,11 +247,8 @@ var SceneGame = Class.create(Scene, {
                 game.assets['./issunriver/assets/res/bravo.mp3'].play();
                                 
                  if(!islandSwitch){
-                   //document.removeEventListener("keydown", keyupShit);
-                   //document.removeEventListener("keyup", keydownShit);
                     window.next();
                     inst.destroy();
-                    console.log("windows.next");    
                 }
                 islandSwitch = true;
                 
@@ -268,7 +263,7 @@ var SceneGame = Class.create(Scene, {
 
     setScore: function (value) {
         this.score = value;
-        this.scoreLabel.text = 'SCORE<br>' + this.score;
+        this.scoreLabel.text = 'Distance<br>' + this.score+" M";
     }
 });
 
@@ -374,7 +369,7 @@ var Enemy = Class.create(Sprite, {
 
     setLane: function(lane) {
         var bodywidth = $(document).width();
-    var bodyheight = $(document).height();
+		var bodyheight = $(document).height();
         var game, distance;
         game = Game.instance;        
         distance = -(bodyheight/6);
@@ -456,21 +451,22 @@ var Bonus = Class.create(Sprite, {
 var SceneGameOver = Class.create(Scene, {
     initialize: function(score) {
         var gameOverLabel, scoreLabel;
+		var bodywidth = $(document).width();
         Scene.apply(this);
         this.backgroundColor = '';
 
-        gameOverLabel = new Label("GAME OVER<br>Clique pour recommencer");
-        gameOverLabel.x = 8;
+        gameOverLabel = new Label("GAME OVER<br><br>Clique pour recommencer");
+        gameOverLabel.x = bodywidth/5;
         gameOverLabel.y = 128;
         gameOverLabel.color = 'black';
-        gameOverLabel.font = '32px strong';
+        gameOverLabel.font = '32px edoregular';
         gameOverLabel.textAlign = 'center';
 
-        scoreLabel = new Label('SCORE<br>' + score);
-        scoreLabel.x = 9;
-        scoreLabel.y = 32;        
+        scoreLabel = new Label('Distance<br>' + score + 'M');
+        scoreLabel.x = bodywidth/10;
+        scoreLabel.y = $(document).height()/10;       
         scoreLabel.color = 'black';
-        scoreLabel.font = '16px strong';
+        scoreLabel.font = '16px edoregular';
         scoreLabel.textAlign = 'center';
 
         this.addChild(gameOverLabel);
