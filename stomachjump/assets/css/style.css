@@ -17,6 +17,8 @@ padding-right: 0px;
   /*background: url(./stomachjump/assets/img/pattern.png);*/
   background-repeat: repeat-y;
   margin: auto;
+  background-color: rgba(255, 255, 255, 0.1);
+
  }
 
 #bg-canvas { height: 552px; width: 422px; display: block; }
