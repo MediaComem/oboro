@@ -3,7 +3,11 @@
 
 window.currentPart = function stomachjump(){
 
-parts.push(new Part("issunriver"));
+//used to stop the loop
+var requestId;
+
+parts.push(new Part("arrivee"));
+parts[parts.length-1].video = true;
 
 var options = {hashTracking: false, closeOnOutsideClick: false};
 
@@ -18,6 +22,7 @@ inst.open();
 window.requestAnimFrame = (function() {
 	return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
 	function(callback) {
+		if(callback!=undefined)
 		window.setTimeout(callback, 1000 / 60);
 	};
 })();
@@ -172,7 +177,7 @@ function Platform() {
 	//Setting the probability of which type of platforms should be shown at what score
 	if (score >= 5000) this.types = [2, 3, 3, 3, 4, 4, 4, 4];
 	else if (score >= 2000 && score < 5000) this.types = [2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4];
-	else if (score >= 1000 && score < 2000) this.types = [2, 2, 2, 3, 3, 3, 3, 3, 4];
+	else if (score >= 1000 && score < 2000) this.types = [3, 3, 3, 3, 3, 3, 3, 3, 3];
 	else if (score >= 500 && score < 1000) this.types = [1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4];
 	else if (score >= 100 && score < 500) this.types = [1, 1, 1, 1, 2, 2];
 	else this.types = [1];
@@ -180,12 +185,16 @@ function Platform() {
 	this.type = this.types[Math.floor(Math.random() * this.types.length)];
 
 	//We can't have two consecutive breakable platforms otherwise it will be impossible to reach another platform sometimes!
-	if (this.type == 3 && broken < 1) {
-		broken++;
-	} else if (this.type == 3 && broken >= 1) {
-		this.type = 1;
-		broken = 0;
+	if(score<1000){
+		if (this.type == 3 && broken < 1) {
+			broken++;
+		} else if (this.type == 3 && broken >= 1) {
+			this.type = 1;
+			broken = 0;
+		}	
 	}
+	
+	
 
 	this.moved = 0;
 	this.vx = 1;
@@ -509,15 +518,28 @@ function init() {
 		}
 		else if(player.y < height / 2) flag = 1;
 		else if(player.y + player.height > height) {
-			player.isDead = "lol";
-			reset();
-			//window.next();
+			
+			if(score > 1000){
+				window.next();
+
+				//stop the timeout
+				window.cancelAnimationFrame(requestId);
+				requestId = undefined;
+
+			}
+			else{
+				player.isDead = "lol";
+				reset();
+			}
+		
 		}
 	}
 
 	//Function to update everything
 
 	function update() {
+
+		
 		paintCanvas();
 		platformCalc();
 
@@ -542,8 +564,12 @@ function init() {
 
 	menuLoop = function(){return;};
 	animloop = function() {
-		update();
-		requestAnimFrame(animloop);
+		if(requestId!=undefined){
+			update();
+
+			if(requestId != undefined)
+			requestId = requestAnimFrame(animloop);
+		}
 	};
 
 	animloop();
@@ -694,7 +720,7 @@ function update() {
 
 menuLoop = function() {
 	update();
-	requestAnimFrame(menuLoop);
+	requestId = requestAnimFrame(menuLoop);
 };
 
 menuLoop();
