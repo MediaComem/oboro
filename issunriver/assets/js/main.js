@@ -78,7 +78,7 @@ var SceneGame = Class.create(Scene, {
         label.x = $(document).width()/10;
         label.y = $(document).height()/10;        
         label.color = 'white';
-        label.font = '16px edoregular';
+        label.font = '16px edo';
         label.textAlign = 'center';
         label._style.textShadow ="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
         this.scoreLabel = label;        
@@ -459,14 +459,14 @@ var SceneGameOver = Class.create(Scene, {
         gameOverLabel.x = bodywidth/5;
         gameOverLabel.y = 128;
         gameOverLabel.color = 'black';
-        gameOverLabel.font = '32px edoregular';
+        gameOverLabel.font = '32px edo';
         gameOverLabel.textAlign = 'center';
 
         scoreLabel = new Label('Distance<br>' + score + 'M');
         scoreLabel.x = bodywidth/10;
         scoreLabel.y = $(document).height()/10;       
         scoreLabel.color = 'black';
-        scoreLabel.font = '16px edoregular';
+        scoreLabel.font = '16px edo';
         scoreLabel.textAlign = 'center';
 
         this.addChild(gameOverLabel);
