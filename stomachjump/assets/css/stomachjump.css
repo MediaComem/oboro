@@ -17,14 +17,9 @@ body { margin: 0; padding: 0;}
 background-size: cover;
 overflow: auto;
 position: fixed;
-<<<<<<< HEAD
 padding-left: 0px;
 padding-right: 0px;
 }
-=======
-padding-right: 0px;
-padding-left: 0px;}
->>>>>>> 025a0a364a46c68b5d82e6137d31712e5b4caa0c
 
 #canvas { /*height: 100%;
   width: 40%;*/
