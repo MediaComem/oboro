@@ -6,8 +6,8 @@ window.currentPart = function stomachjump(){
 //used to stop the loop
 var requestId;
 
-parts.push(new Part("arrivee"));
-parts[parts.length-1].video = true;
+parts.push(new Part("japan"));
+//parts[parts.length-1].video = true;
 
 var options = {hashTracking: false, closeOnOutsideClick: false};
 
