@@ -78,7 +78,7 @@ var SceneGame = Class.create(Scene, {
         label.x = $(document).width()/10;
         label.y = $(document).height()/10;        
         label.color = 'white';
-        label.font = '16px edoregular';
+        label.font = '16px edo';
         label.textAlign = 'center';
         label._style.textShadow ="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
         this.scoreLabel = label;        
@@ -347,13 +347,13 @@ var Enemy = Class.create(Sprite, {
 
 
         if (window.matchMedia("(min-width: 900px)").matches) {
-  Sprite.apply(this,[220, 126]);
+  Sprite.apply(this,[220, 70]);
         this.image = Game.instance.assets['./issunriver/assets/res/tronc_big.png'];    
 } else if (window.matchMedia("(min-width: 500px)").matches) {
-  Sprite.apply(this,[130, 74]);
+  Sprite.apply(this,[130, 41]);
         this.image = Game.instance.assets['./issunriver/assets/res/tronc_medium.png'];    
 } else {
-    Sprite.apply(this,[95, 54]);
+    Sprite.apply(this,[95, 30]);
         this.image = Game.instance.assets['./issunriver/assets/res/tronc_small.png'];
         
     
@@ -374,12 +374,12 @@ var Enemy = Class.create(Sprite, {
         game = Game.instance;        
         distance = -(bodyheight/6);
      
-        this.rotationSpeed = Math.random() * 100 - 50;
+        //this.rotationSpeed = Math.random() * 100 - 50;
 
         
         this.y = game.height/2 - this.height/2 + (lane-1) * distance;
         this.x = -this.width;    
-        this.rotation = Math.floor( Math.random() * 360 );    
+        //this.rotation = Math.floor( Math.random() * 360 );    
     },
 
     update: function(evt) { 
@@ -459,14 +459,14 @@ var SceneGameOver = Class.create(Scene, {
         gameOverLabel.x = bodywidth/5;
         gameOverLabel.y = 128;
         gameOverLabel.color = 'black';
-        gameOverLabel.font = '32px edoregular';
+        gameOverLabel.font = '32px edo';
         gameOverLabel.textAlign = 'center';
 
         scoreLabel = new Label('Distance<br>' + score + 'M');
         scoreLabel.x = bodywidth/10;
         scoreLabel.y = $(document).height()/10;       
         scoreLabel.color = 'black';
-        scoreLabel.font = '16px edoregular';
+        scoreLabel.font = '16px edo';
         scoreLabel.textAlign = 'center';
 
         this.addChild(gameOverLabel);
