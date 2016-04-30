@@ -1,4 +1,5 @@
-var suffix="";
+	var suffix="";
+
 	window.Part = function Part(part){
 
 		var that = this;
@@ -138,7 +139,6 @@ window.next = function(){
 	var lastPart = parts[parts.length-1];
 
 	lastPart.removeOthers();
-	lastPart.appendToBody();
 
 	lastPart.applyStyle();
 	lastPart.show();
@@ -152,16 +152,27 @@ window.next = function(){
 	localStorage.setItem("lastPartPlayed", lastPart.part);
 }
 
+window.appendNext = function(part,notAppend){
+	parts.push(new Part(part));
+
+	if(notAppend==undefined){
+		//after two seconds it appends to the body	
+		setTimeout(function(){
+			parts[parts.length-1].appendToBody();
+		},2000);
+	}
+}
+
 $(function() {
 
 
 
 	var lastPartPlayed = localStorage.getItem("lastPartPlayed");
 	if(lastPartPlayed != undefined){
-		parts.push(new Part(lastPartPlayed));
+		window.appendNext(lastPartPlayed,false);
 	}
 	else{
-		parts.push(new Part("intro"));
+		window.appendNext("intro",false);
 	}
 
 	//parts.push(new Part("stomachjump"))

@@ -1,6 +1,8 @@
 window.currentPart = function intro(){
 
-  window.appendNext("depart");
+  parts.push(new Part("depart"));
+  
+  parts[parts.length-1].video = true;
     
   $(function() {
     

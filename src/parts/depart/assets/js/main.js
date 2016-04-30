@@ -1,3 +1,7 @@
 window.currentPart = function depart(){
-	parts.push(new Part("issunriver"));
+	//get the HTML video and play it
+	var video = parts[parts.length-1].video.video;
+	video.play();
+
+	window.appendNext("issunriver");
 }

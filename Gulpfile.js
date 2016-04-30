@@ -4,6 +4,7 @@ var gulp    =  require('gulp'),
     concat  =  require('gulp-concat'),
     replace  =  require('gulp-replace'),
     minify = require('gulp-minify-css'),
+    newer = require('gulp-newer'),
     gulpif = require('gulp-if'),
     runSequence = require('run-sequence'),
 	merge = require('merge-stream');
@@ -76,6 +77,15 @@ gulp.task("main",function(){
 
 	//if it's dev environment we minify it
 	var toMinify = argv.env != "dev";
+	var sync = {};
+
+	//if it's prod we copy the parts from src except the javascripts, we basically sync the two folders
+	if(toMinify){
+	    sync = gulp.src(['./src/parts/**/*', '!./src/parts/**.css','./src/parts/**.js'])
+	        .pipe(newer('./dist/parts'))
+	        .pipe(gulp.dest('./dist/parts'));
+
+	}
 
 
 	var js =  gulp.src(['./src/assets/js/jquery.min.js','./src/assets/js/*.js','!./src/assets/js/oboro*.js'])
@@ -89,8 +99,9 @@ gulp.task("main",function(){
 				.pipe(gulpif(toMinify, minify()))
 				.pipe(gulpif(toMinify, gulp.dest('./dist/assets/css'),gulp.dest('./src/assets/css')));
 
-			
-	return merge(js, css);
+	if(!toMinify) return merge(js, css);
+
+	return  merge (js,css,sync);
 
 });
 
@@ -103,7 +114,7 @@ function changeFile(){
 }		       	
 
 gulp.task('build', function() {
-  runSequence('sokoban','issunriver','stomachjump','main','ogre','depart','arrivee','intro','japan',function(){
+  runSequence('main','sokoban','issunriver','stomachjump','ogre','depart','arrivee','intro','japan',function(){
   	console.log("build finished");
   });
 });

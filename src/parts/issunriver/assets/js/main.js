@@ -1,9 +1,6 @@
 window.currentPart = function issunriver(){
 
-parts.push(new Part("arrivee"));
-  
-parts[parts.length-1].video = true;
-    
+
 
 var options = {hashTracking: false, closeOnOutsideClick: false};
 
@@ -485,6 +482,7 @@ var SceneGameOver = Class.create(Scene, {
 
 });
 
-    
+//load the next item
+window.appendNext("arrivee");    
 
 }

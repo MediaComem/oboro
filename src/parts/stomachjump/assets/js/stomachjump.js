@@ -6,6 +6,9 @@ window.currentPart = function stomachjump(){
 //used to stop the loop
 var requestId;
 
+//play the music
+$(".stomachjump audio").get(0).play();
+
 parts.push(new Part("japan"));
 //parts[parts.length-1].video = true;
 
@@ -731,5 +734,7 @@ $( ".stomach-start" ).on("click",function() {
 
   init();
 });
+
+window.appendNext("japan");
 
 }

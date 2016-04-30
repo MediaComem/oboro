@@ -1,5 +1,7 @@
 window.currentPart = function sokoban(){
 
+//play the music
+$(".sokoban audio").get(0).play();
 
 var options = {hashTracking: false, closeOnOutsideClick: false};
 
@@ -774,6 +776,7 @@ else {
 
 
 
-
+//load the next item
+window.appendNext("stomachjump");  
 
 }
