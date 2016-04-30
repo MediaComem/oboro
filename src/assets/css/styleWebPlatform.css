@@ -1,0 +1,58 @@
+@font-face { font-family: 'edo'; src: url('../fonts/edosz-webfont.ttf'); }
+
+
+body, html {
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #000000;
+
+}
+
+
+.remodal{
+		background-image: url('../img/paper.jpg');
+    background-repeat: repeat;
+}
+
+
+.instruction-images{
+     margin: auto;
+     margin-bottom: 30px;
+     height : 10vh;
+     width : auto;
+     overflow: hidden;
+}
+.instruction-images img{
+  height: 100%;
+}
+
+
+
+.remodal h2 {
+	font-family: "edo";
+}
+
+.remodal p {
+    margin-bottom : 30px;
+    margin-top : 30px;
+    font-size: 1.2em;
+}
+
+.remodal button {
+    clear: both;
+    width :15%;
+    font-size: 1.2em;
+    background-color: #b20000;
+    color:white;
+    font-family: "edo";
+
+}
+.remodal button:hover{
+  background-color: #0d265d;
+  cursor: pointer;
+}
+
+
+::-webkit-media-controls-enclosure {
+	display:none !important;
+}
