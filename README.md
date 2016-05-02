@@ -41,6 +41,15 @@ gulp build --env=prod
 
 - Une fonction globale `window.next()` nous permet de passer à la prochaine partie
 
+## Newsletter
+
+Validation mail PHP pour verifier la véricatié du mail, fonction php mail() pour l'envoi.
+Les adresse mail recupérées sont stoquées dans le fichier mails.json dans le dossier de la partie japan.
+**Important**
+Pour empêcher l'accés non aurotisé au fichier contenant les mails: 
+```
+chmod 600 mails.json
+```
 
 
 
