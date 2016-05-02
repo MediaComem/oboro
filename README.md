@@ -41,6 +41,11 @@ gulp build --env=prod
 
 - Une fonction globale `window.next()` nous permet de passer à la prochaine partie
 
+## Localstorage
+
+L'aventure web est à vivre en "one-shot", pas de comptes utilisateurs à créer. Pour les visiteurs qui reviendraient sur le site et/ou qui souhaiteraient refaire un jeu en particulier, nous avons utilisé les possibilités offertes par le localstorage.Au lancement de chaque partie, une clé est enregistrée dans le localsotrage du navigateur. Ainsi, dans le cas où le visiteurs arrête l'aventure en plein milieu il pourra reprendre là où il était resté. Une fois la fin du site web atteinte, des boutons permettent de passer les différentes parties de l'aventure.
+
+
 ## Newsletter
 
 Validation mail PHP pour verifier la véricatié du mail, fonction php mail() pour l'envoi.
