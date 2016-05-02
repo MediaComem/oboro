@@ -1,5 +1,5 @@
-# oboro
-Projet transmédia
+# Oboro
+![alt text](https://github.com/simkarlier/oboro/blob/master/doc/img/logo.png "Oboro")
 
 ## Technologies utilisées
 Le projet se base sur la distibution de fichiers HTML, nous utilisons un simple serveur PHP pour s'occuper de celle-ci.
@@ -34,12 +34,12 @@ gulp build --env=prod
 ## Architecture
 ![alt text](https://github.com/simkarlier/oboro/blob/master/doc/img/manuel_image.png "Loader")
 
-* Un loader (dans app.js) nous permet de charger les parties dynamiquement (pendant qu'une video charge par example), ce qui permet une transition fluide entre les différentes 		scènes. (Quelques examples ci-dessous )
-..* `new Part("intro")` charge par example les éléments (JS, HTML,CSS)
-..* `window.appendNext("intro")` charge dans la DOM les éléments mais ne les affiche pas
-..* `parts[1].show()` affiche la partie 1
+- Un loader (dans app.js) nous permet de charger les parties dynamiquement (pendant qu'une video charge par example), ce qui permet une transition fluide entre les différentes 		scènes. (Quelques examples ci-dessous )
+-- `new Part("intro")` charge par example les éléments (JS, HTML,CSS)
+-- `window.appendNext("intro")` charge dans la DOM les éléments mais ne les affiche pas
+-- `parts[1].show()` affiche la partie 1
 
-* Une fonction globale `window.next()` nous permet de passer à la prochaine partie
+- Une fonction globale `window.next()` nous permet de passer à la prochaine partie
 
 
 
