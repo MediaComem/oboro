@@ -41,6 +41,38 @@ gulp build --env=prod
 
 - Une fonction globale `window.next()` nous permet de passer à la prochaine partie
 
+## Difficulté des jeux.
+
+### Issunriver
+
+Nous avons fixé le score à atteindre à 33 pour terminer le jeu. Afin de rallonger ou raccourcir les phases de jeu, il faut varier la condition`if(this.score < 33)` le nombre d'ennemie (troncs d'arbre), générés est defini à la ligne 189 `nemy = new Enemy(Math.floor(Math.random()*6));`
+
+#### Sokoban
+
+Les levels sont paramtrès en ASCII, dans le fichier javascript du jeu.
+Exemple:
+<br/>
+`levelDataLine = new Array();`<br/>
+`levelDataLine[0] = "@@@@@@@@@@@@@@@@@";`<br/>
+`levelDataLine[1] = "@@@@@@   @@@@@@@@";`<br/>
+`levelDataLine[2] = "@@@@@@ @>o @@@@@@";`<br/>
+`levelDataLine[3] = "@@@@@@x  @ @@@@@@";`<br/>
+`levelDataLine[4] = "@@@@@@ ox  @@@@@@";`<br/>
+`levelDataLine[5] = "@@@@@@@  @@@@@@@@";`<br/>
+`levelDataLine[6] = "@@@@@@@  @@@@@@@@";`<br/>
+`levelDataLine[7] = "@@@@@@@@@@@@@@@@@";`<br/>
+
+### StomachJump
+
+Les lignes 180 à 185 permettent de gerer les pièces generées.
+Les lignes 349 et plus permettent de gérer la vitesse.
+Les lignes 512 et plus regle la fin impossible et le passage à la prochaine partie.
+
+## Localstorage
+
+L'aventure web est à vivre en "one-shot", pas de comptes utilisateurs à créer. Pour les visiteurs qui reviendraient sur le site et/ou qui souhaiteraient refaire un jeu en particulier, nous avons utilisé les possibilités offertes par le localstorage.Au lancement de chaque partie, une clé est enregistrée dans le localsotrage du navigateur. Ainsi, dans le cas où le visiteurs arrête l'aventure en plein milieu il pourra reprendre là où il était resté. Une fois la fin du site web atteinte, des boutons permettent de passer les différentes parties de l'aventure.
+
+
 ## Newsletter
 
 Validation mail PHP pour verifier la véricatié du mail, fonction php mail() pour l'envoi.
