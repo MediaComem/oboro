@@ -1,0 +1,26 @@
+div#japan_container{
+  width: 90vw;
+  margin: auto;
+  padding: 15px;
+  /*background-color: #FF0000;*/
+  background-image: url('./assets/img/paper.jpg')
+}
+
+div.box h2{
+  font-family: 'edo';
+}
+
+div.box button{
+  clear: both;
+  width :15%;
+  font-size: 1.2em;
+  background-color: #b20000;
+  color:white;
+  font-family: "edo";
+  border: 0px;
+}
+
+div.box button:hover{
+  background-color: #0d265d;
+  cursor: pointer;
+}
