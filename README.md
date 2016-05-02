@@ -65,7 +65,8 @@ Exemple:
 ### StomachJump
 
 Les lignes 180 à 185 permettent de gerer les pièces generées.
-
+Les lignes 349 et plus permettent de gérer la vitesse.
+Les lignes 512 et plus regle la fin impossible et le passage à la prochaine partie.
 
 ## Localstorage
 
