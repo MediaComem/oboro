@@ -9,8 +9,7 @@ var requestId;
 //play the music
 $(".stomachjump audio").get(0).play();
 
-parts.push(new Part("japan"));
-//parts[parts.length-1].video = true;
+
 
 var options = {hashTracking: false, closeOnOutsideClick: false};
 

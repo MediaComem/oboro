@@ -7226,6 +7226,9 @@ body, html {
 
 }
 
+.mediaControlsFrame{
+    display:none;
+}
 
 .remodal{
 		background-image: url('../img/paper.jpg');
