@@ -51,15 +51,16 @@ Nous avons fixé le score à atteindre à 33 pour terminer le jeux, pour rallong
 
 Les levels sont paramtrès en ASCII, dans le fichier javascript du jeu.
 Exemple:
-`levelDataLine = new Array();`
-`levelDataLine[0] = "@@@@@@@@@@@@@@@@@";`
-`levelDataLine[1] = "@@@@@@   @@@@@@@@";`
-`levelDataLine[2] = "@@@@@@ @>o @@@@@@";`
-`levelDataLine[3] = "@@@@@@x  @ @@@@@@";`
-`levelDataLine[4] = "@@@@@@ ox  @@@@@@";`
-`levelDataLine[5] = "@@@@@@@  @@@@@@@@";`
-`levelDataLine[6] = "@@@@@@@  @@@@@@@@";`
-`levelDataLine[7] = "@@@@@@@@@@@@@@@@@";`
+<br/>
+`levelDataLine = new Array();`<br/>
+`levelDataLine[0] = "@@@@@@@@@@@@@@@@@";`<br/>
+`levelDataLine[1] = "@@@@@@   @@@@@@@@";`<br/>
+`levelDataLine[2] = "@@@@@@ @>o @@@@@@";`<br/>
+`levelDataLine[3] = "@@@@@@x  @ @@@@@@";`<br/>
+`levelDataLine[4] = "@@@@@@ ox  @@@@@@";`<br/>
+`levelDataLine[5] = "@@@@@@@  @@@@@@@@";`<br/>
+`levelDataLine[6] = "@@@@@@@  @@@@@@@@";`<br/>
+`levelDataLine[7] = "@@@@@@@@@@@@@@@@@";`<br/>
 
 ### StomachJump
 
