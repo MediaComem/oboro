@@ -45,7 +45,7 @@ gulp build --env=prod
 
 ### Issunriver
 
-Nous avons fixé le score à atteindre à 33 pour terminer le jeux, pour rallonger ou raccourcir la phase de jeu, il faut varier la condition`if(this.score < 33)` le nombre d'ennemie (troncs d'arbre), générés est defini à la ligne 189 `nemy = new Enemy(Math.floor(Math.random()*6));`
+Nous avons fixé le score à atteindre à 33 pour terminer le jeu. Afin de rallonger ou raccourcir les phases de jeu, il faut varier la condition`if(this.score < 33)` le nombre d'ennemie (troncs d'arbre), générés est defini à la ligne 189 `nemy = new Enemy(Math.floor(Math.random()*6));`
 
 #### Sokoban
 
@@ -63,6 +63,8 @@ Exemple:
 `levelDataLine[7] = "@@@@@@@@@@@@@@@@@";`<br/>
 
 ### StomachJump
+
+Les lignes 180 à 185 permettent de gerer les pièces generées.
 
 
 ## Localstorage
