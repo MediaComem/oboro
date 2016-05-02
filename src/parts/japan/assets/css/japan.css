@@ -3,21 +3,30 @@ div#japan_container{
   margin: auto;
   padding: 15px;
   /*background-color: #FF0000;*/
-  background-image: url('./assets/img/paper.jpg')
-}
+  background-image: url('./assets/img/paper.jpg');
+  text-align: center;
 
+}
+div.box{
+
+    margin-bottom:35px;
+}
+div.box p{
+  font-size: 1.4em;
+}
 div.box h2{
   font-family: 'edo';
+  font-size: 3em;
 }
 
 div.box button{
   clear: both;
-  width :15%;
   font-size: 1.2em;
   background-color: #b20000;
   color:white;
   font-family: "edo";
   border: 0px;
+  margin:2px;
 }
 
 div.box button:hover{
