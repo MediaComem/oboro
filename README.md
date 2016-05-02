@@ -46,7 +46,7 @@ gulp build --env=prod
 Validation mail PHP pour verifier la véricatié du mail, fonction php mail() pour l'envoi.
 Les adresse mail recupérées sont stoquées dans le fichier mails.json dans le dossier de la partie japan.
 **Important**
-Pour empêcher l'accés non aurotisé au fichier contenant les mails: 
+Pour empêcher l'accés non autorisé au fichier contenant les mails, il faut modifier l'accés au fichier: 
 ```
 chmod 600 mails.json
 ```
