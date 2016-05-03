@@ -1,6 +1,11 @@
 # Oboro
 ![alt text](https://github.com/simkarlier/oboro/blob/master/doc/img/logo.png "Oboro")
 
+<a name="top"></a>
+<a name="auteurs"></a>
+<a name="installation"></a>
+## Auteurs: </br>Projet académique HEIG-VD </br>Simon, Quentin, Loïc, Joel, Nicolas, Kemal, Patrick, Lukas, Yann, Valentin 
+
 ## Technologies utilisées
 Le projet se base sur la distibution de fichiers HTML, nous utilisons un simple serveur PHP pour s'occuper de celle-ci.
 Gulp et du coup nodeJS sont uitlisés pour la gestion du déploiement.
