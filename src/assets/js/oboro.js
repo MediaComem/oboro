@@ -105,7 +105,7 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 				//creates the object if the part is a video
 				that.video = new Video(that.part);
 				
-				if(ifMobile){
+				if(ifMobile()){
 					//change all the videos to lower qualities
 					$("#" +that.part  + " video").html("");
 
@@ -122,7 +122,7 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 					
 					//if it's chrome and mobile we add the controls 
 					// NOTE : it's impossible to autoplay videos with chrome mobile
-					if(ifChrome){
+					if(ifChrome()){
 						//add controls to the video if it's chrome
 						$("#" +that.part  + " video").attr("controls","controls");
 					}
@@ -250,7 +250,7 @@ window.appendNext = function(part,callback){
 
 
 $(function() {
-
+	
 	//get the last part played
 	var lastPartPlayed = localStorage.getItem("lastPartPlayed");
 

@@ -100,7 +100,7 @@
 				//creates the object if the part is a video
 				that.video = new Video(that.part);
 				
-				if(ifMobile){
+				if(ifMobile()){
 					//change all the videos to lower qualities
 					$("#" +that.part  + " video").html("");
 
@@ -117,7 +117,7 @@
 					
 					//if it's chrome and mobile we add the controls 
 					// NOTE : it's impossible to autoplay videos with chrome mobile
-					if(ifChrome){
+					if(ifChrome()){
 						//add controls to the video if it's chrome
 						$("#" +that.part  + " video").attr("controls","controls");
 					}
@@ -245,7 +245,7 @@ window.appendNext = function(part,callback){
 
 
 $(function() {
-
+	
 	//get the last part played
 	var lastPartPlayed = localStorage.getItem("lastPartPlayed");
 
