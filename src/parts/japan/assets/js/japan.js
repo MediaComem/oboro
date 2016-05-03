@@ -35,10 +35,14 @@ $('#stomachjump').on('click', function(event) {
         var inst = $('[data-remodal-id=modal]').remodal();
         inst.open();
 
+
         $('button#mail_added').on("click",function(){
-          $('div.box:nth-child(2)').fadeOut( "slow", function() {
-              this.remove();
-          });
+          /*$('div.box:nth-child(2)').fadeOut( "slow", function() {
+              //this.remove();
+
+          });*/
+          $('input#email').val('');
+
         });
 
 
