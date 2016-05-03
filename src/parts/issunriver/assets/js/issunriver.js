@@ -1,5 +1,9 @@
 window.currentPart = function issunriver(){
 
+window.addEventListener('orientationchange', function () {
+location.reload();
+});
+	 
 
 
 var options = {hashTracking: false, closeOnOutsideClick: false};
