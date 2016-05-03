@@ -2,21 +2,28 @@
 ![alt text](https://github.com/simkarlier/oboro/blob/master/doc/img/logo.png "Oboro")
 
 <a name="top"></a>
-<a name="auteurs"></a>
-<a name="installation"></a>
-## Auteurs: </br>Projet académique HEIG-VD </br>Simon, Quentin, Loïc, Joel, Nicolas, Kemal, Patrick, Lukas, Yann, Valentin 
+* [Technologies](#techno)
+* [Installation](#install)
+* [Déploiement](#depl)
+* [Architecture](#arch)
+* [Difficulté des jeux](#dif)
+* [Localstorage](#token)
+* [Newsletter](#mail)
+## Projet académique HEIG-VD </br>Simon, Quentin, Loïc, Joel, Nicolas, Kemal, Patrick, Lukas, Yann, Valentin 
 
+<a name="techno"></a>
 ## Technologies utilisées
 Le projet se base sur la distibution de fichiers HTML, nous utilisons un simple serveur PHP pour s'occuper de celle-ci.
 Gulp et du coup nodeJS sont uitlisés pour la gestion du déploiement.
 
+<a name="install"></a>
 ## Installation
 Téléchargement du repository et des modules node
 ```
 git clone git@github.com:simkarlier/oboro.git
 npm install
 ```
-
+<a name="depl"></a>
 ## Déploiement
 Le projet est composé de deux répertoires : src et dist. Le répertoire src est celui utilisé pour le développement et dist est une version minifiée de celui-ci utilisée pour la version production. Le script présent dans Gulpfile.js regroupe les fichiers js et css dans des fichiers uniques permettant ainsi une gestion plus facile des parties.
 
@@ -33,9 +40,7 @@ Pour la production (compilation dans ./dist), copie des autres fichiers présent
 gulp build --env=prod
 ```
 
-
-### Développement
-
+<a name="arch"></a>
 ## Architecture
 ![alt text](https://github.com/simkarlier/oboro/blob/master/doc/img/manuel_image.png "Loader")
 
@@ -46,6 +51,7 @@ gulp build --env=prod
 
 - Une fonction globale `window.next()` nous permet de passer à la prochaine partie
 
+<a name="dif"></a>
 ## Difficulté des jeux.
 
 ### Issunriver
@@ -73,11 +79,12 @@ Les lignes 180 à 185 permettent de gerer les pièces generées.
 Les lignes 349 et plus permettent de gérer la vitesse.
 Les lignes 512 et plus regle la fin impossible et le passage à la prochaine partie.
 
+<a name="token"></a>
 ## Localstorage
 
 L'aventure web est à vivre en "one-shot", pas de comptes utilisateurs à créer. Pour les visiteurs qui reviendraient sur le site et/ou qui souhaiteraient refaire un jeu en particulier, nous avons utilisé les possibilités offertes par le localstorage. Au lancement de chaque partie, une clé comprenant le nom de la "part" est enregistrée dans le localsotrage du navigateur. Ainsi, dans le cas où le visiteur arrête l'aventure en plein milieu il pourra reprendre là où il était resté. Une fois la fin du site web atteinte, des boutons permettent de passer les différentes parties de l'aventure.
 
-
+<a name="mail"></a>
 ## Newsletter
 
 Validation mail PHP pour verifier la véricatié du mail, fonction php mail() pour l'envoi.
@@ -90,5 +97,5 @@ chmod 600 mails.json
 
 L'adresse d'envoi et de reception sont à regler dans les deux premières lignes du fichier form.php
 
-
+<a href="#top">Back to top</a>
 
