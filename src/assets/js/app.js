@@ -2,7 +2,7 @@
 	var suffix="";
 
 	//Part object is used for each part of the website
-	window.Part = function Part(part){
+	window.Part = function Part(part,callback){
 
 		var that = this;
 
@@ -13,6 +13,26 @@
 
 		this.part = part;
 
+		this.ready = function(callback){
+			var loadingReady = false;
+			
+			var watchDownload = function(){
+				setTimeout(function(){
+									if(that.dom != undefined && that.style != undefined && that.js != undefined){
+										callback();
+									}
+									else{
+										watchDownload();
+									}
+								},50);
+			}
+
+			watchDownload();
+			
+			return;
+			
+		}
+		
 
 		//returns the jquery element
 		this.getElement = function(){
@@ -41,6 +61,7 @@
 			$.getScript(that.baseUrl + "assets/js/"+ part+suffix+".js")
 			 .done(function( script, textStatus ) {
 			  	//stores the function for a later execution
+			  	that.js = true;
 			  	that.exec = window.currentPart;
 
 			  })
@@ -127,6 +148,9 @@
 
 		});
 
+
+		this.ready(callback);
+
 	}
 
 	//if the browser is mobile returns true
@@ -206,16 +230,19 @@ window.next = function(){
 }
 
 //append the next part, load the html code in the dom (hidden)
-window.appendNext = function(part,notAppend){
-	parts.push(new Part(part));
-
-	if(notAppend==undefined){
-		//after two seconds it appends to the body	
-		setTimeout(function(){
+window.appendNext = function(part,callback){
+	if(callback == undefined){
+			parts.push(new Part(part,function(){
 			parts[parts.length-1].appendToBody();
-		},2000);
+		}));
 	}
+	else{
+		parts.push(new Part(part,callback));
+	}
+	
 }
+
+
 
 $(function() {
 
@@ -224,22 +251,20 @@ $(function() {
 
 	//if the lastPart is defined and not empty we jump to the last part
 	if(lastPartPlayed != undefined){
-		window.appendNext(lastPartPlayed,false);
-	}
-	else{
-		//else we start at the beginning
-		window.appendNext("intro",false);
-	}
-
-	//after one second show the interface
-	setTimeout(function(){
-			
+		window.appendNext(lastPartPlayed,function(){
 			 parts[0].appendToBody();
 		 	 parts[0].applyStyle();
 		 	 parts[0].show();
 		 	 parts[0].exec();
-
-
-  	},1000);
-
+		});
+	}
+	else{
+		//else we start at the beginning
+		window.appendNext("intro",function(){
+			 parts[0].appendToBody();
+		 	 parts[0].applyStyle();
+		 	 parts[0].show();
+		 	 parts[0].exec();
+		});
+	}
 });

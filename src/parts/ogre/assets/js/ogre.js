@@ -3,6 +3,6 @@ window.currentPart = function ogre(){
 	var video = parts[parts.length-1].video.video;
 	video.play();
 
-	parts.push(new Part('stomachjump'));
+	window.appendNext("stomachjump");
 
 }

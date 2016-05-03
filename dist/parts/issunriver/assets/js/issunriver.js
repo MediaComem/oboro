@@ -1,5 +1,9 @@
 window.currentPart = function issunriver(){
 
+window.addEventListener('orientationchange', function () {
+location.reload();
+});
+	 
 
 
 var options = {hashTracking: false, closeOnOutsideClick: false};
@@ -12,15 +16,9 @@ inst.open();
 
 // Start enchant.js
 enchant();
-
-
-    // Starting point
-    var bodywidth = $(document).width();
-    var bodyheight = $(document).height();
-    var islandSwitch = false;
-    //console.log("Document height: "+bodyheight);
-    //console.log("Document width: "+bodywidth);
-    var game = new Game(bodywidth, bodyheight);
+var bodywidth = $(document).width();
+var bodyheight = $(document).height();
+var game = new Game(bodywidth, bodyheight);
     game.preload('./parts/issunriver/assets/res/Hit.mp3',
                  './parts/issunriver/assets/res/bgm.mp3',
                  './parts/issunriver/assets/res/bravo.mp3',
@@ -35,6 +33,13 @@ enchant();
                  './parts/issunriver/assets/res/tronc_medium.png',
                  './parts/issunriver/assets/res/tronc_small.png'
                  )
+
+    // Starting point
+    
+    var islandSwitch = false;
+    //console.log("Document height: "+bodyheight);
+    //console.log("Document width: "+bodywidth);
+    
     game.fps = 30;
     
     game.scale = 1;

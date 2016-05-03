@@ -97,7 +97,7 @@ function levelObject(datalineArray){
 
 /***/
 
-parts.push(new Part("ogre"));
+
   
 parts[parts.length-1].video = true;
 
@@ -777,6 +777,6 @@ else {
 
 
 //load the next item
-window.appendNext("stomachjump");  
+window.appendNext("ogre");  
 
 }
