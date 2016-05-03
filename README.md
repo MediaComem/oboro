@@ -70,7 +70,7 @@ Les lignes 512 et plus regle la fin impossible et le passage à la prochaine par
 
 ## Localstorage
 
-L'aventure web est à vivre en "one-shot", pas de comptes utilisateurs à créer. Pour les visiteurs qui reviendraient sur le site et/ou qui souhaiteraient refaire un jeu en particulier, nous avons utilisé les possibilités offertes par le localstorage.Au lancement de chaque partie, une clé est enregistrée dans le localsotrage du navigateur. Ainsi, dans le cas où le visiteurs arrête l'aventure en plein milieu il pourra reprendre là où il était resté. Une fois la fin du site web atteinte, des boutons permettent de passer les différentes parties de l'aventure.
+L'aventure web est à vivre en "one-shot", pas de comptes utilisateurs à créer. Pour les visiteurs qui reviendraient sur le site et/ou qui souhaiteraient refaire un jeu en particulier, nous avons utilisé les possibilités offertes par le localstorage. Au lancement de chaque partie, une clé comprenant le nom de la "part" est enregistrée dans le localsotrage du navigateur. Ainsi, dans le cas où le visiteur arrête l'aventure en plein milieu il pourra reprendre là où il était resté. Une fois la fin du site web atteinte, des boutons permettent de passer les différentes parties de l'aventure.
 
 
 ## Newsletter
@@ -83,7 +83,7 @@ Pour empêcher l'accés non autorisé au fichier contenant les mails, il faut mo
 chmod 600 mails.json
 ```
 
-
+L'adresse d'envoi et de reception sont à regler dans les deux premières lignes du fichier form.php
 
 
 
