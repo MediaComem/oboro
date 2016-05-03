@@ -80,6 +80,12 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 			if(automaticVideo != undefined){
 				//creates the object if the part is a video
 				that.video = new Video(that.part);
+
+				if(ifChrome){
+					//add controls to the video if it's chrome
+					$("#" +that.part  + " video").attr("controls","controls");
+				}
+
 			}
 
 
@@ -114,6 +120,32 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 
 	}
 
+
+	function ifChrome(){
+		// please note, 
+		// that IE11 now returns undefined again for window.chrome
+		// and new Opera 30 outputs true for window.chrome
+		// and new IE Edge outputs to true now for window.chrome
+		// and if not iOS Chrome check
+		// so use the below updated condition
+		var isChromium = window.chrome,
+		    winNav = window.navigator,
+		    vendorName = winNav.vendor,
+		    isOpera = winNav.userAgent.indexOf("OPR") > -1,
+		    isIEedge = winNav.userAgent.indexOf("Edge") > -1,
+		    isIOSChrome = winNav.userAgent.match("CriOS");
+
+		if(isIOSChrome){
+		   return true;
+		} else if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
+		  return true;
+		} else { 
+		   return false;
+		}
+
+	}
+	
+
 	function Video(part){
 		var that = this;
 
@@ -121,10 +153,6 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 
    
 		this.video.ontimeupdate = function() {
-
-			console.log(that.video.currentTime );
-			console.log(that.video.duration);
-
 		    if(that.video.currentTime >= that.video.duration-1){
 		      that.video.pause();
 		    }
@@ -180,10 +208,9 @@ $(function() {
 		window.appendNext("intro",false);
 	}
 
-	//parts.push(new Part("stomachjump"))
 
 	setTimeout(function(){
-			console.log(ifMobile());
+			
 			 parts[0].appendToBody();
 		 	 parts[0].applyStyle();
 		 	 parts[0].show();
