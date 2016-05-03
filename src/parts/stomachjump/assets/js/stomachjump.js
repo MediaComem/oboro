@@ -734,6 +734,6 @@ $( ".stomach-start" ).on("click",function() {
   init();
 });
 
-window.appendNext("japan");
+window.appendNext("chute");
 
 }
