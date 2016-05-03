@@ -1,5 +1,7 @@
+	//suffix is used for production (with .min)
 	var suffix="";
 
+	//Part object is used for each part of the website
 	window.Part = function Part(part){
 
 		var that = this;
@@ -38,7 +40,7 @@
 
 			$.getScript(that.baseUrl + "assets/js/"+ part+suffix+".js")
 			 .done(function( script, textStatus ) {
-			  	//executes the code
+			  	//stores the function for a later execution
 			  	that.exec = window.currentPart;
 
 			  })
@@ -57,6 +59,7 @@
 
 		}
 
+		//apply the style stored in the object
 		this.applyStyle = function(){
 			$('<style class="site-part ' + that.part + '">'+that.style+'</style>')
 	  		.appendTo('head')
@@ -75,17 +78,35 @@
 			if(automaticVideo != undefined){
 				//creates the object if the part is a video
 				that.video = new Video(that.part);
+				
+				if(ifMobile){
+					//change all the videos to lower qualities
+					$("#" +that.part  + " video").html("");
 
-				if(ifChrome){
-					//add controls to the video if it's chrome
-					$("#" +that.part  + " video").attr("controls","controls");
-				}
+					var tags = '<source src="./parts/part-name/assets/video/video-name.mp4" type="video/mp4" />'
+							 +'<source src="./parts/part-name/assets/video/video-name.webm" type="video/webm" />'
+ 						 	 +'<!--<source src="./parts/part-name/assets/video/video-name.ogv" type="video/ogg" />-->';
+
+					//replace the string
+					tags = tags.replace(/part-name/g, that.part);	
+
+ 					tags = tags.replace(/video-name/g, that.part+"-sq");
+
+					$("#" +that.part  + " video").append(tags);
+					
+					//if it's chrome and mobile we add the controls 
+					// NOTE : it's impossible to autoplay videos with chrome mobile
+					if(ifChrome){
+						//add controls to the video if it's chrome
+						$("#" +that.part  + " video").attr("controls","controls");
+					}
+				}	
 
 			}
 
 
 		}
-
+		//remove the other parts with a fadeout effect
 		this.removeOthers = function(){
 			//remove all the other site parts except the current one
 		 	$(".site-part").not("."+that.part).fadeOut( "fast", function() {
@@ -93,29 +114,29 @@
 			  });
 		}
 
+		//get the css at the creation of the object
 		$.get(that.baseUrl+"assets/css/"+that.part+ suffix+".css", function( css ) {
 				that.style = css;
 		});
 
-		//get the html content and append it to the DOM
-		
-		$.get( this.baseUrl + "/" + this.part + ".html", function( html ) {
-
+		//get the html content 
+		$.get( this.baseUrl  + this.part + ".html", function( html ) {
 		 	that.dom = html;
-
+		 	//get the script
 			that.getScript();
 
 		});
 
 	}
 
+	//if the browser is mobile returns true
 	function ifMobile(){
 
 		return( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 
 	}
 
-
+	//if the browser is chrome returns true
 	function ifChrome(){
 		// please note, 
 		// that IE11 now returns undefined again for window.chrome
@@ -140,7 +161,7 @@
 
 	}
 	
-
+	//video object helps us to automatically switch between parts at the end of videos
 	function Video(part){
 		var that = this;
 
@@ -155,13 +176,17 @@
 
 		this.video.onpause = function(){
    			window.next();
-  	}
+  		}
 
 	}
 
 
-window.parts = []//the array containing the different parts of the adventure
+window.parts = [];//the array containing the different parts of the adventure
+
+//the current function to be executed
 window.currentPart = {};
+
+//transition to the next part
 window.next = function(){
 	//executes the script contained in the last added part
 	var lastPart = parts[parts.length-1];
@@ -180,6 +205,7 @@ window.next = function(){
 	localStorage.setItem("lastPartPlayed", lastPart.part);
 }
 
+//append the next part, load the html code in the dom (hidden)
 window.appendNext = function(part,notAppend){
 	parts.push(new Part(part));
 
@@ -193,17 +219,19 @@ window.appendNext = function(part,notAppend){
 
 $(function() {
 
-
-
+	//get the last part played
 	var lastPartPlayed = localStorage.getItem("lastPartPlayed");
+
+	//if the lastPart is defined and not empty we jump to the last part
 	if(lastPartPlayed != undefined){
 		window.appendNext(lastPartPlayed,false);
 	}
 	else{
+		//else we start at the beginning
 		window.appendNext("intro",false);
 	}
 
-
+	//after one second show the interface
 	setTimeout(function(){
 			
 			 parts[0].appendToBody();
@@ -213,7 +241,5 @@ $(function() {
 
 
   	},1000);
-
-
 
 });
