@@ -21,7 +21,6 @@ $('#stomachjump').on('click', function(event) {
 
 
     $('button#btn_email').on('click', function(){
-      console.log('dsds');
       var emailToSend = $('input#email').val();
       console.log(emailToSend);
 
@@ -29,7 +28,7 @@ $('#stomachjump').on('click', function(event) {
 
         var options = {hashTracking: false, closeOnOutsideClick: false};
 
-        $('#japan').append("<div data-remodal-id=\"modal\" ><h2>Sokoban</h2><p>"+data+"</p><button id=\"mail_added\" data-remodal-action=\"confirm\" class=\"remodal-confirm\">OK</button></div>   ");
+        $('#japan').append("<div data-remodal-id=\"modal\" ><h2>Merci!</h2><p>"+data+"</p><button id=\"mail_added\" data-remodal-action=\"confirm\" class=\"remodal-confirm\">OK</button></div>   ");
 
 
         var inst = $('[data-remodal-id=modal]').remodal();
@@ -42,6 +41,7 @@ $('#stomachjump').on('click', function(event) {
 
           });*/
           $('input#email').val('');
+          location.reload();
 
         });
 
