@@ -68,6 +68,10 @@ gulp.task('ogre', function () {
 	return build("ogre",argv.env);
 });
 
+gulp.task('chute', function () {
+	return build("chute",argv.env);
+});
+
 gulp.task('buildMain', function () {
 	return build("ogre",argv.env);
 });
@@ -114,7 +118,7 @@ function changeFile(){
 }		       	
 
 gulp.task('build', function() {
-  runSequence('main','sokoban','issunriver','stomachjump','ogre','depart','arrivee','intro','japan',function(){
+  runSequence('main','sokoban','issunriver','stomachjump','ogre','chute','depart','arrivee','intro','japan',function(){
   	console.log("build finished");
   });
 });
