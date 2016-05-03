@@ -9,6 +9,7 @@
 * [Difficulté des jeux](#dif)
 * [Localstorage](#token)
 * [Newsletter](#mail)
+
 ## Projet académique HEIG-VD </br>Simon, Quentin, Loïc, Joel, Nicolas, Kemal, Patrick, Lukas, Yann, Valentin 
 
 <a name="techno"></a>
