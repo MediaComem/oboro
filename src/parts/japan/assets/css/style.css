@@ -11,6 +11,9 @@ div.box{
 
     margin-bottom:35px;
 }
+div.box img{
+  margin: 5px;
+}
 div.box p{
   font-size: 1.4em;
 }
