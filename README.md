@@ -88,6 +88,8 @@ L'aventure web est à vivre en "one-shot", pas de comptes utilisateurs à créer
 <a name="mail"></a>
 ## Newsletter
 
+**NOTE:** cette fonctionnalité est désactivée dans cette version.
+
 Validation mail PHP pour verifier la véricatié du mail, fonction php mail() pour l'envoi.
 Les adresse mail recupérées sont stoquées dans le fichier mails.json dans le dossier de la partie japan.
 **Important**
